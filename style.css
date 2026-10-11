@@ -478,7 +478,8 @@ body {
 }
 
 
-.button-row button {
+.button-row button,
+.button-row a {
     flex: 1;
 
     padding: 13px 10px;
@@ -504,6 +505,10 @@ body {
 ========================================= */
 
 .secondary-button {
+    display: inline-block;
+    text-align: center;
+    text-decoration: none;
+
     color: #31503c;
 
     background: #f5f8f6;
@@ -556,6 +561,55 @@ body {
         0 8px 22px rgba(8, 120, 48, 0.30);
 }
 
+/* =========================================
+   BACK TO LOGIN BUTTON
+========================================= */
+
+.back-to-login {
+    width: 100%;
+    
+    display: inline-block;
+    
+    text-align: center;
+    
+    text-decoration: none;
+
+    padding: 13px;
+
+    font-size: 15px;
+
+    font-weight: 600;
+
+    color: #31503c;
+
+    cursor: pointer;
+
+    border: 1px solid #d3dfd7;
+
+    border-radius: 9px;
+
+    background: #ffffff;
+
+    transition:
+        transform 0.2s ease,
+        background 0.2s ease,
+        box-shadow 0.2s ease,
+        border-color 0.2s ease;
+}
+
+
+.back-to-login:hover {
+    transform: translateY(-2px);
+
+    background: #f5faf7;
+
+    border-color: #b8cfbf;
+
+    box-shadow:
+        0 6px 18px rgba(20, 75, 40, 0.10);
+}
+
+
 
 /* =========================================
    GOOGLE LOGIN
@@ -606,7 +660,7 @@ body {
    BUTTON CLICK EFFECT
 ========================================= */
 
-button:active {
+button:active, a:active {
     transform: translateY(0) scale(0.98);
 }
 
@@ -861,46 +915,3 @@ button:active {
     }
 }
 
-/* =========================================
-   BACK TO LOGIN BUTTON
-========================================= */
-
-.back-to-login {
-    width: 50%;
-
-    align-self: center;
-
-    padding: 13px;
-
-    font-size: 15px;
-
-    font-weight: 600;
-
-    color: #31503c;
-
-    cursor: pointer;
-
-    border: 1px solid #d3dfd7;
-
-    border-radius: 9px;
-
-    background: #ffffff;
-
-    transition:
-        transform 0.2s ease,
-        background 0.2s ease,
-        box-shadow 0.2s ease,
-        border-color 0.2s ease;
-}
-
-
-.back-to-login:hover {
-    transform: translateY(-2px);
-
-    background: #f5faf7;
-
-    border-color: #b8cfbf;
-
-    box-shadow:
-        0 6px 18px rgba(20, 75, 40, 0.10);
-}
