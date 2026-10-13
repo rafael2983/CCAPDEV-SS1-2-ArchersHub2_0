@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="ArchersHub 2.0 course enlistment">
+ 
+        <title>Enlistment</title>
+        <link rel="icon" href="images/school-logo.png">
+        <link rel="stylesheet" href="style.css">
+        <script src="scripts/scripts.js" defer></script>
+        <script src="scripts/enlistment.js" defer></script>
+        
+    </head>
+    
+    <body>
+        <!-- Header  -->
+        <header class="top-bar">
+            <button class="menu" id="menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="side-menu">
+                &#9776;
+            </button>
+ 
+            <a href="home.html" class="logo-link" aria-label="Go to home page">
+                <img src="images/school-logo.png" alt="DLSU school logo">
+            </a>
+            
+            <div class="header-fill"></div>
+ 
+            <button class="theme-toggle" id="theme-toggle" aria-label="Switch between dark and light mode">
+                <span class="theme-icon">&#9728;</span>
+            </button>
+ 
+            <p class="user-id" id="user-id">12345678</p>
+        </header>
+
+        <!-- Side Menu-->
+        <nav class="side-menu" id="side-menu" aria-label="Main navigation">
+            <ul>
+                <li><a href="home.html">Home</a></li>
+                <li><a href="enlistment.html" class="active" aria-current="page">Enlistment</a></li>
+                <li><a href="add-drop.html">Add / Drop</a></li>
+                <li><a href="special-class.html">Special Class</a></li>
+                <li><a href="withdrawal.html">Course Withdrawal</a></li>
+                <li><a href="program-exchange.html">Program Exchange</a></li>
+                <li><a href="curriculum.html">Curriculum Progression</a></li>
+                <li><a href="schedule.html">View Schedule</a></li>
+                <li><a href="records.html">View Records</a></li>
+                <li><a href="calendar.html">University Calendar</a></li>
+                <li><a href="organizations.html">Organizations</a></li>
+                <li><a href="profile.html">Profile</a></li>
+                <li><a href="ai-chat.html">AI Chat</a></li>
+                <li><a href="index.html" class="logout">Log out</a></li>
+            </ul>
+        </nav>
+
+        <main class="main-section">
+            <h1 class="page-title">Enlistment</h1>
+
+            <div class="enlistment">
+                <!-- Left Side / Available Courses -->
+                <section class="enlist-left" aria-label="Available courses">
+ 
+                <div class="campus-switch" role="group" aria-label="Campus">
+                    <button class="campus-btn active" data-campus="laguna" aria-pressed="true">Laguna</button>
+                    <button class="campus-btn" data-campus="manila" aria-pressed="false">Manila</button>
+                </div>
+ 
+                <!-- Search / filter for courses -->
+                <div class="course-tools">
+                    <label for="course-search" class="sr-only">Search courses</label>
+                    <input type="search" id="course-search" placeholder="Search by course code or name">
+ 
+                    <label for="course-sort" class="sr-only">Sort courses</label>
+                    <select id="course-sort">
+                        <option value="code-asc">Course code (A-Z)</option>
+                        <option value="code-desc">Course code (Z-A)</option>
+                        <option value="name-asc">Course name (A-Z)</option>
+                        <option value="name-desc">Course name (Z-A)</option>
+                    </select>
+                </div>
+ 
+                <div class="table-wrap">
+                    <table class="course-table" id="course-table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Course code</th>
+                                <th scope="col">Course name</th>
+                                <th scope="col">Section</th>
+                                <th scope="col">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="course-body">
+                            <tr data-code="CBAPDEV" data-name="Web Application Development" data-campus="laguna" data-intercampus="false">
+                                <td>CBAPDEV</td>
+                                <td>Web Application Development</td>
+                                <td class="section-cell">none</td>
+                                <td><button class="row-btn add" data-action="add">Add</button></td>
+                            </tr>
+                            <tr data-code="GEWORLD" data-name="The Contemporary World" data-campus="laguna" data-intercampus="false">
+                                <td>GEWORLD</td>
+                                <td>The Contemporary World</td>
+                                <td class="section-cell">
+                                    <span>XZ08</span>
+                                    <small>MON 07:30PM-09:00PM | online<br>THU 07:30PM-09:00PM | LR302</small>
+                                </td>
+                                <td><button class="row-btn add" data-action="add">Add</button></td>
+                            </tr>
+                            <tr data-code="GEETHIC" data-name="Ethics" data-campus="laguna" data-intercampus="false">
+                                <td>GEETHIC</td>
+                                <td>Ethics</td>
+                                <td class="section-cell">
+                                    <span>XZ09</span>
+                                    <small>MON 09:15PM-10:45PM | online<br>THU 09:15PM-10:45PM | LR302</small>
+                                </td>
+                                <td><button class="row-btn add" data-action="add">Add</button></td>
+                            </tr>
+                            <tr data-code="SAS1000" data-name="Student Affairs Services 1000" data-campus="laguna" data-intercampus="false">
+                                <td>SAS1000</td>
+                                <td>Student Affairs Services 1000</td>
+                                <td class="section-cell">
+                                    <span>XZ12</span>
+                                    <small>TUE 10:00AM-4:00AM | online</small>
+                                </td>
+                                <td><button class="row-btn add" data-action="add">Add</button></td>
+                            </tr>
+                            <tr data-code="LCLSONE" data-name="Lasallian Studies 1" data-campus="manila" data-intercampus="true">
+                                <td>LCLSONE</td>
+                                <td>Lasallian Studies 1</td>
+                                <td class="section-cell">
+                                    <span>XB1A</span>
+                                    <small>SAT 09:15AM-10:45AM | EXR004</small>
+                                </td>
+                                <td><button class="row-btn add" data-action="add">Add</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p class="empty" id="no-results" hidden>No courses match your search.</p>
+                </div>
+ 
+                </section>
+
+                
+            </div>
+        </main>
+
+    </body>
+    </html>
