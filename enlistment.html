@@ -72,7 +72,7 @@
                     <label for="course-search" class="sr-only">Search courses</label>
                     <input type="search" id="course-search" placeholder="Search by course code or name">
  
-                    <label for="course-sort" class="sr-only">Sort courses</label>
+                    <label for="course-sort" class="sort-label">Sort courses</label>
                     <select id="course-sort">
                         <option value="code-asc">Course code (A-Z)</option>
                         <option value="code-desc">Course code (Z-A)</option>
@@ -92,8 +92,8 @@
                             </tr>
                         </thead>
                         <tbody id="course-body">
-                            <tr data-code="CBAPDEV" data-name="Web Application Development" data-campus="laguna" data-intercampus="false">
-                                <td>CBAPDEV</td>
+                            <tr data-code="CCAPDEV" data-name="Web Application Development" data-campus="laguna" data-intercampus="false">
+                                <td>CCAPDEV</td>
                                 <td>Web Application Development</td>
                                 <td class="section-cell">none</td>
                                 <td><button class="row-btn add" data-action="add">Add</button></td>
@@ -141,9 +141,75 @@
  
                 </section>
 
+                <section class="enlist-right" aria-label="Chosen courses">
+ 
+                <div class="view-switch" role="tablist" aria-label="Chosen courses view">
+                    <button class="view-btn active" role="tab" aria-selected="true" data-view="chosen" id="tab-chosen">Chosen courses</button>
+                    <button class="view-btn" role="tab" aria-selected="false" data-view="schedule" id="tab-schedule">Schedule</button>
+                </div>
+ 
+                <!-- Chosen courses view -->
+                <div class="chosen-panel" id="chosen-panel" role="tabpanel" aria-labelledby="tab-chosen">
+                    <ul class="chosen-list" id="chosen-list">
+                        <li class="empty">No courses chosen yet. Press Add on a course to start.</li>
+                    </ul>
+                    <p class="chosen-total">Courses chosen: <span id="chosen-count">0</span></p>
+                </div>
+ 
+                <!-- Schedule view -->
+                <div class="schedule-panel" id="schedule-panel" role="tabpanel" aria-labelledby="tab-schedule" hidden>
+                    <div class="table-wrap">
+                        <table class="schedule-table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Time</th>
+                                    <th scope="col">Mon</th>
+                                    <th scope="col">Tue</th>
+                                    <th scope="col">Wed</th>
+                                    <th scope="col">Thu</th>
+                                    <th scope="col">Fri</th>
+                                    <th scope="col">Sat</th>
+                                </tr>
+                            </thead>
+                            <tbody id="schedule-body">
+                                <!-- JS will fill these rows from the chosen courses -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+ 
+                <!-- Inter-campus document -->
+                <section class="intercampus" id="intercampus-form" aria-label="Inter-campus document" hidden>
+                    <h2>Inter-campus document</h2>
+                    <p>One or more chosen courses are held on another campus. Fill this out so it can be reviewed.</p>
+ 
+                    <label for="ic-reason">Reason</label>
+                    <textarea id="ic-reason" rows="3" placeholder="Why do you need to take this course on another campus?"></textarea>
+ 
+                    <label for="ic-file">Supporting document</label>
+                    <input type="file" id="ic-file" accept=".pdf,.jpg,.jpeg,.png">
+                </section>
+ 
+                <!-- Policy + actions -->
+                <div class="enlist-actions">
+                    <label class="policy-check" for="agree-policy">
+                        <input type="checkbox" id="agree-policy">
+                        I agree to the school policy
+                    </label>
+ 
+                    <button class="btn secondary" id="save-btn" type="button">Save</button>
+                    <button class="btn primary" id="submit-btn" type="button" disabled>Submit</button>
+                </div>
+ 
+            </section>
                 
             </div>
         </main>
+
+        <footer class="site-footer">
+            <p>&copy; 2026 ArchersHub 2.0</p>
+            <p><a href="#">Privacy Policy</a> | <a href="#">Terms &amp; Conditions</a></p>
+        </footer>
 
     </body>
     </html>
