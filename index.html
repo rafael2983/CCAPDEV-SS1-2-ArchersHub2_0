@@ -5,23 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>University Login</title>
-    <script src="scripts/scripts.js"></script>
-    <link rel="stylesheet" href="style.css">
+    <script src="index/scripts.js"></script>
+    <link rel="stylesheet" href="index/style.css">
 </head>
 
 <body>
-
     <main class="login-page">
 
         <!-- LEFT SIDE -->
         <section class="school-section">
+            
             <!-- Slideshow -->
             <div class="slides-container">
                 <div class="slide fade active">
                     <div class="number-page">1/3</div>
                     <img src="images/school-picture.png" class="school-image" alt="image">
                 </div>
-
                 <div class="slide fade">
                     <div class="number-page">2/3</div>
                     <img src="images/lasalle_hall.jpg" class="school-image" alt="image">
@@ -30,6 +29,7 @@
                     <div class="number-page">3/3</div>
                     <img src="images/FounderLSU.jpg" class="school-image" alt="image">
                 </div>
+                
                 <!-- Buttons -->
                 <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
                 <a class="next" onclick="plusSlides(1)">&#10095;</a>
@@ -43,27 +43,19 @@
             </div>
         </section>
 
-
         <!-- RIGHT SIDE -->
         <section class="login-section">
-
             <div class="login-container">
 
                 <!-- SCHOOL LOGO -->
                 <div class="logo-container">
-                    <img 
-                        src="images/school-logo.png" 
-                        alt="School Logo"
-                        class="school-logo"
-                    >
+                    <img src="images/school-logo.png" alt="School Logo" class="school-logo">
                 </div>
-
 
                 <!-- EMPTY / BANNER AREA -->
                 <div class="banner-area">
                     <!-- You can put announcements or other content here later -->
                 </div>
-
 
                 <!-- LOGIN FORM -->
                 <form class="login-form">
@@ -71,64 +63,29 @@
                     <!-- ID -->
                     <div class="input-group">
                         <label for="student-id">ID</label>
-
-                        <input 
-                            type="text"
-                            id="student-id"
-                            name="student-id"
-                            placeholder="Enter your ID"
-                        >
+                        <input type="text" id="student-id" name="student-id" placeholder="Enter your ID">
                     </div>
-
 
                     <!-- PASSWORD -->
                     <div class="input-group">
                         <label for="password">Password</label>
-
-                        <input 
-                            type="password"
-                            id="password"
-                            name="password"
-                            placeholder="Enter your password"
-                        >
+                        <input type="password" id="password" name="password" placeholder="Enter your password">
                     </div>
-
 
                     <!-- CLOUDFLARE -->
-                    <div class="cloudflare">
-                        CLOUDFLARE
-                    </div>
-
+                    <div class="cloudflare">CLOUDFLARE</div>
 
                     <!-- LOGIN BUTTONS -->
                     <div class="button-row">
-
-                        <a href="forgot-password.html" class="secondary-button">Forgot Password</a>
-                        <button 
-                            type="submit" 
-                            class="login-button"
-                        >
-                            Login
-                        </button>
-
+                        <a href="index/forgot-password.html" class="secondary-button">Forgot Password</a>
+                        <button type="submit" class="login-button">Login</button>
                     </div>
 
-
                     <!-- GOOGLE LOGIN -->
-                    <button 
-                        type="button" 
-                        class="google-button"
-                    >
-                        Google Login
-                    </button>
-
+                    <button type="button" class="google-button">Google Login</button>
                 </form>
-
             </div>
-
         </section>
-
     </main>
-
 </body>
 </html>
