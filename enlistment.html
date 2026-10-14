@@ -33,185 +33,185 @@
 
         <p class="user-id" id="user-id">12345678</p>
     </header>
+    <div class="layout" id="layout">
+        <!-- ===== SIDE MENU (same as home, Enlistment is active) ===== -->
+        <nav class="sidebar" id="sidebar" aria-label="Main navigation">
+            <ul class="side-menu">
+                <li><a href="home.html" class="active">Home</a></li>
+                <li><a href="enlistment.html">Enlistment</a></li>
+                <li><a href="add-drop.html">Add / Drop</a></li>
+                <li><a href="apply-special.html">Special Class</a></li>
+                <li><a href="withdrawal.html">Course Withdrawal</a></li>
+                <li><a href="program-exchange.html">Program Exchange</a></li>
+                <li><a href="curriculum.html">Curriculum Progression</a></li>
+                <li><a href="schedule.html">View Schedule</a></li>
+                <li><a href="records.html">View Records</a></li>
+                <li><a href="calendar.html">University Calendar</a></li>
+                <li><a href="organizations.html">Organizations</a></li>
+                <li><a href="profile.html">Profile</a></li>
+                <li><a href="ai-chat.html">AI Chat</a></li>
+            </ul>
 
-    <!-- ===== SIDE MENU (same as home, Enlistment is active) ===== -->
-    <nav class="side-menu" id="side-menu">
-        <ul>
-            <li><a href="home.html">Home</a></li>
-            <li><a href="enlistment.html" class="active">Enlistment</a></li>
-            <li><a href="add-drop.html">Add / Drop</a></li>
-            <li><a href="apply-special.html">Special Class</a></li>
-            <li><a href="withdrawal.html">Course Withdrawal</a></li>
-            <li><a href="program-exchange.html">Program Exchange</a></li>
-            <li><a href="curriculum.html">Curriculum Progression</a></li>
-            <li><a href="schedule.html">View Schedule</a></li>
-            <li><a href="records.html">View Records</a></li>
-            <li><a href="calendar.html">University Calendar</a></li>
-            <li><a href="organizations.html">Organizations</a></li>
-            <li><a href="profile.html">Profile</a></li>
-            <li><a href="ai-chat.html">AI Chat</a></li>
-            <li><a href="index.html" class="logout">Log out</a></li>
-        </ul>
-    </nav>
-    <div class="menu-backdrop" id="menu-backdrop" hidden></div>
+            <ul class="sidebar-bottom">
+                <li><a href="index.html" class="logout">Log out</a></li>
+            </ul>
+        </nav>
 
-    <!-- ===== MAIN ===== -->
-    <main class="main-section enlistment-page">
+        <!-- ===== MAIN ===== -->
+        <main class="main-section enlistment-page">
 
-        <h1 class="page-title">Enlistment</h1>
+            <h1 class="page-title">Enlistment</h1>
 
-        <div class="enlist-layout">
+            <div class="enlist-layout">
 
-            <!-- LEFT: campus + course table -->
-            <section class="enlist-left">
+                <!-- LEFT: campus + course table -->
+                <section class="enlist-left">
 
-                <div class="campus-switch">
-                    <button class="campus-btn active" data-campus="laguna">Laguna</button>
-                    <button class="campus-btn" data-campus="manila">Manila</button>
-                </div>
+                    <div class="campus-switch">
+                        <button class="campus-btn active" data-campus="laguna">Laguna</button>
+                        <button class="campus-btn" data-campus="manila">Manila</button>
+                    </div>
 
                 <!-- Search / filter for courses (required feature) -->
-                <div class="course-tools">
-                    <input type="search" id="course-search" placeholder="Search by course code or name">
+                    <div class="course-tools">
+                        <input type="search" id="course-search" placeholder="Search by course code or name">
 
-                    <select id="course-sort">
-                        <option value="code-asc">Course code (A-Z)</option>
-                        <option value="code-desc">Course code (Z-A)</option>
-                        <option value="name-asc">Course name (A-Z)</option>
-                        <option value="name-desc">Course name (Z-A)</option>
-                    </select>
-                </div>
+                        <select id="course-sort">
+                            <option value="code-asc">Course code (A-Z)</option>
+                            <option value="code-desc">Course code (Z-A)</option>
+                            <option value="name-asc">Course name (A-Z)</option>
+                            <option value="name-desc">Course name (Z-A)</option>
+                        </select>
+                    </div>
 
-                <div class="table-wrap">
-                    <table class="course-table" id="course-table">
-                        <thead>
-                            <tr>
-                                <th scope="col">Course code</th>
-                                <th scope="col">Course name</th>
-                                <th scope="col">Section</th>
-                                <th scope="col">Action</th>
-                            </tr>
-                        </thead>
-                        <tbody id="course-body">
-                            <tr data-code="CBAPDEV" data-name="Web Application Development" data-campus="laguna" data-intercampus="false">
-                                <td>CBAPDEV</td>
-                                <td>Web Application Development</td>
-                                <td class="section-cell">none</td>
-                                <td><button class="row-btn add" data-action="add">Add</button></td>
-                            </tr>
-                            <tr data-code="GEWORLD" data-name="The Contemporary World" data-campus="laguna" data-intercampus="false">
-                                <td>GEWORLD</td>
-                                <td>The Contemporary World</td>
-                                <td class="section-cell">
-                                    <span>XZ08</span>
-                                    <small>MON 07:30PM-09:00PM | online<br>THU 07:30PM-09:00PM | LR302</small>
-                                </td>
-                                <td><button class="row-btn add" data-action="add">Add</button></td>
-                            </tr>
-                            <tr data-code="GEETHIC" data-name="Ethics" data-campus="laguna" data-intercampus="false">
-                                <td>GEETHIC</td>
-                                <td>Ethics</td>
-                                <td class="section-cell">
-                                    <span>XZ09</span>
-                                    <small>MON 09:15PM-10:45PM | online<br>THU 09:15PM-10:45PM | LR302</small>
-                                </td>
-                                <td><button class="row-btn add" data-action="add">Add</button></td>
-                            </tr>
-                            <tr data-code="SAS1000" data-name="Student Affairs Services 1000" data-campus="laguna" data-intercampus="false">
-                                <td>SAS1000</td>
-                                <td>Student Affairs Services 1000</td>
-                                <td class="section-cell">
-                                    <span>XZ12</span>
-                                    <small>TUE 10:00AM-4:00AM | online</small>
-                                </td>
-                                <td><button class="row-btn add" data-action="add">Add</button></td>
-                            </tr>
-                            <tr data-code="LCLSONE" data-name="Lasallian Studies 1" data-campus="manila" data-intercampus="true">
-                                <td>LCLSONE</td>
-                                <td>Lasallian Studies 1</td>
-                                <td class="section-cell">
-                                    <span>XB1A</span>
-                                    <small>SAT 09:15AM-10:45AM | EXR004</small>
-                                </td>
-                                <td><button class="row-btn add" data-action="add">Add</button></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <p class="empty" id="no-results" hidden>No courses match your search.</p>
-                </div>
-
-            </section>
-
-            <!-- RIGHT: chosen courses / schedule + documents + actions -->
-            <section class="enlist-right">
-
-                <div class="view-switch">
-                    <button class="view-btn active" data-view="chosen" id="tab-chosen">Chosen courses</button>
-                    <button class="view-btn" data-view="schedule" id="tab-schedule">Schedule</button>
-                </div>
-
-                <!-- Chosen courses view -->
-                <div class="chosen-panel" id="chosen-panel">
-                    <ul class="chosen-list" id="chosen-list">
-                        <li class="empty">No courses chosen yet. Press Add on a course to start.</li>
-                    </ul>
-                    <p class="chosen-total">Courses chosen: <span id="chosen-count">0</span></p>
-                </div>
-
-                <!-- Schedule view -->
-                <div class="schedule-panel" id="schedule-panel" hidden>
                     <div class="table-wrap">
-                        <table class="schedule-table">
+                        <table class="course-table" id="course-table">
                             <thead>
-                                <tr>
-                                    <th scope="col">Time</th>
-                                    <th scope="col">Mon</th>
-                                    <th scope="col">Tue</th>
-                                    <th scope="col">Wed</th>
-                                    <th scope="col">Thu</th>
-                                    <th scope="col">Fri</th>
-                                    <th scope="col">Sat</th>
+                            <tr>
+                                    <th scope="col">Course code</th>
+                                    <th scope="col">Course name</th>
+                                    <th scope="col">Section</th>
+                                    <th scope="col">Action</th>
                                 </tr>
                             </thead>
-                            <tbody id="schedule-body">
-                                <!-- JS fills these rows from the chosen courses -->
+                            <tbody id="course-body">
+                                <tr data-code="CBAPDEV" data-name="Web Application Development" data-campus="laguna" data-intercampus="false">
+                                    <td>CBAPDEV</td>
+                                    <td>Web Application Development</td>
+                                    <td class="section-cell">none</td>
+                                    <td><button class="row-btn add" data-action="add">Add</button></td>
+                                </tr>
+                                <tr data-code="GEWORLD" data-name="The Contemporary World" data-campus="laguna" data-intercampus="false">
+                                    <td>GEWORLD</td>
+                                    <td>The Contemporary World</td>
+                                    <td class="section-cell">
+                                        <span>XZ08</span>
+                                        <small>MON 07:30AM-09:00AM | online<br>THU 07:30AM-09:00AM | LR302</small>
+                                    </td>
+                                    <td><button class="row-btn add" data-action="add">Add</button></td>
+                                </tr>
+                                <tr data-code="GEETHIC" data-name="Ethics" data-campus="laguna" data-intercampus="false">
+                                    <td>GEETHIC</td>
+                                    <td>Ethics</td>
+                                    <td class="section-cell">
+                                        <span>XZ09</span>
+                                        <small>MON 09:15AM-10:45AM | online<br>THU 09:15AM-10:45AM | LR302</small>
+                                    </td>
+                                    <td><button class="row-btn add" data-action="add">Add</button></td>
+                                </tr>
+                                <tr data-code="SAS1000" data-name="Student Affairs Services 1000" data-campus="laguna" data-intercampus="false">
+                                    <td>SAS1000</td>
+                                    <td>Student Affairs Services 1000</td>
+                                    <td class="section-cell">
+                                        <span>XZ12</span>
+                                        <small>TUE 12:00NN-4:00PM | online</small>
+                                    </td>
+                                    <td><button class="row-btn add" data-action="add">Add</button></td>
+                                </tr>
+                                <tr data-code="LCLSONE" data-name="Lasallian Studies 1" data-campus="manila" data-intercampus="true">
+                                    <td>LCLSONE</td>
+                                    <td>Lasallian Studies 1</td>
+                                    <td class="section-cell">
+                                        <span>XB1A</span>
+                                        <small>SAT 09:15AM-10:45AM | EXR004</small>
+                                    </td>
+                                    <td><button class="row-btn add" data-action="add">Add</button></td>
+                                </tr>
                             </tbody>
                         </table>
+                        <p class="empty" id="no-results" hidden>No courses match your search.</p>
                     </div>
-                </div>
 
-                <!-- Inter-campus document: only shown when an inter-campus course is added -->
-                <section class="intercampus" id="intercampus-form" hidden>
-                    <h2>Inter-campus document</h2>
-                    <p>One or more chosen courses are held on another campus. Fill this out so it can be reviewed.</p>
-
-                    <label for="ic-reason">Reason</label>
-                    <textarea id="ic-reason" rows="3" placeholder="Why do you need to take this course on another campus?"></textarea>
-
-                    <label for="ic-file">Supporting document</label>
-                    <input type="file" id="ic-file" accept=".pdf,.jpg,.jpeg,.png">
                 </section>
 
-                <!-- Policy + actions -->
-                <div class="enlist-actions">
+                <!-- RIGHT: chosen courses / schedule + documents + actions -->
+                <section class="enlist-right">
+
+                    <div class="view-switch">
+                        <button class="view-btn active" data-view="chosen" id="tab-chosen">Chosen courses</button>
+                        <button class="view-btn" data-view="schedule" id="tab-schedule">Schedule</button>
+                    </div>
+
+                    <!-- Chosen courses view -->
+                    <div class="chosen-panel" id="chosen-panel">
+                        <ul class="chosen-list" id="chosen-list">
+                            <li class="empty">No courses chosen yet. Press Add on a course to start.</li>
+                        </ul>
+                        <p class="chosen-total">Courses chosen: <span id="chosen-count">0</span></p>
+                    </div>
+
+                    <!-- Schedule view -->
+                    <div class="schedule-panel" id="schedule-panel" hidden>
+                        <div class="table-wrap">
+                            <table class="schedule-table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Time</th>
+                                        <th scope="col">Mon</th>
+                                        <th scope="col">Tue</th>
+                                        <th scope="col">Wed</th>
+                                        <th scope="col">Thu</th>
+                                        <th scope="col">Fri</th>
+                                        <th scope="col">Sat</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="schedule-body">
+                                    <!-- JS fills these rows from the chosen courses -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Inter-campus document: only shown when an inter-campus course is added -->
+                    <section class="intercampus" id="intercampus-form" hidden>
+                        <h2>Inter-campus document</h2>
+                        <p>One or more chosen courses are held on another campus. Fill this out so it can be reviewed.</p>
+
+                        <label for="ic-reason">Reason</label>
+                        <textarea id="ic-reason" rows="3" placeholder="Why do you need to take this course on another campus?"></textarea>
+
+                        <label for="ic-file">Supporting document</label>
+                        <input type="file" id="ic-file" accept=".pdf,.jpg,.jpeg,.png">
+                    </section>
+
+                    <!-- Policy + actions -->
+                    <div class="enlist-actions">
                     <label class="policy-check" for="agree-policy">
-                        <input type="checkbox" id="agree-policy">
-                        I agree to the school policy
-                    </label>
+                            <input type="checkbox" id="agree-policy">
+                            I agree to the school policy
+                        </label>
 
-                    <button class="btn secondary" id="save-btn" type="button">Save</button>
-                    <button class="btn primary" id="submit-btn" type="button" disabled>Submit</button>
-                </div>
+                        <button class="btn secondary" id="save-btn" type="button">Save</button>
+                        <button class="btn primary" id="submit-btn" type="button" disabled>Submit</button>
+                    </div>
 
-            </section>
-        </div>
-    </main>
-
-    <!-- ===== TOAST NOTIFICATIONS ===== -->
-    <div class="toast-container" id="toast-container"></div>
+                </section>
+            </div>
+        </main>
+    </div>
 
     <!-- ===== FOOTER ===== -->
-    <footer class="site-footer">
+    <footer class="footer-section">
         <p>&copy; 2026 ArchersHub 2.0</p>
         <p><a href="#">Privacy Policy</a> | <a href="#">Terms &amp; Conditions</a></p>
     </footer>

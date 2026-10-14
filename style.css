@@ -353,6 +353,82 @@ body {
     max-width: 480px;
 }
 
+/* =========================================
+   ENLISTMENT / ADD-DROP / SPECIAL CLASS LAYOUT
+========================================= */
+ 
+ 
+.enlist-left,
+.enlist-right {
+    min-width: 0;
+ 
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+ 
+ 
+.enlistment-page .enlist-left,
+.enlistment-page .enlist-right,
+.add-drop-page .enlist-left,
+.add-drop-page .enlist-right {
+    padding: 20px;
+ 
+    background: var(--surface);
+ 
+    border: 1px solid var(--border);
+    border-radius: 14px;
+ 
+    box-shadow: var(--shadow);
+}
+
+.page-title {
+    margin: 0 0 18px;
+ 
+    font-size: 26px;
+    color: var(--heading);
+}
+ 
+ 
+.card h2,
+.changes-panel h2,
+.intercampus h2 {
+    margin: 0 0 14px;
+ 
+    font-size: 18px;
+    color: var(--heading);
+}
+ 
+ 
+.section-cell span {
+    display: block;
+ 
+    font-weight: 700;
+}
+ 
+ 
+.section-cell small {
+    display: block;
+ 
+    margin-top: 3px;
+ 
+    font-size: 12px;
+    line-height: 1.4;
+    color: var(--text-muted);
+}
+ 
+ 
+.count-cell {
+    font-weight: 700;
+    color: var(--heading);
+}
+ 
+ 
+.campus-switch {
+    display: flex;
+    gap: 8px;
+}
+ 
 
 /* =========================================
    HEADER 
@@ -396,6 +472,44 @@ body {
     min-height: calc(100vh - var(--header-h) - 70px);
 }
 
+.main-section input[type="search"],
+.main-section input[type="text"],
+.main-section select,
+.main-section textarea {
+    width: 100%;
+ 
+    padding: 11px 14px;
+ 
+    font-family: inherit;
+    font-size: 15px;
+    color: var(--text);
+ 
+    background: var(--surface);
+ 
+    border: 1px solid var(--input-border);
+    border-radius: 9px;
+ 
+    outline: none;
+ 
+    transition:
+        border-color 0.25s ease,
+        box-shadow 0.25s ease;
+}
+ 
+ 
+.main-section textarea {
+    resize: vertical;
+}
+
+
+.main-section input[type="file"] {
+    width: 100%;
+ 
+    padding: 8px 0;
+ 
+    font-size: 14px;
+    color: var(--text);
+}
 
 /* =========================================
    GREETING ROW + FILTER
@@ -821,6 +935,154 @@ body {
         border-color 0.2s ease;
 }
 
+/* =========================================
+   ROW BUTTONS
+========================================= */
+
+
+.row-btn.add {
+    color: #ffffff;
+ 
+    background: var(--green);
+ 
+    border-color: var(--green);
+}
+ 
+ 
+.row-btn.drop {
+    color: var(--danger);
+ 
+    background: transparent;
+ 
+    border-color: var(--danger);
+}
+ 
+ 
+.row-btn.change {
+    color: var(--warn-text);
+ 
+    background: var(--warn-bg);
+ 
+    border-color: var(--warn-border);
+}
+ 
+ 
+.row-btn.undo {
+    color: var(--text-muted);
+ 
+    background: var(--surface-alt);
+ 
+    border-color: var(--border);
+}
+ 
+ 
+.chosen-list,
+.changes-list,
+.event-list {
+    margin: 0;
+    padding: 0;
+ 
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+ 
+    list-style: none;
+}
+ 
+ 
+.chosen-list li:not(.empty),
+.changes-list li:not(.empty),
+.event-list li:not(.empty) {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+ 
+    padding: 12px 14px;
+ 
+    font-size: 14px;
+ 
+    background: var(--surface-alt);
+ 
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--green);
+    border-radius: 10px;
+}
+ 
+ 
+.chosen-total {
+    margin: 12px 0 0;
+ 
+    font-size: 14px;
+    color: var(--text-muted);
+}
+ 
+ 
+.chosen-total span {
+    font-weight: 700;
+    color: var(--heading);
+}
+ 
+ 
+.schedule-table th,
+.schedule-table td {
+    padding: 8px;
+ 
+    font-size: 12px;
+    text-align: center;
+}
+
+
+
+/* =========================================
+   TABS / SWITCHES
+========================================= */
+
+
+.campus-btn {
+    padding: 10px 22px;
+ 
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text);
+ 
+    cursor: pointer;
+ 
+    background: var(--surface-alt);
+ 
+    border: 1px solid var(--border);
+    border-radius: 9px;
+ 
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.2s ease;
+}
+ 
+ 
+.course-tools {
+    display: grid;
+    grid-template-columns: 1fr 200px;
+    gap: 10px;
+}
+ 
+ 
+.row-btn {
+    padding: 7px 16px;
+ 
+    font-size: 13px;
+    font-weight: 600;
+ 
+    cursor: pointer;
+ 
+    border: 1px solid transparent;
+    border-radius: 8px;
+ 
+    transition:
+        background 0.2s ease,
+        color 0.2s ease,
+        transform 0.2s ease;
+}
 
 /* =========================================
    GOOGLE LOGIN
@@ -1145,6 +1407,14 @@ body {
     border-radius: 20px;
 }
 
+.enlist-layout {
+    display: grid;
+    grid-template-columns: 1.3fr 1fr;
+    gap: 20px;
+ 
+    align-items: start;
+}
+
 .sidebar {
     position: fixed;
     top: var(--header-h);
@@ -1420,6 +1690,20 @@ body {
         color 0.2s ease;
 }
 
+/* =========================================
+   SCHEDULE GRID
+========================================= */
+ 
+ 
+.changes-panel,
+.intercampus {
+    padding: 16px;
+ 
+    background: rgba(8, 120, 48, 0.04);
+ 
+    border: 1px dashed #9fc3ac;
+    border-radius: 12px;
+}
 
 /* =========================================
    CHOSEN / CHANGES / EVENT LISTS
@@ -1761,3 +2045,290 @@ body.dark-mode .card:hover {
         max-width: none;
     }
 }
+
+
+/* =========================================
+   CHANGES / INTER-CAMPUS / SPECIAL CLASS BOXES
+========================================= */
+ 
+ 
+.intercampus p {
+    margin: 0 0 4px;
+ 
+    font-size: 14px;
+    color: var(--text-muted);
+}
+ 
+ 
+.not-listed {
+    margin-top: 6px;
+    padding: 4px 14px 14px;
+ 
+    background: rgba(8, 120, 48, 0.05);
+ 
+    border-left: 4px solid var(--green);
+    border-radius: 8px;
+}
+ 
+ 
+.special-class-box {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+ 
+    padding: 14px 16px;
+ 
+    background: rgba(8, 120, 48, 0.06);
+ 
+    border: 1px solid var(--border);
+    border-radius: 12px;
+}
+ 
+ 
+.special-class-box p {
+    margin: 0;
+ 
+    font-size: 14px;
+    color: var(--label);
+}
+ 
+ 
+.enlist-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px;
+ 
+    padding-top: 16px;
+ 
+    border-top: 1px solid var(--border);
+}
+
+
+ 
+ 
+/* =========================================
+   ACTION BUTTONS
+========================================= */
+ 
+ 
+.main-section .policy-check {
+    flex: 1 1 200px;
+ 
+    display: flex;
+    align-items: center;
+    gap: 8px;
+ 
+    margin: 0;
+ 
+    cursor: pointer;
+}
+ 
+ 
+.policy-check input {
+    width: 18px;
+    height: 18px;
+ 
+    accent-color: var(--green);
+}
+ 
+ 
+.btn {
+    display: inline-block;
+ 
+    padding: 12px 24px;
+ 
+    font-size: 15px;
+    font-weight: 600;
+    text-align: center;
+    text-decoration: none;
+ 
+    cursor: pointer;
+ 
+    border-radius: 9px;
+ 
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        background 0.2s ease,
+        border-color 0.2s ease;
+}
+ 
+ 
+.btn.primary {
+    color: #ffffff;
+ 
+    background:
+        linear-gradient(
+            135deg,
+            var(--green),
+            var(--green-dark)
+        );
+ 
+    border: 1px solid var(--green);
+ 
+    box-shadow: 0 5px 15px rgba(8, 120, 48, 0.20);
+}
+ 
+ 
+.btn.secondary {
+    color: var(--label);
+ 
+    background: var(--surface-alt);
+ 
+    border: 1px solid var(--border);
+}
+ 
+ 
+.main-section input[type="search"]:focus,
+.main-section input[type="text"]:focus,
+.main-section select:focus,
+.main-section textarea:focus {
+    border-color: var(--green);
+ 
+    box-shadow: 0 0 0 3px rgba(8, 120, 48, 0.12);
+}
+ 
+ 
+.main-section tbody tr.pending-add {
+    background: rgba(8, 120, 48, 0.12);
+}
+ 
+ 
+/* Row states JS can toggle */
+ 
+ 
+.main-section tbody tr.pending-drop {
+    background: rgba(179, 38, 30, 0.10);
+}
+ 
+ 
+.campus-btn:hover {
+    border-color: #b8cfbf;
+ 
+    transform: translateY(-1px);
+}
+ 
+ 
+.campus-btn.active {
+    color: #ffffff;
+ 
+    background:
+        linear-gradient(
+            135deg,
+            var(--green),
+            var(--green-dark)
+        );
+ 
+    border-color: var(--green);
+}
+ 
+ 
+.row-btn:hover {
+    transform: translateY(-1px);
+}
+ 
+ 
+.row-btn.add:hover {
+    background: var(--green-dark);
+}
+ 
+ 
+.row-btn.drop:hover {
+    color: #ffffff;
+ 
+    background: var(--danger);
+}
+ 
+ 
+.changes-list li.drop-item {
+    border-left-color: var(--danger);
+}
+ 
+ 
+.schedule-table td.filled {
+    font-weight: 600;
+ 
+    background: rgba(8, 120, 48, 0.18);
+}
+ 
+ 
+.btn.primary:hover {
+    transform: translateY(-2px);
+ 
+    box-shadow: 0 8px 22px rgba(8, 120, 48, 0.30);
+}
+ 
+ 
+.btn.secondary:hover {
+    transform: translateY(-2px);
+ 
+    background: rgba(8, 120, 48, 0.08);
+ 
+    border-color: #b8cfbf;
+}
+ 
+ 
+.btn:disabled {
+    opacity: 0.5;
+ 
+    cursor: not-allowed;
+ 
+    transform: none;
+ 
+    box-shadow: none;
+}
+ 
+ 
+body.dark-mode .changes-panel,
+body.dark-mode .intercampus {
+    border-color: #3f5c49;
+}
+ 
+ 
+@media (max-width: 1000px) {
+    .dashboard,
+    .enlist-layout {
+        grid-template-columns: 1fr;
+    }
+}
+ 
+ 
+@media (max-width: 600px) {
+    .page-title {
+        font-size: 22px;
+    }
+}
+ 
+ 
+@media (max-width: 600px) {
+    .course-tools {
+        grid-template-columns: 1fr;
+    }
+}
+ 
+ 
+@media (max-width: 600px) {
+    .campus-switch {
+        width: 100%;
+    }
+}
+ 
+ 
+@media (max-width: 600px) {
+    .campus-btn {
+        flex: 1;
+ 
+        padding: 10px 8px;
+    }
+}
+ 
+ 
+@media (max-width: 600px) {
+    .enlist-actions .btn {
+        flex: 1;
+    }
+}
+ 
