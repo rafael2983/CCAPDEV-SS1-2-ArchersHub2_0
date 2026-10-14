@@ -39,25 +39,27 @@
     </header>
 
     <!-- Side Menu -->
-    <nav class="side-menu" id="side-menu">
-        <ul>
-            <li><a href="home.html">Home</a></li>
-            <li><a href="enlistment.html">Enlistment</a></li>
-            <li><a href="add-drop.html">Add / Drop</a></li>
-            <li><a href="special-class.html" class="active">Special Class</a></li>
-            <li><a href="withdrawal.html">Course Withdrawal</a></li>
-            <li><a href="program-exchange.html">Program Exchange</a></li>
-            <li><a href="curriculum.html">Curriculum Progression</a></li>
-            <li><a href="schedule.html">View Schedule</a></li>
-            <li><a href="records.html">View Records</a></li>
-            <li><a href="calendar.html">University Calendar</a></li>
-            <li><a href="organizations.html">Organizations</a></li>
-            <li><a href="profile.html">Profile</a></li>
-            <li><a href="ai-chat.html">AI Chat</a></li>
-            <li><a href="index.html" class="logout">Log out</a></li>
-        </ul>
-    </nav>
-    <div class="menu-backdrop" id="menu-backdrop" hidden></div>
+    <nav class="sidebar" id="sidebar" aria-label="Main navigation">
+            <ul class="side-menu">
+                <li><a href="home.html" class="active">Home</a></li>
+                <li><a href="enlistment.html">Enlistment</a></li>
+                <li><a href="add-drop.html">Add / Drop</a></li>
+                <li><a href="apply-special.html">Special Class</a></li>
+                <li><a href="withdrawal.html">Course Withdrawal</a></li>
+                <li><a href="program-exchange.html">Program Exchange</a></li>
+                <li><a href="curriculum.html">Curriculum Progression</a></li>
+                <li><a href="schedule.html">View Schedule</a></li>
+                <li><a href="records.html">View Records</a></li>
+                <li><a href="calendar.html">University Calendar</a></li>
+                <li><a href="organizations.html">Organizations</a></li>
+                <li><a href="profile.html">Profile</a></li>
+                <li><a href="ai-chat.html">AI Chat</a></li>
+            </ul>
+
+            <ul class="sidebar-bottom">
+                <li><a href="index.html" class="logout">Log out</a></li>
+            </ul>
+        </nav>
 
     <main class="main-section special-class-page">
 
@@ -93,8 +95,8 @@
                                 </tr>
                             </thead>
                             <tbody id="applied-body">
-                                <tr data-code="CBAPDEV" data-name="Web Application Development" data-campus="laguna">
-                                    <td>CBAPDEV</td>
+                                <tr data-code="CCAPDEV" data-name="Web Application Development" data-campus="laguna">
+                                    <td>CCAPDEV</td>
                                     <td>Web Application Development</td>
                                     <td>Laguna</td>
                                     <td class="count-cell">7</td>
@@ -127,7 +129,7 @@
                     <label for="sc-course">Course</label>
                     <select id="sc-course">
                         <option value="">Select a course</option>
-                        <option value="CBAPDEV">CBAPDEV - Web Application Development</option>
+                        <option value="CBAPDEV">CCAPDEV - Web Application Development</option>
                         <option value="GEETHIC">GEETHIC - Ethics</option>
                         <option value="GEWORLD">GEWORLD - The Contemporary World</option>
                         <option value="SAS2000">SAS2000 - Student Affairs Services 2000</option>
@@ -194,7 +196,7 @@
     <div class="toast-container" id="toast-container"></div>
 
     <!-- Footer -->
-    <footer class="site-footer">
+    <footer class="footer-section">
         <p>&copy; 2026 ArchersHub 2.0</p>
         <p><a href="#">Privacy Policy</a> | <a href="#">Terms &amp; Conditions</a></p>
     </footer>

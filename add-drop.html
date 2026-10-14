@@ -39,11 +39,11 @@
     </header>
 
     <!-- Side Menu -->
-    <nav class="side-menu" id="side-menu">
-            <ul>
-                <li><a href="home.html">Home</a></li>
+    <nav class="sidebar" id="sidebar" aria-label="Main navigation">
+            <ul class="side-menu">
+                <li><a href="home.html" class="active">Home</a></li>
                 <li><a href="enlistment.html">Enlistment</a></li>
-                <li><a href="add-drop.html" class="active">Add / Drop</a></li>
+                <li><a href="add-drop.html">Add / Drop</a></li>
                 <li><a href="apply-special.html">Special Class</a></li>
                 <li><a href="withdrawal.html">Course Withdrawal</a></li>
                 <li><a href="program-exchange.html">Program Exchange</a></li>
@@ -54,10 +54,12 @@
                 <li><a href="organizations.html">Organizations</a></li>
                 <li><a href="profile.html">Profile</a></li>
                 <li><a href="ai-chat.html">AI Chat</a></li>
+            </ul>
+
+            <ul class="sidebar-bottom">
                 <li><a href="index.html" class="logout">Log out</a></li>
             </ul>
-    </nav>
-    <div class="menu-backdrop" id="menu-backdrop" hidden></div>
+        </nav>
 
     <main class="main-section add-drop-page">
 
@@ -98,7 +100,7 @@
                         <tbody id="course-body">
                             <!-- Not enrolled yet: Add -->
                             <tr data-code="CCAPDEV" data-name="Web Application Development" data-campus="laguna" data-status="available" data-intercampus="false">
-                                <td>CBAPDEV</td>
+                                <td>CCAPDEV</td>
                                 <td>Web Application Development</td>
                                 <td class="section-cell">none</td>
                                 <td><button class="row-btn add" data-action="add">Add</button></td>
@@ -244,7 +246,7 @@
     </main>
 
     <!-- Footer -->
-    <footer class="site-footer">
+    <footer class="footer-section">
         <p>&copy; 2026 ArchersHub 2.0</p>
         <p><a href="#">Privacy Policy</a> | <a href="#">Terms &amp; Conditions</a></p>
     </footer>
