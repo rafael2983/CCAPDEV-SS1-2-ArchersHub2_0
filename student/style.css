@@ -1,0 +1,145 @@
+/* =========================================
+   FORM CONTROLS
+========================================= */
+
+.main-section label {
+    display: block;
+
+    margin: 12px 0 6px;
+
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--label);
+}
+
+.main-section select {
+    width: 100%;
+
+    padding: 11px 14px;
+
+    font-family: inherit;
+    font-size: 15px;
+    color: var(--text);
+
+    background: var(--surface);
+
+    border: 1px solid var(--input-border);
+    border-radius: 9px;
+
+    outline: none;
+
+    transition:
+        border-color 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+.main-section table {
+    width: 100%;
+
+    border-collapse: collapse;
+
+    font-size: 14px;
+}
+
+.main-section th {
+    padding: 12px 14px;
+
+    font-size: 13px;
+    text-align: left;
+    white-space: nowrap;
+    color: #ffffff;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--green),
+            var(--green-dark)
+        );
+}
+
+.main-section td {
+    padding: 12px 14px;
+
+    vertical-align: top;
+
+    border-top: 1px solid var(--border);
+}
+
+.main-section tbody tr {
+    transition: background 0.2s ease;
+}
+
+
+/* =========================================
+   FILTER PANEL
+========================================= */
+
+#filter-panel[hidden] {
+    display: none !important;
+}
+
+#filter-panel {
+    width: 100%;
+    margin-top: 16px;
+    padding: 18px;
+
+    background: var(--surface);
+
+    border: 1px solid var(--border);
+    border-radius: 10px;
+}
+
+/* =========================================
+   FILTER BUTTON
+========================================= */
+
+#filter-btn {
+    padding: 10px 16px;
+
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 600;
+
+    color: #ffffff;
+    background: var(--green);
+
+    border: none;
+    border-radius: 8px;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease;
+}
+
+#filter-btn:hover {
+    background: var(--green-dark);
+}
+
+#filter-btn:active {
+    transform: scale(0.98);
+}
+
+#filter-btn:focus-visible {
+    outline: 2px solid var(--green);
+    outline-offset: 3px;
+}
+
+/* =========================================
+   MOBILE FORM CONTROLS
+========================================= */
+
+@media (max-width: 800px) {
+    #filter-panel {
+        padding: 14px;
+    }
+
+    .main-section {
+        min-width: 0;
+    }
+
+    .main-section select {
+        max-width: 100%;
+    }
+}
