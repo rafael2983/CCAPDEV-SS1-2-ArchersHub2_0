@@ -20,17 +20,17 @@
     <!-- Header -->
     <header class="top-bar">
 
-        <button class="menu" id="menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="side-menu">
+        <button class="menu" id="menu-btn" title="Open menu">
             &#9776;
         </button>
 
-        <a href="home.html" class="logo-link" aria-label="Go to home page">
+        <a href="home.html" class="logo-link" title="Go to home page">
             <img src="images/school-logo.png" alt="DLSU school logo">
         </a>
 
         <div class="header-fill"></div>
 
-        <button class="theme-toggle" id="theme-toggle" aria-label="Switch between dark and light mode">
+        <button class="theme-toggle" id="theme-toggle" title="Switch between dark and light mode">
             <span class="theme-icon">&#9728;</span>
         </button>
 
@@ -39,12 +39,12 @@
     </header>
 
     <!-- Side Menu -->
-    <nav class="side-menu" id="side-menu" aria-label="Main navigation">
+    <nav class="side-menu" id="side-menu">
         <ul>
             <li><a href="home.html">Home</a></li>
             <li><a href="enlistment.html">Enlistment</a></li>
             <li><a href="add-drop.html">Add / Drop</a></li>
-            <li><a href="special-class.html" class="active" aria-current="page">Special Class</a></li>
+            <li><a href="special-class.html" class="active">Special Class</a></li>
             <li><a href="withdrawal.html">Course Withdrawal</a></li>
             <li><a href="program-exchange.html">Program Exchange</a></li>
             <li><a href="curriculum.html">Curriculum Progression</a></li>
@@ -65,21 +65,20 @@
 
         <div class="enlist-layout">
 
-            <!-- LEFT: campus, already applied courses, apply form -->
-            <section class="enlist-left" aria-label="Special class applications">
+            <!-- campus, already applied courses, apply form -->
+            <section class="enlist-left">
 
                 <!-- Campus: Laguna / Manila / Either -->
-                <div class="campus-switch" role="group" aria-label="Campus">
-                    <button class="campus-btn active" data-campus="either" aria-pressed="true">Either</button>
-                    <button class="campus-btn" data-campus="laguna" aria-pressed="false">Laguna</button>
-                    <button class="campus-btn" data-campus="manila" aria-pressed="false">Manila</button>
+                <div class="campus-switch">
+                    <button class="campus-btn active" data-campus="either">Either</button>
+                    <button class="campus-btn" data-campus="laguna">Laguna</button>
+                    <button class="campus-btn" data-campus="manila">Manila</button>
                 </div>
 
                 <!-- Already applied courses (shows how many students applied) -->
-                <section class="card" aria-label="Already applied courses">
+                <section class="card">
                     <h2>Already applied courses</h2>
 
-                    <label for="applied-search" class="sr-only">Search applied courses</label>
                     <input type="search" id="applied-search" placeholder="Search by course code or name">
 
                     <div class="table-wrap">
@@ -122,7 +121,7 @@
                 </section>
 
                 <!-- Course and reason form -->
-                <section class="card" aria-label="New application">
+                <section class="card">
                     <h2>New application</h2>
 
                     <label for="sc-course">Course</label>
@@ -169,10 +168,10 @@
 
             </section>
 
-            <!-- requested courses and actions -->
-            <section class="enlist-right" aria-label="Currently requested courses">
+            <!-- my requested courses and actions -->
+            <section class="enlist-right">
 
-                <section class="card" aria-label="Currently requested courses">
+                <section class="card">
                     <h2>Currently requested courses</h2>
                     <ul class="chosen-list" id="requested-list">
                         <li class="empty">You haven't applied for any special class yet.</li>
@@ -190,6 +189,9 @@
         </div>
 
     </main>
+
+    <!-- Toast notifications -->
+    <div class="toast-container" id="toast-container"></div>
 
     <!-- Footer -->
     <footer class="site-footer">

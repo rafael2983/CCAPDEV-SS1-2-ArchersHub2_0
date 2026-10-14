@@ -2,15 +2,17 @@
 <html lang="en">
 
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="ArchersHub 2.0 add and drop courses">
- 
+
     <title>Add / Drop</title>
     <link rel="icon" href="images/school-logo.png">
     <link rel="stylesheet" href="style.css">
     <script src="scripts/scripts.js" defer></script>
     <script src="scripts/add-drop.js" defer></script>
+
 </head>
 
 <body>
@@ -18,17 +20,17 @@
     <!-- Header -->
     <header class="top-bar">
 
-        <button class="menu" id="menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="side-menu">
+        <button class="menu" id="menu-btn" title="Open menu">
             &#9776;
         </button>
  
-        <a href="home.html" class="logo-link" aria-label="Go to home page">
+        <a href="home.html" class="logo-link" title="Go to home page">
             <img src="images/school-logo.png" alt="DLSU school logo">
         </a>
             
         <div class="header-fill"></div>
  
-        <button class="theme-toggle" id="theme-toggle" aria-label="Switch between dark and light mode">
+        <button class="theme-toggle" id="theme-toggle" title="Switch between dark and light mode">
             <span class="theme-icon">&#9728;</span>
         </button>
  
@@ -37,12 +39,12 @@
     </header>
 
     <!-- Side Menu -->
-    <nav class="side-menu" id="side-menu" aria-label="Main navigation">
+    <nav class="side-menu" id="side-menu">
             <ul>
                 <li><a href="home.html">Home</a></li>
-                <li><a href="enlistment.html" class="active" aria-current="page">Enlistment</a></li>
-                <li><a href="add-drop.html">Add / Drop</a></li>
-                <li><a href="special-class.html">Special Class</a></li>
+                <li><a href="enlistment.html">Enlistment</a></li>
+                <li><a href="add-drop.html" class="active">Add / Drop</a></li>
+                <li><a href="apply-special.html">Special Class</a></li>
                 <li><a href="withdrawal.html">Course Withdrawal</a></li>
                 <li><a href="program-exchange.html">Program Exchange</a></li>
                 <li><a href="curriculum.html">Curriculum Progression</a></li>
@@ -55,27 +57,26 @@
                 <li><a href="index.html" class="logout">Log out</a></li>
             </ul>
     </nav>
+    <div class="menu-backdrop" id="menu-backdrop" hidden></div>
 
     <main class="main-section add-drop-page">
- 
+
         <h1 class="page-title">Add / Drop</h1>
- 
+
         <div class="enlist-layout">
- 
+
             <!-- LEFT: campus + course table + special class -->
-            <section class="enlist-left" aria-label="Available courses">
- 
-                <div class="campus-switch" role="group" aria-label="Campus">
-                    <button class="campus-btn active" data-campus="laguna" aria-pressed="true">Laguna</button>
-                    <button class="campus-btn" data-campus="manila" aria-pressed="false">Manila</button>
+            <section class="enlist-left">
+
+                <div class="campus-switch">
+                    <button class="campus-btn active" data-campus="laguna">Laguna</button>
+                    <button class="campus-btn" data-campus="manila">Manila</button>
                 </div>
- 
+
                 <!-- Search / filter for courses -->
                 <div class="course-tools">
-                    <label for="course-search" class="sr-only">Search courses</label>
                     <input type="search" id="course-search" placeholder="Search by course code or name">
- 
-                    <label for="course-sort" class="sr-only">Sort courses</label>
+
                     <select id="course-sort">
                         <option value="code-asc">Course code (A-Z)</option>
                         <option value="code-desc">Course code (Z-A)</option>
@@ -83,7 +84,7 @@
                         <option value="name-desc">Course name (Z-A)</option>
                     </select>
                 </div>
- 
+
                 <div class="table-wrap">
                     <table class="course-table" id="course-table">
                         <thead>
@@ -96,7 +97,7 @@
                         </thead>
                         <tbody id="course-body">
                             <!-- Not enrolled yet: Add -->
-                            <tr data-code="CBAPDEV" data-name="Web Application Development" data-campus="laguna" data-status="available" data-intercampus="false">
+                            <tr data-code="CCAPDEV" data-name="Web Application Development" data-campus="laguna" data-status="available" data-intercampus="false">
                                 <td>CBAPDEV</td>
                                 <td>Web Application Development</td>
                                 <td class="section-cell">none</td>
@@ -111,7 +112,7 @@
                                 </td>
                                 <td><button class="row-btn add" data-action="add">Add</button></td>
                             </tr>
- 
+
                             <!-- Already enrolled: Drop -->
                             <tr data-code="SAS3000" data-name="Student Affairs Services 3000" data-campus="laguna" data-status="enrolled" data-intercampus="false">
                                 <td>SAS3000</td>
@@ -131,7 +132,7 @@
                                 </td>
                                 <td><button class="row-btn drop" data-action="drop">Drop</button></td>
                             </tr>
- 
+
                             <!-- Enrolled and can change section -->
                             <tr data-code="LCLSONE" data-name="Lasallian Studies 1" data-campus="manila" data-status="enrolled" data-intercampus="true">
                                 <td>LCLSONE</td>
@@ -146,33 +147,33 @@
                     </table>
                     <p class="empty" id="no-results" hidden>No courses match your search.</p>
                 </div>
- 
-                <!-- Apply Special Class -->
+
+                <!-- Apply Special Class (bottom left in wireframe) -->
                 <div class="special-class-box">
                     <p>Can't find the course you need?</p>
                     <a href="special-class.html" class="btn secondary" id="special-class-link">Apply Special Class</a>
                 </div>
- 
+
             </section>
- 
+
             <!-- RIGHT: chosen courses, changes, documents, actions -->
-            <section class="enlist-right" aria-label="Your courses and changes">
- 
-                <div class="view-switch" role="tablist" aria-label="Courses view">
-                    <button class="view-btn active" role="tab" aria-selected="true" data-view="chosen" id="tab-chosen">Chosen courses</button>
-                    <button class="view-btn" role="tab" aria-selected="false" data-view="schedule" id="tab-schedule">Schedule</button>
+            <section class="enlist-right">
+
+                <div class="view-switch">
+                    <button class="view-btn active" data-view="chosen" id="tab-chosen">Chosen courses</button>
+                    <button class="view-btn" data-view="schedule" id="tab-schedule">Schedule</button>
                 </div>
- 
+
                 <!-- Currently enrolled courses -->
-                <div class="chosen-panel" id="chosen-panel" role="tabpanel" aria-labelledby="tab-chosen">
+                <div class="chosen-panel" id="chosen-panel">
                     <ul class="chosen-list" id="chosen-list">
                         <li class="empty">No enrolled courses.</li>
                     </ul>
                     <p class="chosen-total">Courses enrolled: <span id="chosen-count">0</span></p>
                 </div>
- 
+
                 <!-- Schedule view -->
-                <div class="schedule-panel" id="schedule-panel" role="tabpanel" aria-labelledby="tab-schedule" hidden>
+                <div class="schedule-panel" id="schedule-panel" hidden>
                     <div class="table-wrap">
                         <table class="schedule-table">
                             <thead>
@@ -187,19 +188,19 @@
                                 </tr>
                             </thead>
                             <tbody id="schedule-body">
-                                <!-- JS will fill these rows -->
+                                <!-- JS fills these rows -->
                             </tbody>
                         </table>
                     </div>
                 </div>
- 
-                <!-- pending add / drop / change, each with a reason -->
-                <section class="changes-panel" id="changes-panel" aria-label="Pending changes">
+
+                <!-- Changes: pending add / drop / change, each with a reason -->
+                <section class="changes-panel" id="changes-panel">
                     <h2>Changes</h2>
                     <ul class="changes-list" id="changes-list">
                         <li class="empty">No changes yet. Press Add, Drop or Change on a course.</li>
                     </ul>
- 
+
                     <label for="change-reason">Reason</label>
                     <select id="change-reason">
                         <option value="">Select a reason</option>
@@ -210,38 +211,43 @@
                         <option value="personal">Personal reasons</option>
                         <option value="other">Other</option>
                     </select>
- 
-                    <label for="change-reason-other" class="sr-only">Other reason</label>
+
                     <textarea id="change-reason-other" rows="2" placeholder="Please explain" hidden></textarea>
                 </section>
- 
-                <!-- Inter-campus document -->
-                <section class="intercampus" id="intercampus-form" aria-label="Inter-campus document" hidden>
+
+                <!-- Inter-campus document: only shown when an inter-campus course is added -->
+                <section class="intercampus" id="intercampus-form" hidden>
                     <h2>Inter-campus document</h2>
                     <p>One or more changes involve a course on another campus. Fill this out so it can be reviewed.</p>
- 
+
                     <label for="ic-reason">Reason</label>
                     <textarea id="ic-reason" rows="3" placeholder="Why do you need to take this course on another campus?"></textarea>
- 
+
                     <label for="ic-file">Supporting document</label>
                     <input type="file" id="ic-file" accept=".pdf,.jpg,.jpeg,.png">
                 </section>
- 
-                <!-- Policy and actions -->
+
+                <!-- Policy + actions -->
                 <div class="enlist-actions">
                     <label class="policy-check" for="agree-policy">
                         <input type="checkbox" id="agree-policy">
                         I agree to the school policy
                     </label>
- 
+
                     <button class="btn secondary" id="save-btn" type="button">Save</button>
                     <button class="btn primary" id="submit-btn" type="button" disabled>Submit</button>
                 </div>
- 
+
             </section>
         </div>
- 
+
     </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <p>&copy; 2026 ArchersHub 2.0</p>
+        <p><a href="#">Privacy Policy</a> | <a href="#">Terms &amp; Conditions</a></p>
+    </footer>
 
 </body>
 
