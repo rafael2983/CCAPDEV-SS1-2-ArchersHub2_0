@@ -1,0 +1,599 @@
+/* =========================================
+   LAYOUT SECTIONS (Major structural blocks)
+========================================= */
+
+
+
+/* =========================================
+   ENLISTMENT / ADD-DROP / SPECIAL CLASS LAYOUT
+========================================= */
+
+.enlist-left, .enlist-right {
+    min-width: 0;
+ 
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.enlistment-page .enlist-left, .enlistment-page .enlist-right,
+.add-drop-page .enlist-left, .add-drop-page .enlist-right {
+    padding: 20px;
+    background: var(--surface);
+ 
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    box-shadow: var(--shadow);
+}
+
+.enlist-layout {
+    display: grid;
+    grid-template-columns: 1.3fr 1fr;
+    gap: 20px;
+ 
+    align-items: start;
+}
+
+
+/* =========================================
+   GREETING ROW + FILTER
+========================================= */
+
+.greeting-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+
+    margin-bottom: 20px;
+    padding: 4px 0 8px;
+
+    color: var(--text);
+}
+
+
+/* =========================================
+   DASHBOARD GRID (home)
+========================================= */
+
+.dashboard {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 20px;
+    align-items: start;
+}
+
+.dashboard-left, .dashboard-right {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+
+/* =========================================
+   COMPONENTS (Reusable UI pieces)
+========================================= */
+
+
+.changes-panel h2, .intercampus h2 {
+    margin: 0 0 14px;
+    font-size: 18px;
+    color: var(--heading);
+}
+
+.section-cell span {
+    display: block;
+    font-weight: 700;
+}
+
+.section-cell small {
+    display: block;
+    margin-top: 3px;
+ 
+    font-size: 12px;
+    line-height: 1.4;
+    color: var(--text-muted);
+}
+
+.count-cell {
+    font-weight: 700;
+    color: var(--heading);
+}
+
+.campus-switch {
+    display: flex;
+    gap: 8px;
+}
+
+
+/* =========================================
+   TABS / SWITCHES
+========================================= */
+
+.campus-btn {
+    padding: 10px 22px;
+ 
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text);
+ 
+    cursor: pointer;
+ 
+    background: var(--surface-alt);
+ 
+    border: 1px solid var(--border);
+    border-radius: 9px;
+ 
+    transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+
+.course-tools {
+    display: grid;
+    grid-template-columns: 1fr 200px;
+    gap: 10px;
+}
+
+.row-btn {
+    padding: 7px 16px;
+ 
+    font-size: 13px;
+    font-weight: 600;
+ 
+    cursor: pointer;
+ 
+    border: 1px solid transparent;
+    border-radius: 8px;
+ 
+    transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+
+
+/* =========================================
+   ROW BUTTONS
+========================================= */
+
+.row-btn.add {
+    color: #ffffff;
+    background: var(--green);
+    border-color: var(--green);
+}
+
+.row-btn.drop {
+    color: var(--danger);
+ 
+    background: transparent;
+ 
+    border-color: var(--danger);
+}
+
+.row-btn.change {
+    color: var(--warn-text);
+ 
+    background: var(--warn-bg);
+ 
+    border-color: var(--warn-border);
+}
+
+.row-btn.undo {
+    color: var(--text-muted);
+ 
+    background: var(--surface-alt);
+ 
+    border-color: var(--border);
+}
+
+
+/* =========================================
+   CHOSEN / CHANGES / EVENT LISTS
+========================================= */
+
+.chosen-list, .changes-list, .event-list {
+    margin: 0;
+    padding: 0;
+
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    list-style: none;
+}
+
+.chosen-list li:not(.empty), .changes-list li:not(.empty), .event-list li:not(.empty) {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+ 
+    padding: 12px 14px;
+    font-size: 14px;
+    background: var(--surface-alt);
+ 
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--green);
+    border-radius: 10px;
+}
+
+.chosen-total {
+    margin: 12px 0 0;
+    font-size: 14px;
+    color: var(--text-muted);
+}
+
+.chosen-total span {
+    font-weight: 700;
+    color: var(--heading);
+}
+
+.schedule-table th, .schedule-table td {
+    padding: 8px;
+ 
+    font-size: 12px;
+    text-align: center;
+}
+
+.greeting-sub {
+    margin: 0 0 4px;
+
+    font-size: 14px;
+    color: var(--text-muted);
+}
+
+.greeting h1 {
+    margin: 0;
+
+    font-size: 28px;
+    color: var(--heading);
+}
+
+
+/* =========================================
+   FILTER PANEL
+========================================= */
+
+.filter-wrap {
+    position: relative;
+}
+
+.filter-panel {
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    z-index: 50;
+
+    width: 240px;
+
+    padding: 16px;
+
+    color: var(--text);
+
+    background: var(--surface);
+
+    border: 1px solid var(--border);
+    border-radius: 12px;
+
+    box-shadow: var(--shadow);
+}
+
+
+/* =========================================
+   FILTER BUTTON
+========================================= */
+
+.filter-btn {
+    padding: 10px 20px;
+
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--label);
+
+    cursor: pointer;
+
+    background: var(--surface);
+
+    border: 1px solid var(--border);
+    border-radius: 9px;
+
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.2s ease;
+}
+
+#stats-chart {
+    width: 100%;
+    max-height: 260px;
+}
+
+.view-switch {
+    display: flex;
+    gap: 6px;
+
+    width: fit-content;
+
+    margin-bottom: 14px;
+    padding: 4px;
+
+    background: var(--surface-alt);
+
+    border-radius: 10px;
+}
+
+.view-btn {
+    padding: 8px 16px;
+
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-muted);
+
+    cursor: pointer;
+
+    background: transparent;
+
+    border: none;
+    border-radius: 8px;
+
+    transition: background 0.2s ease, color 0.2s ease;
+}
+
+
+/* =========================================
+   SCHEDULE GRID
+========================================= */
+
+.changes-panel, .intercampus {
+    padding: 16px;
+ 
+    background: rgba(8, 120, 48, 0.04);
+ 
+    border: 1px dashed #9fc3ac;
+    border-radius: 12px;
+}
+
+
+/* =========================================
+   CHANGES / INTER-CAMPUS / SPECIAL CLASS BOXES
+========================================= */
+
+.intercampus p {
+    margin: 0 0 4px;
+    font-size: 14px;
+    color: var(--text-muted);
+}
+
+.not-listed {
+    margin-top: 6px;
+    padding: 4px 14px 14px;
+ 
+    background: rgba(8, 120, 48, 0.05);
+ 
+    border-left: 4px solid var(--green);
+    border-radius: 8px;
+}
+
+.special-class-box {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+
+    padding: 14px 16px;
+
+    background: rgba(8, 120, 48, 0.06);
+
+    border: 1px solid var(--border);
+    border-radius: 12px;
+}
+
+.special-class-box p {
+    margin: 0;
+    font-size: 14px;
+    color: var(--label);
+}
+
+
+/* Withdrawal, program exchange, schedule, curriculum and organizations pages */
+
+.period-note {
+    margin: 0 0 14px;
+    padding: 10px 14px;
+
+    font-size: 14px;
+    color: var(--warn-text);
+
+    background: var(--warn-bg);
+
+    border: 1px solid var(--warn-border);
+    border-radius: 10px;
+}
+
+.schedule-tools {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px;
+
+    margin-bottom: 14px;
+}
+
+.schedule-tools label {
+    margin: 0;
+}
+
+.schedule-tools select {
+    width: auto;
+    min-width: 180px;
+}
+
+.schedule-tools .view-switch {
+    margin-bottom: 0;
+    margin-left: auto;
+}
+
+.org-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 16px;
+
+    margin-top: 14px;
+}
+
+.org-card {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.org-card h3 {
+    margin: 0;
+
+    font-size: 16px;
+    letter-spacing: 0;
+    text-transform: none;
+    color: var(--heading);
+}
+
+.org-card p {
+    margin: 0;
+
+    font-size: 14px;
+    color: var(--text-muted);
+}
+
+.org-card .row-btn {
+    align-self: flex-start;
+
+    margin-top: auto;
+}
+
+progress {
+    width: 100%;
+    height: 14px;
+
+    accent-color: var(--green);
+}
+
+
+/* =========================================
+   STATE MODIFIERS (Hover, active, toggle states)
+========================================= */
+
+
+.filter-btn:hover {
+    background: rgba(8, 120, 48, 0.08);
+    border-color: #b8cfbf;
+    transform: translateY(-1px);
+}
+
+.view-btn:hover {
+    color: var(--heading);
+}
+
+.view-btn.active {
+    color: #ffffff;
+    background: var(--green);
+}
+
+.main-section tbody tr.pending-add {
+    background: rgba(8, 120, 48, 0.12);
+}
+
+
+/* Row states JS can toggle */
+
+.main-section tbody tr.pending-drop {
+    background: rgba(179, 38, 30, 0.10);
+}
+
+.campus-btn:hover {
+    border-color: #b8cfbf;
+    transform: translateY(-1px);
+}
+
+.campus-btn.active {
+    color: #ffffff;
+    background: linear-gradient(135deg, var(--green), var(--green-dark));
+    border-color: var(--green);
+}
+
+.row-btn:hover {
+    transform: translateY(-1px);
+}
+
+.row-btn.add:hover {
+    background: var(--green-dark);
+}
+
+.row-btn.drop:hover {
+    color: #ffffff;
+    background: var(--danger);
+}
+
+.changes-list li.drop-item {
+    border-left-color: var(--danger);
+}
+
+.schedule-table td.filled {
+    font-weight: 600;
+    background: rgba(8, 120, 48, 0.18);
+}
+
+body.dark-mode .changes-panel, body.dark-mode .intercampus {
+    border-color: #3f5c49;
+}
+
+
+/* =========================================
+   MEDIA QUERIES (Responsive design overrides)
+========================================= */
+
+
+@media (max-width: 1000px) {
+    .dashboard, .enlist-layout {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 600px) {
+    .greeting-row {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .greeting h1 {
+        font-size: 22px;
+    }
+
+    .filter-panel {
+        right: auto;
+        left: 0;
+    }
+
+    .course-tools {
+        grid-template-columns: 1fr;
+    }
+
+    .campus-switch {
+        width: 100%;
+    }
+
+    .campus-btn {
+        flex: 1;
+        padding: 10px 8px;
+    }
+}
+
+/* Selected request in Special Class */
+.chosen-list li.selected {
+    outline: 2px solid var(--green);
+    outline-offset: -2px;
+}
+
+.chosen-list li:not(.empty) {
+    cursor: default;
+}
+
+#requested-list li:not(.empty) {
+    cursor: pointer;
+}

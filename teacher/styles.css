@@ -1,0 +1,110 @@
+/* =========================================
+   LAYOUT SECTIONS (Major structural blocks)
+========================================= */
+
+
+
+/* =========================================
+   Grade Encoding
+========================================= */
+
+.grade-selection {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.grade-field {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+#grade-encoding {
+    padding-bottom: 90px;
+}
+
+.grade-actions {
+    position: fixed;
+    right: 24px;
+    bottom: 24px;
+    display: flex;
+    justify-content: flex-end;
+    margin: 0;
+    z-index: 900;
+}
+
+
+/* =========================================
+   COMPONENTS (Reusable UI pieces)
+========================================= */
+
+
+.grade-table {
+    width: 100%;
+    table-layout: fixed;
+    border-collapse: collapse;
+}
+
+.grade-table th, .grade-table td {
+    box-sizing: border-box;
+    padding: 12px;
+    vertical-align: middle;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+    overflow-wrap: anywhere;
+}
+
+.grade-select {
+    max-width: 100%;
+    min-width: 0;
+}
+
+#save-grades-btn {
+    padding: 12px 32px;
+    border: none;
+    border-radius: 6px;
+    background: var(--green);
+    color: #ffffff;
+    font-size: 16px;
+    cursor: pointer;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+
+/* =========================================
+   STATE MODIFIERS (Hover, active, toggle states)
+========================================= */
+
+
+.grade-field select:disabled {
+    background: var(--surface-alt);
+    cursor: not-allowed;
+}
+
+#save-grades-btn:hover:not(:disabled) {
+    background: var(--green-dark);
+}
+
+#save-grades-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+
+/* =========================================
+   MEDIA QUERIES (Responsive design overrides)
+========================================= */
+
+
+
+/* =========================================
+   MOBILE FORM CONTROLS
+========================================= */
+
+@media (max-width: 600px) {
+    .grade-selection {
+        grid-template-columns: 1fr;
+    }
+}

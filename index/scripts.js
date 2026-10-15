@@ -1,16 +1,11 @@
 let slideIndex = 1;
 let autoPlay;
 
-showSlides(slideIndex);
-startAutoPlay();
-
-// Next / previous arrows
 function plusSlides(n) {
     showSlides(slideIndex += n);
     restartAutoPlay();
 }
 
-// Dots
 function currentSlide(n) {
     showSlides(slideIndex = n);
     restartAutoPlay();
@@ -20,18 +15,18 @@ function showSlides(n) {
     const slides = document.querySelectorAll(".slide");
     const dots = document.querySelectorAll(".dot");
 
-    // Wrap around
+    if (slides.length === 0) return;
+
     if (n > slides.length) slideIndex = 1;
     if (n < 1) slideIndex = slides.length;
 
     slides.forEach(slide => slide.classList.remove("active"));
     dots.forEach(dot => dot.classList.remove("active"));
 
-    slides[slideIndex - 1].classList.add("active");
-    dots[slideIndex - 1].classList.add("active");
+    if (slides[slideIndex - 1]) slides[slideIndex - 1].classList.add("active");
+    if (dots[slideIndex - 1]) dots[slideIndex - 1].classList.add("active");
 }
 
-// Optional: auto-advance every 5 seconds
 function startAutoPlay() {
     autoPlay = setInterval(() => showSlides(slideIndex += 1), 5000);
 }
@@ -40,3 +35,29 @@ function restartAutoPlay() {
     clearInterval(autoPlay);
     startAutoPlay();
 }
+
+const themeToggle = document.getElementById("theme-toggle");
+if (themeToggle) {
+    if (localStorage.getItem("theme") === "dark") document.body.classList.add("dark-mode");
+    themeToggle.addEventListener("click", () => {
+        const isDark = document.body.classList.toggle("dark-mode");
+        localStorage.setItem("theme", isDark ? "dark" : "light");
+    });
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    // Start the slideshow
+    showSlides(1);
+    startAutoPlay();
+
+    // Login: goes straight to the home page for now (no credential check yet)
+    const form = document.getElementById("login-form");
+
+    if (form) {
+        form.addEventListener("submit", event => {
+            event.preventDefault();
+
+            window.location.href = "home.html";
+        });
+    }
+});

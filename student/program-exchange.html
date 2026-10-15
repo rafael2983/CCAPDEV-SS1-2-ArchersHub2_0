@@ -1,0 +1,46 @@
+<h1 class="page-title">Program Exchange</h1>
+
+<div class="program-exchange">
+
+    <section class="card" id="px-form">
+        <h2>Apply for a program exchange</h2>
+        <p class="period-note" id="px-period">Application period: not yet loaded.</p>
+
+        <label for="px-current">Current program</label>
+        <input type="text" id="px-current" value="Loading..." readonly>
+
+        <label for="px-target">Target program</label>
+        <select id="px-target">
+            <option value="">Select a program</option>
+        </select>
+
+        <label for="px-reason">Reason</label>
+        <textarea id="px-reason" rows="4" placeholder="Why do you want to change programs?"></textarea>
+
+        <div class="enlist-actions">
+            <button class="btn primary" id="px-submit" type="button">Submit application</button>
+        </div>
+    </section>
+
+    <section class="card" id="px-history">
+        <h2>My applications</h2>
+        <div class="table-wrap">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Target program</th>
+                        <th>Date applied</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="px-body">
+                    <tr>
+                        <td colspan="4" class="empty">You have no program exchange applications.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+</div>
