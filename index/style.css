@@ -1,39 +1,4 @@
 /* =========================================
-   GENERAL
-========================================= */
-
-* {
-    box-sizing: border-box;
-}
-
-html,
-body {
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    min-height: 100%;
-}
-
-body {
-    font-family: Arial, Helvetica, sans-serif;
-
-    background:
-        radial-gradient(
-            circle at 85% 15%,
-            rgba(8, 120, 48, 0.10),
-            transparent 35%
-        ),
-        linear-gradient(
-            135deg,
-            #f7faf8,
-            #edf4ef
-        );
-
-    color: #17251c;
-}
-
-
-/* =========================================
    MAIN PAGE
 ========================================= */
 
@@ -71,39 +36,6 @@ body {
     background: #e8f5ec;
 }
 
-
-/* School image */
-
-.school-image {
-    width: 100%;
-    height: 100%;
-
-    object-fit: cover;
-
-    position: absolute;
-    inset: 0;
-
-    filter:
-        brightness(0.82)
-        saturate(0.9);
-
-    transition:
-        transform 0.8s ease,
-        filter 0.5s ease;
-}
-
-
-/* Subtle zoom */
-
-.school-section:hover .school-image {
-    transform: scale(1.03);
-
-    filter:
-        brightness(0.88)
-        saturate(1);
-}
-
-
 /* Green image overlay */
 
 .school-section::after {
@@ -123,6 +55,20 @@ body {
     pointer-events: none;
 }
 
+.school-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    inset: 0;
+    filter: brightness(0.82) saturate(0.9);
+    transition: transform 0.8s ease, filter 0.5s ease;
+}
+
+.school-section:hover .school-image {
+    transform: scale(1.03);
+    filter: brightness(0.88) saturate(1);
+}
 
 /* =========================================
    SCHOOL IMAGE TEXT
@@ -609,8 +555,6 @@ body {
         0 6px 18px rgba(20, 75, 40, 0.10);
 }
 
-
-
 /* =========================================
    GOOGLE LOGIN
 ========================================= */
@@ -643,7 +587,6 @@ body {
         border-color 0.2s ease;
 }
 
-
 .google-button:hover {
     transform: translateY(-2px);
 
@@ -655,7 +598,6 @@ body {
         0 6px 18px rgba(20, 75, 40, 0.10);
 }
 
-
 /* =========================================
    BUTTON CLICK EFFECT
 ========================================= */
@@ -663,7 +605,6 @@ body {
 button:active, a:active {
     transform: translateY(0) scale(0.98);
 }
-
 
 /* =========================================
    MOBILE
@@ -747,8 +688,7 @@ button:active, a:active {
 }
 
 /* Prev / Next arrows */
-.prev,
-.next {
+.prev, .next {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
@@ -776,8 +716,7 @@ button:active, a:active {
 .prev { left: 16px; }
 .next { right: 16px; }
 
-.prev:hover,
-.next:hover {
+.prev:hover, .next:hover {
     background: rgba(8, 120, 48, 0.75);
 }
 
@@ -807,8 +746,7 @@ button:active, a:active {
     transition: background 0.25s ease, transform 0.25s ease;
 }
 
-.dot.active,
-.dot:hover {
+.dot.active, .dot:hover {
     background: #ffffff;
     transform: scale(1.2);
 }
@@ -914,4 +852,3 @@ button:active, a:active {
         padding: 25px 15px;
     }
 }
-

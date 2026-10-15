@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>View Application - ArchersHub 2.0</title>
+    <script src="../student/scripts.js" defer></script>
+    <script src="../teacher/scripts.js" defer></script>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../student/style.css">
+    <link rel="stylesheet" href="../teacher/style.css">
+    <link rel="icon" href="../images/school-logo.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+    <!-- HEADER -->
+    <header class="top-bar">
+        <button class="menu-btn" id="menu-btn" aria-label="Toggle navigation menu">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </button>
+        <a href="../home.html" class="logo-link" aria-label="Go to homepage">
+            <img src="../images/school-logo.png" alt="DLSU school logo">
+        </a>
+        <div class="header-fill"></div>
+        <button class="theme-toggle" id="theme-toggle" aria-label="Switch between dark and light mode">
+            <span class="theme-icon">&#9728;</span>
+        </button>
+        <p class="user-id">ID12345678</p>
+    </header>
+
+    <!-- SIDE MENU & LAYOUT -->
+    <div class="layout" id="layout">
+        <nav class="sidebar" id="sidebar" aria-label="Main navigation">
+            <ul class="side-menu">
+                <li><a href="home.html" data-page="home">Home</a></li>
+                <li><a href="student/enlistment.html" data-page="enlistment">Enlistment</a></li>
+                <li><a href="student/add-drop.html" data-page="add/drop">Add / Drop</a></li>
+                <li><a href="student/apply-special.html" data-page="special-class">Special Class</a></li>
+                <li><a href="withdrawal.html">Course Withdrawal</a></li>
+                <li><a href="program-exchange.html">Program Exchange</a></li>
+                <li><a href="curriculum.html">Curriculum Progression</a></li>
+                <li><a href="schedule.html">View Schedule</a></li>
+                <li><a href="records.html">View Records</a></li>
+                <li><a href="application.html" class="active">View Application</a></li>
+                <li><a href="calendar.html">University Calendar</a></li>
+                <li><a href="organizations.html">Organizations</a></li>
+                <li><a href="profile.html">Profile</a></li>
+                <li><a href="teacher/grade-encoding.html" data-page="grade-encoding">Grade Encoding</a></li>
+                <li><a href="teacher/make-announcements.html">Make Announcements</a></li>
+                <li><a href="ai-chat.html">AI Chat</a></li>
+            </ul>
+            <ul class="sidebar-bottom">
+                <li><a href="index.html" class="logout">Log out</a></li>
+            </ul>
+        </nav>
+
+        <!-- MAIN SECTION -->
+        <main class="main-section" id="main-content">
+            <section class="greeting-row" aria-label="Greeting">
+                <div class="greeting">
+                    <p class="greeting-sub">Enrollment Hub</p>
+                    <h1>View the Application</h1>
+                </div>
+            </section>
+
+            <div class="dashboard">
+                <!-- Left Side: Courses, Sections, and Controls -->
+                <div class="dashboard-left" style="flex: 1.1;">
+                    <!-- Split row for List of Course & Section -->
+                    <div style="display: flex; gap: 15px;">
+                        <!-- List of Course -->
+                        <section class="card" style="flex: 2;">
+                            <h2>List of Course</h2>
+                            <div class="table-wrap" style="max-height: 260px; overflow-y: auto; margin-top: 10px;">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Course Code</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr style="background-color: rgba(0, 77, 38, 0.1); font-weight: bold;">
+                                            <td>CCAPDEV</td>
+                                        </tr>
+                                        <tr>
+                                            <td>CSSE101</td>
+                                        </tr>
+                                        <tr>
+                                            <td>STADVDB</td>
+                                        </tr>
+                                        <tr>
+                                            <td>GEETHIC</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </section>
+
+                        <!-- Section -->
+                        <section class="card" style="flex: 1;">
+                            <h2>Section</h2>
+                            <div class="table-wrap" style="max-height: 260px; overflow-y: auto; margin-top: 10px;">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Sec</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr style="background-color: rgba(0, 77, 38, 0.1); font-weight: bold;">
+                                            <td>S11</td>
+                                        </tr>
+                                        <tr>
+                                            <td>S12</td>
+                                        </tr>
+                                        <tr>
+                                            <td>S13</td>
+                                        </tr>
+                                        <tr>
+                                            <td>S14</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </section>
+                    </div>
+
+                    <!-- Bottom Controls: ID number, Status, Add/Drop -->
+                    <section class="card">
+                        <div style="display: grid; grid-template-columns: 2fr 2fr 1fr; gap: 10px; align-items: end;">
+                            <div>
+                                <label for="id-number"
+                                    style="display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 5px;">ID
+                                    Number</label>
+                                <input type="text" id="id-number" placeholder="Enter ID (e.g. 12345678)"
+                                    style="width: 100%; padding: 8px; border-radius: 4px; border: 1px solid #ccc; font-size: 0.9rem;">
+                            </div>
+                            <div>
+                                <label for="status-select"
+                                    style="display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 5px;">Status</label>
+                                <select id="status-select"
+                                    style="width: 100%; padding: 8px; border-radius: 4px; border: 1px solid #ccc; font-size: 0.9rem;">
+                                    <option value="enlist">Enlist</option>
+                                    <option value="pend">Pend</option>
+                                    <option value="none">None</option>
+                                </select>
+                            </div>
+                            <div>
+                                <button class="filter-btn"
+                                    style="width: 100%; background-color: #004d26; color: white; justify-content: center; padding: 8px 0;">Add
+                                    / Drop</button>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+
+                <!-- Right Side: Selected Course/Section Details & Enlisted Student List -->
+                <div class="dashboard-right" style="flex: 1.4;">
+                    <!-- Selected course and Section -->
+                    <section class="card" style="margin-bottom: 15px; padding: 15px 20px;">
+                        <h2 style="margin: 0; font-size: 1rem; color: #666;">Selected Course & Section</h2>
+                        <p style="font-size: 1.25rem; font-weight: 700; color: #004d26; margin: 5px 0 0 0;">CCAPDEV —
+                            Section S11</p>
+                    </section>
+
+                    <!-- List of student enlisted in selected course and section -->
+                    <section class="card" style="flex: 1;">
+                        <h2>List of Student Enlisted in Selected Course and Section</h2>
+                        <div class="table-wrap" style="margin-top: 10px;">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Student ID</th>
+                                        <th>Student Name</th>
+                                        <th>Degree Program</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>12345678</td>
+                                        <td>Juan Dela Cruz</td>
+                                        <td>BS CS-ST</td>
+                                        <td><span style="color: #16a34a; font-weight: bold;">Enlisted</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>12234567</td>
+                                        <td>Maria Santos</td>
+                                        <td>BS CS-NIS</td>
+                                        <td><span style="color: #d97706; font-weight: bold;">Pending</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>12187654</td>
+                                        <td>Mark Reyes</td>
+                                        <td>BS IT</td>
+                                        <td><span style="color: #16a34a; font-weight: bold;">Enlisted</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>12398765</td>
+                                        <td>Anne Tan</td>
+                                        <td>BS CS-ST</td>
+                                        <td><span style="color: #dc2626; font-weight: bold;">None</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </section>
+                </div>
+            </div>
+
+            <!-- Footer -->
+            <footer class="footer-section">
+                <p>2026 ArchersHub 2.0</p>
+                <p>Privacy Policy | Conditions</p>
+            </footer>
+        </main>
+        <div class="overlay" id="overlay"></div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Make Announcements - ArchersHub 2.0</title>
+    <script src="../student/scripts.js" defer></script>
+    <script src="scripts.js" defer></script>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../student/style.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="../images/school-logo.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+    <!-- HEADER -->
+    <header class="top-bar">
+        <button class="menu-btn" id="menu-btn" aria-label="Toggle navigation menu">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </button>
+        <a href="../home.html" class="logo-link" aria-label="Go to homepage">
+            <img src="../images/school-logo.png" alt="DLSU school logo">
+        </a>
+        <div class="header-fill"></div>
+        <button class="theme-toggle" id="theme-toggle" aria-label="Switch between dark and light mode">
+            <span class="theme-icon">&#9728;</span>
+        </button>
+        <p class="user-id">FACULTY-01</p>
+    </header>
+
+    <!-- SIDE MENU & LAYOUT -->
+    <div class="layout" id="layout">
+        <nav class="sidebar" id="sidebar" aria-label="Main navigation">
+            <ul class="side-menu">
+                <li><a href="../home.html" data-page="home">Home</a></li>
+                <li><a href="../student/enlistment.html" data-page="enlistment">Enlistment</a></li>
+                <li><a href="../student/add-drop.html" data-page="add/drop">Add / Drop</a></li>
+                <li><a href="../student/apply-special.html" data-page="special-class">Special Class</a></li>
+                <li><a href="../withdrawal.html">Course Withdrawal</a></li>
+                <li><a href="../program-exchange.html">Program Exchange</a></li>
+                <li><a href="../curriculum.html">Curriculum Progression</a></li>
+                <li><a href="../schedule.html">View Schedule</a></li>
+                <li><a href="../records.html">View Records</a></li>
+                <li><a href="../application.html">View Application</a></li>
+                <li><a href="../calendar.html">University Calendar</a></li>
+                <li><a href="../organizations.html">Organizations</a></li>
+                <li><a href="../profile.html">Profile</a></li>
+                <li><a href="grade-encoding.html" data-page="grade-encoding">Grade Encoding</a></li>
+                <li><a href="make-announcements.html" class="active">Make Announcements</a></li>
+                <li><a href="../ai-chat.html">AI Chat</a></li>
+            </ul>
+            <ul class="sidebar-bottom">
+                <li><a href="../index.html" class="logout">Log out</a></li>
+            </ul>
+        </nav>
+
+        <!-- MAIN SECTION -->
+        <main class="main-section" id="main-content">
+            <section class="greeting-row" aria-label="Greeting">
+                <div class="greeting">
+                    <p class="greeting-sub">Faculty Portal</p>
+                    <h1>Make Announcements</h1>
+                </div>
+            </section>
+
+            <div class="dashboard">
+                <!-- Left Side Controls -->
+                <div class="dashboard-left">
+                    <!-- Title & Checkbox -->
+                    <section class="card">
+                        <h2>Title</h2>
+                        <div style="margin-top: 10px;">
+                            <input type="text" placeholder="Announcement Title..."
+                                style="width: 100%; padding: 8px; border-radius: 4px; border: 1px solid #ccc; margin-bottom: 10px;">
+                            <label
+                                style="display: flex; align-items: center; gap: 8px; font-size: 0.9rem; font-weight: 500; cursor: pointer;">
+                                <input type="checkbox"> For important announcement
+                            </label>
+                        </div>
+                    </section>
+
+                    <!-- Uploaded File List -->
+                    <section class="card">
+                        <h2>Uploaded file list</h2>
+                        <div
+                            style="padding: 15px; background: rgba(0,0,0,0.02); border: 1px dashed #ccc; border-radius: 6px; text-align: center; color: #666; font-size: 0.9rem;">
+                            No files attached yet.
+                        </div>
+                    </section>
+
+                    <!-- Calendars side by side -->
+                    <section class="card">
+                        <div style="display: flex; gap: 10px;">
+                            <div style="flex: 1;">
+                                <h3 style="font-size: 0.95rem; margin-bottom: 5px;">Start Date</h3>
+                                <input type="date"
+                                    style="width: 100%; padding: 6px; border-radius: 4px; border: 1px solid #ccc;">
+                            </div>
+                            <div style="flex: 1;">
+                                <h3 style="font-size: 0.95rem; margin-bottom: 5px;">End Date</h3>
+                                <input type="date"
+                                    style="width: 100%; padding: 6px; border-radius: 4px; border: 1px solid #ccc;">
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Action Buttons -->
+                    <div style="display: flex; gap: 10px;">
+                        <button class="filter-btn"
+                            style="flex: 1; background-color: #f3f4f6; color: #374151; border: 1px solid #d1d5db; justify-content: center;">Save</button>
+                        <button class="filter-btn"
+                            style="flex: 1; background-color: #004d26; color: white; justify-content: center;">Upload</button>
+                    </div>
+                </div>
+
+                <!-- Right Side: Contents -->
+                <div class="dashboard-right">
+                    <section class="card" style="height: 100%; display: flex; flex-direction: column;">
+                        <h2>Contents</h2>
+                        <div style="flex: 1; margin-top: 10px; display: flex; flex-direction: column;">
+                            <textarea placeholder="Type announcement contents here..."
+                                style="width: 100%; flex: 1; min-height: 380px; padding: 12px; border-radius: 6px; border: 1px solid #ccc; resize: vertical; font-family: inherit;"></textarea>
+                        </div>
+                    </section>
+                </div>
+            </div>
+
+            <!-- Footer -->
+            <footer class="footer-section">
+                <p>2026 ArchersHub 2.0</p>
+                <p>Privacy Policy | Conditions</p>
+            </footer>
+        </main>
+        <div class="overlay" id="overlay"></div>
+    </div>
+</body>
+
+</html>
