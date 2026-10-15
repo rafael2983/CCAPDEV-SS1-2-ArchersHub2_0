@@ -1,0 +1,53 @@
+<h1 class="page-title">Organizations</h1>
+
+<div class="organizations">
+
+    <section class="card" id="org-browse">
+        <h2>Browse organizations</h2>
+
+        <label for="org-search">Search</label>
+        <input type="search" id="org-search" placeholder="Search by organization name">
+
+        <div class="org-list" id="org-list">
+            <article class="card org-card" data-org="1">
+                <h3>La Salle Computer Society</h3>
+                <p>Sample description of what this organization does.</p>
+                <button class="row-btn add" data-action="apply">Apply</button>
+            </article>
+
+            <article class="card org-card" data-org="2">
+                <h3>DLSU Pusa</h3>
+                <p>Sample description of what this organization does.</p>
+                <button class="row-btn add" data-action="apply">Apply</button>
+            </article>
+
+            <article class="card org-card" data-org="3">
+                <h3>NHK</h3>
+                <p>Sample description of what this organization does.</p>
+                <button class="row-btn add" data-action="apply">Apply</button>
+            </article>
+        </div>
+        <p class="empty" id="org-empty" hidden>No organizations match your search.</p>
+    </section>
+
+    <section class="card" id="org-applications">
+        <h2>My applications</h2>
+        <div class="table-wrap">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Organization</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="org-app-body">
+                    <tr>
+                        <td colspan="3" class="empty">You have not applied to any organization.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+</div>
