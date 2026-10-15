@@ -34,6 +34,7 @@
 .grade-table th, .grade-table td {
     box-sizing: border-box;
     padding: 12px;
+    vertical-align: middle;
     text-align: left;
     border-bottom: 1px solid #ddd;
     overflow-wrap: anywhere;

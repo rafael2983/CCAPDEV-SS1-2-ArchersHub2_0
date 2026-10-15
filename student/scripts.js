@@ -1,86 +1,100 @@
 
-document.addEventListener("DOMContentLoaded", () => {
-    // =========================================
-    // ELEMENTS
-    // =========================================
+/* =========================================
+   ARCHERSHUB 2.0 - STUDENT SCRIPT
+========================================= */
 
-    const menuBtn = document.getElementById("menu-button");
+document.addEventListener("DOMContentLoaded", () => {
+
+    /* =========================================
+       ELEMENTS & CONFIGURATION
+    ========================================= */
+
+    const menuBtn = document.getElementById("menu-button") || document.getElementById("menu-btn");
     const layout = document.getElementById("layout");
     const overlay = document.getElementById("overlay");
     const sidebar = document.getElementById("sidebar");
     const mainContent = document.getElementById("main-content");
+    const themeToggle = document.getElementById("theme-toggle");
 
     const HOME_URL = "home.html";
     const MOBILE_BREAKPOINT = 800;
 
-    const homeContent = mainContent ? mainContent.innerHTML : "";
-
     const pages = {
-        enlistment: "enlistment.html",
+        enlistment: "student/enlistment.html",
+        "add/drop": "student/add-drop.html",
+        "special-class": "student/apply-special.html",
         "grade-encoding": "teacher/grade-encoding.html"
     };
 
-    let pageRequestId = 0;
+    const homeContent = mainContent ? mainContent.innerHTML : "";
 
-    // =========================================
-    // SIDEBAR & HAMBURGER MENU
-    // =========================================
+    let pageRequestId = 0;
+    let wasMobile = window.innerWidth <= MOBILE_BREAKPOINT;
+
+    /* =========================================
+       SIDEBAR & HAMBURGER MENU
+    ========================================= */
 
     function setMenu(open) {
-        if (!layout || !menuBtn) return;
+        if (!layout || !menuBtn || !sidebar) return;
 
+        // Update layout classes
         layout.classList.toggle("menu-open", open);
+        layout.classList.toggle("sidebar-open", open);
+
+        // Update sidebar
+        sidebar.classList.toggle("open", open);
+
+        // Update hamburger button
         menuBtn.classList.toggle("active", open);
 
-        menuBtn.setAttribute(
-            "aria-expanded",
-            String(open)
-        );
+        menuBtn.setAttribute("aria-expanded", String(open));
+        menuBtn.setAttribute("aria-label", open ? "Close Menu" : "Open Menu");
 
-        menuBtn.setAttribute(
-            "aria-label",
-            open ? "Close Menu" : "Open Menu"
-        );
+        // Support both icon-based and text-based buttons
+        const hasBars = menuBtn.querySelector(".bar") !== null;
 
-        menuBtn.textContent = open ? "✕" : "☰";
-
-        // Synchronize sidebar state
-        if (sidebar) {
-            sidebar.classList.toggle("open", open);
+        if (!hasBars) {
+            menuBtn.textContent = open ? "✕" : "☰";
         }
 
-        // Synchronize overlay state
+        // Overlay is used on mobile only
         if (overlay) {
-            overlay.classList.toggle("active", open);
+            const showOverlay = open && window.innerWidth <= MOBILE_BREAKPOINT;
+
+            overlay.classList.toggle("active", showOverlay);
         }
 
         // Save desktop sidebar state
         if (window.innerWidth > MOBILE_BREAKPOINT) {
-            sessionStorage.setItem(
-                "sidebarOpen",
-                String(open)
-            );
+            sessionStorage.setItem("sidebarOpen", String(open));
         }
     }
 
-    // Hamburger button
-    if (menuBtn && layout) {
+    /* =========================================
+       HAMBURGER BUTTON
+    ========================================= */
+
+    if (menuBtn && layout && sidebar) {
         menuBtn.addEventListener("click", () => {
-            const isOpen = layout.classList.contains("menu-open");
+            const isOpen = sidebar.classList.contains("open");
             setMenu(!isOpen);
         });
     }
 
-    // Close sidebar when overlay is clicked
+    /* =========================================
+       OVERLAY
+    ========================================= */
+
     if (overlay) {
         overlay.addEventListener("click", () => {
             setMenu(false);
         });
     }
 
-    // =========================================
-    // FILTER PANEL
-    // =========================================
+    /* =========================================
+       FILTER PANEL
+    ========================================= */
 
     function initFilterPanel() {
         const filterBtn = document.getElementById("filter-btn");
@@ -89,32 +103,49 @@ document.addEventListener("DOMContentLoaded", () => {
         if (!filterBtn || !filterPanel) return;
 
         // Prevent duplicate event listeners
-        if (filterBtn.dataset.initialized === "true") {
-            return;
-        }
+        if (filterBtn.dataset.initialized === "true") return;
 
         filterBtn.dataset.initialized = "true";
 
-        filterBtn.setAttribute(
-            "aria-expanded",
-            String(!filterPanel.hidden)
-        );
+        filterBtn.setAttribute("aria-expanded", String(!filterPanel.hidden));
 
         filterBtn.addEventListener("click", () => {
             const isHidden = filterPanel.hidden;
 
             filterPanel.hidden = !isHidden;
 
-            filterBtn.setAttribute(
-                "aria-expanded",
-                String(isHidden)
-            );
+            filterBtn.setAttribute("aria-expanded", String(isHidden));
         });
     }
 
-    // =========================================
-    // ACTIVE SIDEBAR LINK
-    // =========================================
+    /* =========================================
+       DARK MODE
+    ========================================= */
+
+    function initTheme() {
+        const savedTheme = localStorage.getItem("theme");
+
+        if (savedTheme === "dark") {
+            document.body.classList.add("dark-mode");
+        } else if (savedTheme === "light") {
+            document.body.classList.remove("dark-mode");
+        }
+
+        if (!themeToggle) return;
+
+        themeToggle.addEventListener("click", () => {
+            const isDark = document.body.classList.toggle("dark-mode");
+
+            localStorage.setItem("theme", isDark ? "dark" : "light");
+            themeToggle.setAttribute("aria-pressed", String(isDark));
+        });
+
+        themeToggle.setAttribute("aria-pressed", String(document.body.classList.contains("dark-mode")));
+    }
+
+    /* =========================================
+       ACTIVE SIDEBAR LINK
+    ========================================= */
 
     function updateActiveLink(pageName) {
         if (!sidebar) return;
@@ -125,30 +156,31 @@ document.addEventListener("DOMContentLoaded", () => {
             link.classList.toggle("active", isActive);
 
             if (isActive) {
-                link.setAttribute(
-                    "aria-current",
-                    "page"
-                );
+                link.setAttribute("aria-current", "page");
             } else {
                 link.removeAttribute("aria-current");
             }
         });
     }
 
-    // =========================================
-    // HOME PAGE
-    // =========================================
+    /* =========================================
+       HOME PAGE
+    ========================================= */
 
     function loadHome(addHistory = true) {
         if (!mainContent) return;
 
-        // Invalidate previous page requests
+        // Invalidate any pending page requests
         pageRequestId++;
 
         mainContent.innerHTML = homeContent;
         mainContent.scrollTop = 0;
 
         updateActiveLink("home");
+
+        // Initialize home page features
+        initFilterPanel();
+        initSlideshow();
 
         if (addHistory) {
             history.pushState(
@@ -160,18 +192,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
         document.title = "Home | ArchersHub 2.0";
 
-        // Initialize filters if present
-        initFilterPanel();
-
-        // Close sidebar on mobile
+        // Close menu on mobile
         if (window.innerWidth <= MOBILE_BREAKPOINT) {
             setMenu(false);
         }
+
     }
 
-    // =========================================
-    // DYNAMIC PAGE LOADING
-    // =========================================
+    /* =========================================
+       DYNAMIC PAGE LOADING
+    ========================================= */
 
     async function loadPage(pageName, addHistory = true) {
         const file = pages[pageName];
@@ -190,16 +220,19 @@ document.addEventListener("DOMContentLoaded", () => {
             const html = await response.text();
 
             // Ignore outdated requests
-            if (currentRequest !== pageRequestId) {
-                return;
-            }
+            if (currentRequest !== pageRequestId) return;
 
+            // Replace only the main content
             mainContent.innerHTML = html;
             mainContent.scrollTop = 0;
 
             updateActiveLink(pageName);
 
-            // Initialize page-specific features
+
+            /* =================================
+               PAGE INITIALIZATION
+            ================================= */
+
             if (pageName === "enlistment") {
                 initEnlistment();
             }
@@ -210,61 +243,76 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
             }
 
-            // Initialize filter panel after loading
+            // Initialize shared page features
             initFilterPanel();
+            initSlideshow();
+
+            /* =================================
+               BROWSER HISTORY
+            ================================= */
 
             if (addHistory) {
                 history.pushState(
                     { page: pageName },
                     "",
-                    HOME_URL + "?page=" +
+                    HOME_URL +
+                    "?page=" +
                     encodeURIComponent(pageName)
                 );
             }
 
-            document.title =
-                pageName === "enlistment"
-                    ? "Enlistment | ArchersHub 2.0"
-                    : pageName === "grade-encoding"
-                    ? "Grade Encoding | ArchersHub 2.0"
-                    : "ArchersHub 2.0";
+            /* =================================
+               PAGE TITLE
+            ================================= */
+
+            switch (pageName) {
+                case "enlistment":
+                    document.title = "Enlistment | ArchersHub 2.0";
+                    break;
+
+                case "grade-encoding":
+                    document.title = "Grade Encoding | ArchersHub 2.0";
+                    break;
+
+                default:
+                    document.title = "ArchersHub 2.0";
+            }
 
             // Close menu on mobile
             if (window.innerWidth <= MOBILE_BREAKPOINT) {
                 setMenu(false);
             }
-
         } catch (error) {
             if (currentRequest === pageRequestId) {
-                console.error(
-                    "Page loading error:",
-                    error
-                );
+                console.error("Page loading error:", error);
             }
         }
     }
 
-    // =========================================
-    // SIDEBAR NAVIGATION
-    // =========================================
+    /* =========================================
+       SIDEBAR NAVIGATION
+    ========================================= */
 
     if (sidebar) {
         sidebar.querySelectorAll("a").forEach(link => {
             link.addEventListener("click", event => {
                 const pageName = link.dataset.page;
 
+                // Home page
                 if (pageName === "home") {
                     event.preventDefault();
                     loadHome();
                     return;
                 }
 
-                if (pageName && pages[pageName]) {
+                // Dynamic pages
+                if (pageName && Object.prototype.hasOwnProperty.call(pages, pageName)) {
                     event.preventDefault();
                     loadPage(pageName);
                     return;
                 }
 
+                // Normal links
                 if (window.innerWidth <= MOBILE_BREAKPOINT) {
                     setMenu(false);
                 }
@@ -272,50 +320,47 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // =========================================
-    // BROWSER BACK / FORWARD
-    // =========================================
+    /* =========================================
+       BROWSER BACK / FORWARD
+    ========================================= */
 
     window.addEventListener("popstate", () => {
-        const params = new URLSearchParams(
-            window.location.search
-        );
-
+        const params = new URLSearchParams(window.location.search);
         const pageName = params.get("page");
 
-        if (pageName && pages[pageName]) {
+        if (pageName && Object.prototype.hasOwnProperty.call(pages, pageName)) {
             loadPage(pageName, false);
         } else {
             loadHome(false);
         }
     });
 
-    // =========================================
-    // RESPONSIVE SIDEBAR
-    // =========================================
-
-    let wasMobile = window.innerWidth <= MOBILE_BREAKPOINT;
+    /* =========================================
+       RESPONSIVE SIDEBAR
+    ========================================= */
 
     window.addEventListener("resize", () => {
-        const isMobile = window.innerWidth <= MOBILE_BREAKPOINT;
+        const isMobile =window.innerWidth <= MOBILE_BREAKPOINT;
 
-        // Only update when crossing breakpoint
+        // Only act when crossing breakpoint
         if (isMobile === wasMobile) return;
 
         wasMobile = isMobile;
 
         if (isMobile) {
+            // Enter mobile mode
             setMenu(false);
         } else {
-            const savedState = sessionStorage.getItem("sidebarOpen") === "true";
+            // Restore desktop menu state
+            const savedState =sessionStorage.getItem("sidebarOpen") === "true";
             setMenu(savedState);
         }
     });
 
-    // =========================================
-    // ENLISTMENT INITIALIZATION
-    // =========================================
-    
+    /* =========================================
+       ENLISTMENT INITIALIZATION
+    ========================================= */
+
     function initEnlistment() {
         const searchInput = document.getElementById("course-search");
         const sortSelect = document.getElementById("course-sort");
@@ -324,23 +369,113 @@ document.addEventListener("DOMContentLoaded", () => {
         if (!searchInput || !sortSelect || !courseBody) return;
     }
 
-    // =========================================
-    // INITIAL PAGE SETUP
-    // =========================================
+    /* =========================================
+       SLIDESHOW
+    ========================================= */
 
+    let slideIndex = 1;
+    let autoPlay = null;
+
+    function showSlides(n) {
+        const slides = document.querySelectorAll(".slide");
+        const dots = document.querySelectorAll(".dot");
+
+        if (slides.length === 0) return;
+
+        if (n > slides.length) {
+            slideIndex = 1;
+        } else if (n < 1) {
+            slideIndex = slides.length;
+        } else {
+            slideIndex = n;
+        }
+
+        slides.forEach(slide => {
+            slide.classList.remove("active");
+        });
+
+        dots.forEach(dot => {
+            dot.classList.remove("active");
+        });
+
+        if (slides[slideIndex - 1]) {
+            slides[slideIndex - 1].classList.add("active");
+        }
+
+        if (dots[slideIndex - 1]) {
+            dots[slideIndex - 1].classList.add("active");
+        }
+    }
+
+    function startAutoPlay() {
+        clearInterval(autoPlay);
+
+        const slides = document.querySelectorAll(".slide");
+
+        if (slides.length <= 1) return;
+
+        autoPlay = setInterval(() => {
+            slideIndex++;
+            showSlides(slideIndex);
+        }, 5000);
+    }
+
+    function restartAutoPlay() {
+        clearInterval(autoPlay);
+        startAutoPlay();
+    }
+
+    function plusSlides(n) {
+        showSlides(slideIndex + n);
+        restartAutoPlay();
+    }
+
+    function currentSlide(n) {
+        showSlides(n);
+        restartAutoPlay();
+    }
+
+    function initSlideshow() {
+        clearInterval(autoPlay);
+        autoPlay = null;
+
+        const slides = document.querySelectorAll(".slide");
+
+        if (slides.length === 0) return;
+
+        slideIndex = 1;
+
+        showSlides(slideIndex);
+        startAutoPlay();
+    }
+
+    // Support HTML onclick attributes
+    window.plusSlides = plusSlides;
+    window.currentSlide = currentSlide;
+
+    /* =========================================
+       INITIAL PAGE SETUP
+    ========================================= */
+
+    // Initialize theme
+    initTheme();
+
+    // Restore sidebar state
     if (window.innerWidth > MOBILE_BREAKPOINT) {
-        const savedState = sessionStorage.getItem("sidebarOpen") === "true";
+        const savedState =sessionStorage.getItem("sidebarOpen") === "true";
         setMenu(savedState);
     } else {
         setMenu(false);
     }
 
+    // Check URL for direct page access
     const initialPage = new URLSearchParams(window.location.search).get("page");
 
-    if (initialPage && pages[initialPage]) {
+    if (initialPage && Object.prototype.hasOwnProperty.call(pages, initialPage)) {
         loadPage(initialPage, false);
     } else {
         updateActiveLink("home");
         initFilterPanel();
+        initSlideshow();
     }
 });
