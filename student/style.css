@@ -168,7 +168,7 @@
     margin: 0 auto;
     padding: 24px 20px 40px;
 
-    min-height: calc(100vh - var(--header-h) - 70px);
+    flex: 1;
 }
 
 .main-section input[type="search"], .main-section input[type="text"],
@@ -243,6 +243,8 @@
 ========================================= */
 
 .footer-section {
+    width: 100%;
+
     display: flex;
     flex-wrap: wrap;
     align-items: center;
@@ -357,7 +359,6 @@
    TABS / SWITCHES
 ========================================= */
 
-
 .campus-btn {
     padding: 10px 22px;
  
@@ -470,6 +471,40 @@
     transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
 }
 
+.role-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+
+    min-width: 105px;
+    height: 42px;
+
+    padding: 0 12px;
+
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 700;
+    color: #ffffff;
+
+    background: rgba(255, 255, 255, 0.18);
+
+    border: 1px solid rgba(255, 255, 255, 0.45);
+    border-radius: 9px;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.2s ease;
+}
+
+.role-toggle:focus-visible {
+    outline: 2px solid #ffffff;
+    outline-offset: 3px;
+}
+
 .theme-toggle {
     border-radius: 50%;
 }
@@ -503,11 +538,27 @@
     font-size: 14px;
     font-weight: 700;
     color: #ffffff;
+    text-decoration: none;
 
     background: rgba(255, 255, 255, 0.18);
 
     border: 1px solid rgba(255, 255, 255, 0.45);
     border-radius: 20px;
+
+    cursor: pointer;
+
+    transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+
+.user-id:hover {
+    background: rgba(255, 255, 255, 0.30);
+    border-color: #ffffff;
+    transform: translateY(-1px);
+}
+
+.user-id:focus-visible {
+    outline: 2px solid #ffffff;
+    outline-offset: 3px;
 }
 
 .enlist-layout {
@@ -529,7 +580,6 @@
 
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
 
     padding: 12px 0;
 
@@ -538,9 +588,7 @@
     transform: translateX(-100%);
 
     background: var(--surface);
-
     border-right: 1px solid var(--border);
-
     box-shadow: 6px 0 24px rgba(26, 70, 45, 0.10);
 
     transition: transform 0.3s ease;
@@ -550,10 +598,33 @@
     transform: translateX(0);
 }
 
-.side-menu, .sidebar-bottom {
+/* Main navigation */
+.side-menu {
     margin: 0;
     padding: 0;
     list-style: none;
+
+    flex: 1;
+    min-height: 0;
+
+    overflow-y: auto;
+}
+
+.side-menu li[hidden] {
+    display: none !important;
+}
+
+/* Logout section */
+.sidebar-bottom {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+
+    width: 100%;
+    flex-shrink: 0;
+
+    border-top: 1px solid var(--border);
+    background: var(--surface);
 }
 
 .side-menu a, .sidebar-bottom a {
@@ -601,6 +672,11 @@
 }
 
 .layout {
+    display: flex;
+    flex-direction: column;
+
+    min-height: calc(100vh - var(--header-h));
+
     transition: padding-left 0.3s ease;
 }
 
@@ -838,6 +914,11 @@
     transform: translateY(-1px);
 }
 
+.role-toggle:hover {
+    background: rgba(255, 255, 255, 0.30);
+    border-color: #ffffff;
+    transform: translateY(-1px);
+}
 
 .filter-btn:hover {
     background: rgba(8, 120, 48, 0.08);
@@ -1095,6 +1176,16 @@ body.dark-mode .changes-panel, body.dark-mode .intercampus {
 
     .logo-link img {
         height: 36px;
+    }
+
+    .role-toggle {
+        min-width: auto;
+        height: 36px;
+
+        padding: 0 8px;
+
+        font-size: 10px;
+        gap: 4px;
     }
 
     .user-id {

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <title>Home Page</title>
     <script src="student/scripts.js" defer></script>
@@ -11,6 +12,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
+
 <body>
     <!-- HEADER -->
     <header class="top-bar">
@@ -29,33 +31,40 @@
 
         <div class="header-fill"></div>
 
+        <button class="role-toggle" id="role-toggle" type="button" aria-label="Switch account role" title="Switch account role">
+            <span id="current-role">STUDENT</span>
+            <span aria-hidden="true">⟳</span>
+        </button>
+
         <!-- toggle -->
         <button class="theme-toggle" id="theme-toggle" aria-label="Switch between dark and light mode">
             <span class="theme-icon">&#9728;</span>
         </button>
 
         <!-- ID -->
-        <p class="user-id">ID12345678</p>
+        <a href="general/profile.html" class="user-id" id="user-profile" aria-label="Go to profile">ID12345678</a>
     </header>
 
     <!-- side menu -->
     <div class="layout" id="layout">
         <nav class="sidebar" id="sidebar" aria-label="Main navigation">
             <ul class="side-menu">
-                <li><a href="home.html" class="active" data-page="home">Home</a></li>
-                <li><a href="student/enlistment.html" data-page="enlistment">Enlistment</a></li>
-                <li><a href="student/add-drop.html" data-page="add/drop">Add / Drop</a></li>
-                <li><a href="student/apply-special.html" data-page="special-class">Special Class</a></li>
-                <li><a href="withdrawal.html">Course Withdrawal</a></li>
-                <li><a href="program-exchange.html">Program Exchange</a></li>
-                <li><a href="curriculum.html">Curriculum Progression</a></li>
-                <li><a href="schedule.html">View Schedule</a></li>
-                <li><a href="records.html">View Records</a></li>
-                <li><a href="calendar.html">University Calendar</a></li>
-                <li><a href="organizations.html">Organizations</a></li>
-                <li><a href="profile.html">Profile</a></li>
-                <li><a href="teacher/grade-encoding.html" data-page="grade-encoding">Grade Encoding</a></li>
-                <li><a href="ai-chat.html">AI Chat</a></li>
+                <li data-role="general"><a href="home.html" class="active" data-page="home">Home</a></li>
+                <li data-role="student"><a href="student/enlistment.html" data-page="enlistment">Enlistment</a></li>
+                <li data-role="student"><a href="student/add-drop.html" data-page="add/drop">Add / Drop</a></li>
+                <li data-role="student"><a href="student/apply-special.html" data-page="special-class">Special Class</a></li>
+                <li data-role="student"><a href="student/withdrawal.html" data-page="course-withdrawal">Course Withdrawal</a></li>
+                <li data-role="student"><a href="student/program-exchange.html" data-page="program-exchange">Program Exchange</a></li>
+                <li data-role="student"><a href="student/curriculum.html" data-page="curriculum-progression">Curriculum Progression</a></li>
+                <li data-role="general"><a href="general/schedule.html" data-page="view-schedule">View Schedule</a></li>
+                <li data-role="student"><a href="student/records.html" data-page="view-record">View Records</a></li>
+                <li data-role="general"><a href="general/calendar.html"data-page="calender">University Calendar</a></li>
+                <li data-role="general"><a href="general/organizations.html" data-page="organizations">Organizations</a></li>
+                <li data-role="teacher"><a href="teacher/grade-encoding.html" data-page="grade-encoding">Grade Encoding</a></li>
+                <li data-role="teacher"><a href="teacher/application.html" data-page="view-application">View Application</a></li>
+                <li data-role="office"><a href="office/announcements.html" data-page="make-announcements">Make Announcements</a></li>
+                <li data-role="admin"><a href="admin/account-menegement.html" data-page="account-menegement">Account Menegement</a></li>
+                <li data-role="general"><a href="general/ai-chat.html" data-page="ai-chat">AI Chat</a></li>
             </ul>
 
             <ul class="sidebar-bottom">
@@ -157,15 +166,16 @@
                     </section>
                 </div>
             </div>
-
-            <!-- Footer -->
-            <footer class="footer-section">
-                <p>2026 ArchersHub 2.0</p>
-                <p>Privacy Policy  |  Conditions</p>
-            </footer>
         </main>
+
+        <!-- Footer -->
+        <footer class="footer-section">
+            <p>2026 ArchersHub 2.0</p>
+            <p>Privacy Policy  |  Conditions</p>
+        </footer>
 
         <div class="overlay" id="overlay"></div>
     </div>  
 </body>
+
 </html>

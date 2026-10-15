@@ -16,26 +16,11 @@ const GRADE_OPTIONS = [
 
 // Courses and their available sections
 const MOCK_COURSES = [
-    {
-        code: "CCPROG3",
-        sections: ["X05", "SS1"]
-    },
-    {
-        code: "CCAPDEV",
-        sections: ["N24", "SS1"]
-    },
-    {
-        code: "STADVDB",
-        sections: ["S40B"]
-    },
-    {
-        code: "GEETHIC",
-        sections: ["XZ08", "XZ09"]
-    },
-    {
-        code: "SAS2000",
-        sections: ["X05"]
-    }
+    { code: "CCPROG3", sections: ["X05", "SS1"] },
+    { code: "CCAPDEV", sections: ["N24", "SS1"] },
+    { code: "STADVDB", sections: ["S40B"] },
+    { code: "GEETHIC", sections: ["XZ08", "XZ09"] },
+    { code: "SAS2000", sections: ["X05"] }
 ];
 
 // Student information
@@ -69,6 +54,10 @@ const MOCK_ENROLLMENTS = {
 // Temporary grade storage (frontend only)
 const MOCK_GRADES = {};
 
+/* ========================================
+   GRADE ENCODING INITIALIZATION
+======================================== */
+
 function initGradeEncoding() {
     const courseSelect = document.getElementById("course-select");
     const sectionSelect = document.getElementById("section-select");
@@ -96,6 +85,10 @@ function initGradeEncoding() {
     sectionSelect.disabled = true;
     saveButton.disabled = true;
 
+    /* =====================================
+       HELPERS
+    ===================================== */
+
     function showMessage(message) {
         studentBody.replaceChildren();
 
@@ -109,6 +102,10 @@ function initGradeEncoding() {
         studentBody.appendChild(row);
     }
 
+    /* =====================================
+       RENDER STUDENTS
+    ===================================== */
+
     function renderStudents(courseCode, sectionCode) {
         studentBody.replaceChildren();
 
@@ -116,15 +113,12 @@ function initGradeEncoding() {
         const studentIds = MOCK_ENROLLMENTS[enrollmentKey] || [];
 
         const students = studentIds
-            .map(id => MOCK_STUDENTS.find(
-                student => student.id === id
-            ))
+            .map(id => MOCK_STUDENTS.find(student => student.id === id))
             .filter(Boolean)
             .sort((a, b) => a.id.localeCompare(b.id));
 
         if (students.length === 0) {
             showMessage("No students are enrolled in this section.");
-
             saveButton.disabled = true;
             status.textContent = "No students found.";
             return;
@@ -174,11 +168,13 @@ function initGradeEncoding() {
         });
 
         saveButton.disabled = false;
-
         status.textContent = `${students.length} student(s) found.`;
     }
 
-    // When course changes, populate sections
+    /* =====================================
+       COURSE SELECTION
+    ===================================== */
+
     courseSelect.addEventListener("change", () => {
         const courseCode = courseSelect.value;
 
@@ -196,9 +192,7 @@ function initGradeEncoding() {
 
         if (!courseCode) {
             sectionSelect.disabled = true;
-
             showMessage("Select a course and section first.");
-
             status.textContent = "Select a course first.";
             return;
         }
@@ -206,6 +200,8 @@ function initGradeEncoding() {
         const course = MOCK_COURSES.find(
             item => item.code === courseCode
         );
+
+        if (!course) return;
 
         course.sections.forEach(section => {
             sectionSelect.add(
@@ -219,7 +215,10 @@ function initGradeEncoding() {
         status.textContent = "Select a section.";
     });
 
-    // When section changes, display enrolled students
+    /* =====================================
+       SECTION SELECTION
+    ===================================== */
+
     sectionSelect.addEventListener("change", () => {
         const courseCode = courseSelect.value;
         const sectionCode = sectionSelect.value;
@@ -235,7 +234,10 @@ function initGradeEncoding() {
         renderStudents(courseCode, sectionCode);
     });
 
-    // Save grades to temporary JavaScript memory
+    /* =====================================
+       SAVE GRADES
+    ===================================== */
+
     saveButton.addEventListener("click", () => {
         const courseCode = courseSelect.value;
         const sectionCode = sectionSelect.value;
@@ -261,6 +263,8 @@ function initGradeEncoding() {
             if (grade !== "") {
                 MOCK_GRADES[enrollmentKey][studentId] = grade;
                 savedCount++;
+            } else {
+                delete MOCK_GRADES[enrollmentKey][studentId];
             }
         });
 
