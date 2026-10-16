@@ -1,21 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
 
+<head>
     <title>Home Page</title>
-    <script src="scripts/scripts.js" defer></script>
+
+    <script src="student/scripts.js" defer></script>
+    <script src="teacher/scripts.js" defer></script>
+    <script src="admin/scripts.js" defer></script>
+    <script src="chatbot.js" defer></script>
+
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="student/style.css">
+    <link rel="stylesheet" href="teacher/style.css">
+    <link rel="stylesheet" href="admin/style.css">
+
     <link rel="icon" href="images/school-logo.png">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 </head>
+
 <body>
     <!-- HEADER -->
     <header class="top-bar">
+
         <!-- Menu -->
-        <button class="menu" id="menu-button" aria-label="Open Menu" aria-expanded="false" aria-controls="side-menu">&#9776;</button>
-        
+        <button class="menu-btn" id="menu-btn" aria-label="Toggle navigation menu">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </button>
+
         <!-- Logo -->
         <a href="home.html" class="logo-link" aria-label="Go to homepage">
             <img src="images/school-logo.png" alt="DLSU school logo">
@@ -23,149 +37,163 @@
 
         <div class="header-fill"></div>
 
+        <button class="role-toggle" id="role-toggle" type="button" aria-label="Switch account role"
+            title="Switch account role">
+            <span id="current-role">STUDENT</span>
+            <span aria-hidden="true">⟳</span>
+        </button>
+
         <!-- toggle -->
         <button class="theme-toggle" id="theme-toggle" aria-label="Switch between dark and light mode">
             <span class="theme-icon">&#9728;</span>
         </button>
 
         <!-- ID -->
-        <p class="user-id">12345678</p>
+        <a href="general/profile.html" class="user-id" id="user-profile" aria-label="Go to profile">ID12345678</a>
     </header>
 
     <!-- side menu -->
-    <nav class="side-menu" id="side-menu" aria-label="Main navigation">
-        <ul>
-            <li><a href="home.html" class="active">Home</a></li>
-            <li><a href="enlistment.html">Enlistment</a></li>
-            <li><a href="add-drop.html">Add / Drop</a></li>
-            <li><a href="apply-special.html">Special Class</a></li>
-            <li><a href="withdrawal.html">Course Withdrawal</a></li>
-            <li><a href="program-exchange.html">Program Exchange</a></li>
-            <li><a href="curriculum.html">Curriculum Progression</a></li>
-            <li><a href="schedule.html">View Schedule</a></li>
-            <li><a href="records.html">View Records</a></li>
-            <li><a href="calendar.html">University Calendar</a></li>
-            <li><a href="organizations.html">Organizations</a></li>
-            <li><a href="profile.html">Profile</a></li>
-            <li><a href="ai-chat.html">AI Chat</a></li>
-            <li><a href="index.html" class="logout">Log out</a></li>
-        </ul>
-    </nav>  
-    
-    <div class="menu-backdrop" id="menu-backdrop" hidden></div>
+    <div class="layout" id="layout">
+        <nav class="sidebar" id="sidebar" aria-label="Main navigation">
+            <ul class="side-menu">
+                <li data-role="general"><a href="home.html" class="active" data-page="home">Home</a></li>
+                <li data-role="student"><a href="student/enlistment.html" data-page="enlistment">Enlistment</a></li>
+                <li data-role="student"><a href="student/add-drop.html" data-page="add/drop">Add / Drop</a></li>
+                <li data-role="student"><a href="student/apply-special.html" data-page="special-class">Special Class</a>
+                </li>
+                <li data-role="student"><a href="student/withdrawal.html" data-page="course-withdrawal">Course
+                        Withdrawal</a></li>
+                <li data-role="student"><a href="student/program-exchange.html" data-page="program-exchange">Program
+                        Exchange</a></li>
+                <li data-role="student"><a href="student/curriculum.html" data-page="curriculum-progression">Curriculum
+                        Progression</a></li>
+                <li data-role="general"><a href="general/schedule.html" data-page="view-schedule">View Schedule</a></li>
+                <li data-role="student"><a href="student/records.html" data-page="view-record">View Records</a></li>
+                <li data-role="general"><a href="general/calendar.html" data-page="calender">University Calendar</a>
+                </li>
+                <li data-role="general"><a href="general/organizations.html" data-page="organizations">Organizations</a>
+                </li>
+                <li data-role="teacher"><a href="teacher/grade-encoding.html" data-page="grade-encoding">Grade
+                        Encoding</a></li>
+                <li data-role="teacher"><a href="teacher/application.html" data-page="view-application">View
+                        Application</a></li>
+                <li data-role="office"><a href="office/announcements.html" data-page="make-announcements">Make
+                        Announcements</a></li>
+                <li data-role="admin"><a href="admin/account-menegement.html" data-page="account-menegement">Account
+                        Menegement</a></li>
+                <li data-role="general"><a href="general/ai-chat.html" data-page="ai-chat">AI Chat</a></li>
+            </ul>
 
-    <main class="main-section">
-        <!-- Greeting and filter section-->
-        <section class="greeting-row" aria-label="Greeting">
-            <div class="greeting">
-                <p class="greeting-sub">Welcome, <span id="user-name">Student Name</span></p>
-                <h1 id="greeting-text">Good Day</h1>
-            </div>
- 
-            <div class="filter-wrap">
-                <button class="filter-btn" id="filter-btn" aria-expanded="false" aria-controls="filter-panel">
-                    Filter
-                </button>
-                <div class="filter-panel" id="filter-panel" hidden>
-                    <label for="filter-campus">Campus</label>
-                    <select id="filter-campus">
-                        <option value="all">All</option>
-                        <option value="manila">Manila</option>
-                        <option value="laguna">Laguna</option>
-                    </select>
- 
-                    <label for="filter-events">Show events</label>
-                    <select id="filter-events">
-                        <option value="all">All events</option>
-                        <option value="important">Important only</option>
-                        <option value="org">Organizations only</option>
-                    </select>
+            <ul class="sidebar-bottom">
+                <li><a href="index.html" class="logout">Log out</a></li>
+            </ul>
+        </nav>
+
+        <main class="main-section" id="main-content">
+
+            <!-- Greeting and filter section-->
+            <section class="greeting-row" aria-label="Greeting">
+                <div class="greeting">
+                    <p class="greeting-sub">Welcome, <span id="user-name">Student Name</span></p>
+                    <h1 id="greeting-text">Good Day</h1>
+                </div>
+
+                <div class="filter-wrap">
+                    <button class="filter-btn" id="filter-btn" aria-expanded="false" aria-controls="filter-panel">
+                        Filter
+                    </button>
+                    <div class="filter-panel" id="filter-panel" hidden>
+                        <label for="filter-campus">Campus</label>
+                        <select id="filter-campus">
+                            <option value="all">All</option>
+                            <option value="manila">Manila</option>
+                            <option value="laguna">Laguna</option>
+                        </select>
+
+                        <label for="filter-events">Show events</label>
+                        <select id="filter-events">
+                            <option value="all">All events</option>
+                            <option value="important">Important only</option>
+                            <option value="org">Organizations only</option>
+                        </select>
+                    </div>
+                </div>
+            </section>
+
+            <div class="dashboard">
+
+                <!-- Left Side -->
+                <div class="dashboard-left">
+                    <section class="card" id="class-schedule">
+                        <h2>Class Schedule</h2>
+                        <div class="table-wrap">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Course</th>
+                                        <th>Section</th>
+                                        <th>Day / Time</th>
+                                        <th>Room</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="schedule-body">
+                                    <tr>
+                                        <td colspan="4" class="empty">No classes yet. Enlist in a course to see your
+                                            schedule here</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </section>
+
+                    <!-- School Calendar -->
+                    <section class="card" id="school-calendar">
+                        <h2>School Calendar</h2>
+                        <div class="calendar-view">
+                            <p>calendar goes here</p>
+                        </div>
+                    </section>
+                </div>
+
+                <!-- Right Side -->
+                <div class="dashboard-right">
+
+                    <!-- Events -->
+                    <section class="card" id="events">
+                        <h2>Events</h2>
+                        <ul class="event-list" id="events-list">
+                            <li class="empty">No upcoming events.</li>
+                        </ul>
+                    </section>
+
+                    <!-- Announcements -->
+                    <section class="card" id="announcements">
+                        <h2>Announcements</h2>
+                        <ul class="event-list" id="announcements-list">
+                            <li class="empty">No announcements from the Provost.</li>
+                        </ul>
+                    </section>
+
+                    <!--Organization Posts -->
+                    <section class="card" id="other-events">
+                        <h2>Other Events</h2>
+                        <h3>Organization posts</h3>
+                        <ul class="event-list" id="org-posts-list">
+                            <li class="empty">No organization posts yet. Join an organization to see its updates.</li>
+                        </ul>
+                    </section>
                 </div>
             </div>
-        </section>
+        </main>
 
-        <div class="dashboard">
+        <!-- Footer -->
+        <footer class="footer-section">
+            <p>2026 ArchersHub 2.0</p>
+            <p>Privacy Policy | Conditions</p>
+        </footer>
 
-            <!-- Left Side -->
-            <div class="dashboard-left">
-                <section class="card" id="class-schedule">
-                    <h2>Class Schedule</h2>
-                    <div class="table-wrap">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Course</th>
-                                    <th>Section</th>
-                                    <th>Day / Time</th>
-                                    <th>Room</th>
-                                </tr>
-                            </thead>
-                            <tbody id="schedule-body">
-                                <tr>
-                                    <td colspan="4" class="empty">No classes yet. Enlist in a course to see your schedule here</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </section>
-            
-                <!-- School Calendar -->
-                <section class="card" id="school-calendar">
-                    <h2>School Calendar</h2>
-                    <div class="calendar-view">
-                        <p>calendar goes here</p>
-                    </div>
-                </section>
-            </div>
-
-            <!-- Right Side -->
-             <div class="dashboard-right">
-
-                <!-- Events -->
-                <section class="card" id="events">
-                    <h2>Events</h2>
-                    <ul class="event-list" id="events-list">
-                        <li class="empty">No upcoming events.</li>
-                    </ul>
-                </section>
- 
-                <!-- Important Events -->
-                <section class="card" id="important-events">
-                    <h2>Important Events</h2>
-                    <ul class="event-list" id="important-list">
-                        <li class="empty">No important events.</li>
-                    </ul>
-                </section>
- 
-
-                <!-- Announcements -->
-                <section class="card" id="announcements">
-                    <h2>Announcements</h2>
-                    <ul class="event-list" id="announcements-list">
-                        <li class="empty">No announcements from the Provost.</li>
-                    </ul>
-                </section>
- 
-
-                <!--Organization Posts -->
-                <section class="card" id="other-events">
-                    <h2>Other Events</h2>
-                    <h3>Organization posts</h3>
-                    <ul class="event-list" id="org-posts-list">
-                        <li class="empty">No organization posts yet. Join an organization to see its updates.</li>
-                    </ul>
-                </section>
-
-             </div>
-        
-        </div>
-
-    </main>
-
-    <!-- Footer -->
-     <footer class="footer-section">
-        <p>2026 ArchersHub 2.0</p>
-        <p>Privavy Policy  |  Conditions</p>
-     </footer>
+        <div class="overlay" id="overlay"></div>
+    </div>
 </body>
+
 </html>

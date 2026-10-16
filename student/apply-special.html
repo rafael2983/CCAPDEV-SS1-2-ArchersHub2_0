@@ -1,0 +1,124 @@
+<h1 class="page-title">Apply Special Class</h1>
+
+<div class="enlist-layout">
+
+    <!-- LEFT: campus, already applied courses, apply form -->
+    <section class="enlist-left" aria-label="Special class applications">
+
+        <!-- Campus: Laguna / Manila / Either -->
+        <div class="campus-switch" role="group" aria-label="Campus">
+            <button class="campus-btn active" data-campus="either" aria-pressed="true">Either</button>
+            <button class="campus-btn" data-campus="laguna" aria-pressed="false">Laguna</button>
+            <button class="campus-btn" data-campus="manila" aria-pressed="false">Manila</button>
+        </div>
+
+        <!-- Already applied courses (shows how many students applied) -->
+        <section class="card" aria-label="Already applied courses">
+            <h2>Already applied courses</h2>
+
+            <label for="applied-search" class="sr-only">Search applied courses</label>
+            <input type="search" id="applied-search" placeholder="Search by course code or name">
+
+            <div class="table-wrap">
+                <table class="course-table" id="applied-table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Course code</th>
+                            <th scope="col">Course name</th>
+                            <th scope="col">Campus</th>
+                            <th scope="col">Students applied</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="applied-body">
+                        <tr data-code="CBAPDEV" data-name="Web Application Development" data-campus="laguna">
+                            <td>CBAPDEV</td>
+                            <td>Web Application Development</td>
+                            <td>Laguna</td>
+                            <td class="count-cell">7</td>
+                            <td><button class="row-btn add" data-action="join">Apply</button></td>
+                        </tr>
+                        <tr data-code="GEETHIC" data-name="Ethics" data-campus="manila">
+                            <td>GEETHIC</td>
+                            <td>Ethics</td>
+                            <td>Manila</td>
+                            <td class="count-cell">12</td>
+                            <td><button class="row-btn add" data-action="join">Apply</button></td>
+                        </tr>
+                        <tr data-code="SAS2000" data-name="Student Affairs Services 2000" data-campus="laguna">
+                            <td>SAS2000</td>
+                            <td>Student Affairs Services 2000</td>
+                            <td>Laguna</td>
+                            <td class="count-cell">3</td>
+                            <td><button class="row-btn add" data-action="join">Apply</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p class="empty" id="no-applied" hidden>No special class applications match your search.</p>
+            </div>
+        </section>
+
+        <!-- Course and reason form -->
+        <section class="card" aria-label="New application">
+            <h2>New application</h2>
+
+            <label for="sc-course">Course</label>
+            <select id="sc-course">
+                <option value="">Select a course</option>
+                <option value="CBAPDEV">CBAPDEV - Web Application Development</option>
+                <option value="GEETHIC">GEETHIC - Ethics</option>
+                <option value="GEWORLD">GEWORLD - The Contemporary World</option>
+                <option value="SAS2000">SAS2000 - Student Affairs Services 2000</option>
+                <option value="not-listed">Not in the list</option>
+            </select>
+
+            <!-- Shown only when "Not in the list" is picked -->
+            <div class="not-listed" id="not-listed-box" hidden>
+                <label for="sc-other-code">Course code</label>
+                <input type="text" id="sc-other-code" placeholder="e.g. CCDEVAP">
+
+                <label for="sc-other-name">Course name</label>
+                <input type="text" id="sc-other-name" placeholder="Course name">
+
+                <label for="sc-college">College</label>
+                <select id="sc-college">
+                    <option value="">Select a college</option>
+                    <option value="ccs">College of Computer Studies</option>
+                    <option value="cla">College of Liberal Arts</option>
+                    <option value="cos">College of Science</option>
+                    <option value="coe">Gokongwei College of Engineering</option>
+                    <option value="cbe">Ramon V. del Rosario College of Business</option>
+                    <option value="ced">Br. Andrew Gonzalez College of Education</option>
+                    <option value="other">Other</option>
+                </select>
+            </div>
+
+            <label for="sc-campus">Campus</label>
+            <select id="sc-campus">
+                <option value="either">Either</option>
+                <option value="laguna">Laguna</option>
+                <option value="manila">Manila</option>
+            </select>
+
+            <label for="sc-reason">Reason</label>
+            <textarea id="sc-reason" rows="4" placeholder="Why do you need this special class?"></textarea>
+        </section>
+    </section>
+
+    <!-- requested courses and actions -->
+    <section class="enlist-right" aria-label="Currently requested courses">
+        <section class="card" aria-label="Currently requested courses">
+            <h2>Currently requested courses</h2>
+            <ul class="chosen-list" id="requested-list">
+                <li class="empty">You haven't applied for any special class yet.</li>
+            </ul>
+            <p class="chosen-total">Requests: <span id="requested-count">0</span></p>
+        </section>
+
+        <div class="enlist-actions">
+            <button class="btn secondary" id="withdraw-btn" type="button" disabled>Withdraw application</button>
+            <button class="btn secondary" id="apply-btn" type="button">Apply</button>
+            <button class="btn primary" id="submit-btn" type="button" disabled>Submit</button>
+        </div>
+    </section>
+</div>

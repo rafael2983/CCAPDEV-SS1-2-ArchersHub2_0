@@ -1,0 +1,176 @@
+<!-- This fragment is inserted into #main-content by the ArchersHub SPA. -->
+<section class="greeting-row ac-title" aria-label="Page title">
+    <div class="greeting"><h1>Account Management</h1></div>
+</section>
+
+<section class="ac-page" id="ac-page" aria-label="Account Management">
+    <!-- LEFT: Basic information form -->
+    <section class="ac-pane ac-detail-pane" aria-label="Basic information">
+        <div class="ac-scroll ac-detail-scroll">
+            <form id="ac-form" novalidate>
+                <div class="ac-section-head">
+                    <h2>Basic Information</h2>
+                    <div class="ac-head-tools">
+                        <span><b class="ac-required">*</b> Required</span>
+                        <button type="button" class="ac-link" id="ac-reset">New account</button>
+                    </div>
+                </div>
+
+                <div class="ac-fields">
+                    <div class="ac-field ac-wide">
+                        <label for="ac-id">ID <b class="ac-required">*</b></label>
+                        <input id="ac-id" name="id" required autocomplete="off" placeholder="e.g. 12208469">
+                    </div>
+
+                    <div class="ac-field ac-wide">
+                        <span class="ac-field-title">Name <b class="ac-required">*</b></span>
+                        <div class="ac-name-fields">
+                            <div>
+                                <label for="ac-surname">Surname</label>
+                                <input id="ac-surname" name="surname" autocomplete="family-name" placeholder="Surname" required>
+                            </div>
+                            <div>
+                                <label for="ac-middle">Middle Name</label>
+                                <input id="ac-middle" name="middleName" autocomplete="additional-name" placeholder="Middle name">
+                            </div>
+                            <div>
+                                <label for="ac-first">First Name</label>
+                                <input id="ac-first" name="firstName" autocomplete="given-name" placeholder="First name" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="ac-field ac-wide">
+                        <label for="ac-email">Email <b class="ac-required">*</b></label>
+                        <input id="ac-email" name="email" type="email" required autocomplete="email" placeholder="name@example.edu">
+                    </div>
+                    <div class="ac-field">
+                        <label for="ac-type">Account Type <b class="ac-required">*</b></label>
+                        <select id="ac-type" name="type" required>
+                            <option value="">Select type</option>
+                            <option value="Student">Student</option>
+                            <option value="Teacher">Teacher</option>
+                            <option value="Officer">Officer</option>
+                            <option value="Provost">Provost</option>
+                            <option value="Admin">Admin</option>
+                        </select>
+                        <p class="ac-help" id="ac-type-note" hidden>Admin account type cannot be changed.</p>
+                    </div>
+                    <div class="ac-field">
+                        <label for="ac-status">Account Status <b class="ac-required">*</b></label>
+                        <select id="ac-status" name="status" required>
+                            <option value="">Select status</option>
+                            <option value="Active">Active</option>
+                            <option value="LOA">LOA</option>
+                            <option value="Discontinued">Discontinued</option>
+                            <option value="Expulsion">Expulsion</option>
+                            <option value="Graduate">Graduate</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Mobile shows records and Other information on this second screen. -->
+                <div class="ac-mobile-info">
+                    <section class="ac-record-section">
+                        <h3>Enlistment</h3>
+                        <div id="ac-mobile-enlistment" class="ac-related-content"></div>
+                    </section>
+                    <section class="ac-record-section">
+                        <h3>Grade</h3>
+                        <div id="ac-mobile-grade" class="ac-related-content"></div>
+                    </section>
+                    <section class="ac-record-section ac-mobile-other">
+                        <h3>Other Information</h3>
+                        <div class="ac-fields">
+                            <div class="ac-field">
+                                <label for="ac-m-created">Created Date</label>
+                                <input id="ac-m-created" data-other="createdDate" data-editor="mobile" type="date" form="ac-form">
+                            </div>
+                            <div class="ac-field">
+                                <label for="ac-m-contact">Contact Number</label>
+                                <input id="ac-m-contact" data-other="contactNumber" data-editor="mobile" type="tel" placeholder="Contact number" form="ac-form">
+                            </div>
+                            <div class="ac-field ac-wide">
+                                <label for="ac-m-address">Address</label>
+                                <input id="ac-m-address" data-other="address" data-editor="mobile" placeholder="Address" form="ac-form">
+                            </div>
+                        </div>
+                        <div class="ac-timeline-head">
+                            <h4>Timeline</h4>
+                            <button type="button" class="ac-btn ac-secondary ac-add-event" data-add-event="mobile">＋ Add event</button>
+                        </div>
+                        <div class="ac-event-labels" aria-hidden="true"><span>Date</span><span>Event</span><span></span></div>
+                        <div class="ac-events" id="ac-m-events" data-events="mobile"></div>
+                    </section>
+                </div>
+            </form>
+        </div>
+
+        <footer class="ac-actions ac-detail-actions">
+            <button type="button" class="ac-btn ac-secondary ac-mobile-back" id="ac-back">← Back to account list</button>
+            <button type="submit" form="ac-form" class="ac-btn ac-primary" id="ac-save">Create</button>
+        </footer>
+    </section>
+
+    <!-- RIGHT: Existing account list and related information -->
+    <section class="ac-pane ac-list-pane" aria-label="Existing accounts">
+        <header class="ac-head">
+            <div>
+                <h2>List of Existing ID</h2>
+                <p class="ac-muted">Select an account to view its records.</p>
+            </div>
+            <span class="ac-count" id="ac-count">Loading…</span>
+        </header>
+
+        <div class="ac-scroll ac-list-scroll">
+            <div class="ac-list" id="ac-list" aria-live="polite">
+                <p class="ac-empty">Loading accounts…</p>
+            </div>
+
+            <section class="ac-related" id="ac-related" hidden aria-live="polite">
+                <div class="ac-related-head">
+                    <div>
+                        <p class="ac-eyebrow" id="ac-related-label">ACCOUNT DETAILS</p>
+                        <h3 id="ac-related-title">Enlistment</h3>
+                    </div>
+                    <button type="button" class="ac-link" id="ac-related-back">Back to ID List</button>
+                </div>
+
+                <div id="ac-related-content" class="ac-related-content"></div>
+
+                <!-- Editable on desktop. Saved by the Create/Edit button under Basic Information. -->
+                <section class="ac-other-editor" id="ac-other-editor" hidden>
+                    <div class="ac-fields">
+                        <div class="ac-field">
+                            <label for="ac-created">Created Date</label>
+                            <input id="ac-created" data-other="createdDate" data-editor="desktop" type="date" form="ac-form">
+                        </div>
+                        <div class="ac-field">
+                            <label for="ac-contact">Contact Number</label>
+                            <input id="ac-contact" data-other="contactNumber" data-editor="desktop" type="tel" placeholder="Contact number" form="ac-form">
+                        </div>
+                        <div class="ac-field ac-wide">
+                            <label for="ac-address">Address</label>
+                            <input id="ac-address" data-other="address" data-editor="desktop" placeholder="Address" form="ac-form">
+                        </div>
+                    </div>
+                    <div class="ac-timeline-head">
+                        <h4>Timeline</h4>
+                        <button type="button" class="ac-btn ac-secondary ac-add-event" data-add-event="desktop">＋ Add event</button>
+                    </div>
+                    <div class="ac-event-labels" aria-hidden="true"><span>Date</span><span>Event</span><span></span></div>
+                    <div class="ac-events" id="ac-events" data-events="desktop"></div>
+                </section>
+            </section>
+        </div>
+
+        <footer class="ac-actions ac-list-actions">
+            <div class="ac-tabs" role="group" aria-label="Account information">
+                <button type="button" class="ac-tab" data-view="enlistment" aria-pressed="false">Enlistment</button>
+                <button type="button" class="ac-tab" data-view="grade" aria-pressed="false">Grade</button>
+                <button type="button" class="ac-tab" data-view="other" aria-pressed="false">Other</button>
+            </div>
+            <button type="button" class="ac-btn ac-primary ac-mobile-new" id="ac-new">＋ Create New Account</button>
+        </footer>
+    </section>
+</section>

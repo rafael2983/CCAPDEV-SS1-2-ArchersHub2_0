@@ -1,0 +1,194 @@
+/* =========================================
+   GENERAL
+========================================= */
+
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    min-height: 100%;
+}
+
+/* =========================================
+      GLOBAL VARIABLES & UTILITIES
+========================================= */
+
+/* =========================================
+   THEME VARIABLES
+   Dark mode: JS toggles the "dark-mode" class on <body>
+========================================= */
+
+:root {
+    --green:        #087830;
+    --green-dark:   #056226;
+    --green-deep:   #0b552c;
+
+    --surface:      #ffffff;
+    --surface-alt:  #f5f8f6;
+    --border:       #d7e4db;
+    --input-border: #ccd9d0;
+
+    --text:         #17251c;
+    --text-muted:   #5d7066;
+    --heading:      #0b552c;
+    --label:        #31503c;
+
+    --danger:       #b3261e;
+    --warn-bg:      #fff4d6;
+    --warn-text:    #8a5a00;
+    --warn-border:  #e3b448;
+
+    --shadow:       0 8px 24px rgba(26, 70, 45, 0.08);
+    --header-h:     64px;
+}
+
+body.dark-mode {
+    --surface:      #17211b;
+    --surface-alt:  #1f2b24;
+    --border:       #2c3d33;
+    --input-border: #34483c;
+
+    --text:         #e6efe9;
+    --text-muted:   #9bb0a3;
+    --heading:      #7fd6a0;
+    --label:        #b5cbbd;
+
+    --danger:       #ff8b82;
+    --warn-bg:      #3d3210;
+    --warn-text:    #f0c75e;
+    --warn-border:  #7a6320;
+
+    --shadow:       0 8px 24px rgba(0, 0, 0, 0.35);
+
+    color: var(--text);
+
+    background:
+        radial-gradient(
+            circle at 85% 15%,
+            rgba(8, 120, 48, 0.12),
+            transparent 35%
+        ),
+        #0e1511;
+}
+
+/* =========================================
+   HELPERS
+========================================= */
+
+[hidden] {
+    display: none !important;
+}
+
+/* =========================================
+    BASE HTML ELEMENTS (Typography & Defaults)
+========================================= */
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+
+    background:
+        radial-gradient(
+            circle at 85% 15%,
+            rgba(8, 120, 48, 0.10),
+            transparent 35%
+        ),
+        linear-gradient(
+            135deg,
+            #f7faf8,
+            #edf4ef
+        );
+
+    color: #17251c;
+}
+
+/* =========================================
+   TOAST
+========================================= */
+
+.toast-container {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    z-index: 2000;
+
+    max-width: calc(100% - 40px);
+
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.toast {
+    min-width: 240px;
+    max-width: 360px;
+
+    padding: 14px 18px;
+
+    font-size: 14px;
+    color: #ffffff;
+
+    background: #2f3a34;
+
+    border-left: 5px solid #9aa8a0;
+    border-radius: 10px;
+
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.22);
+
+    animation: toastIn 0.3s ease;
+}
+
+.toast.success {
+    background: var(--green-deep);
+
+    border-left-color: #4cd47f;
+}
+
+.toast.error {
+    background: #8f1d17;
+
+    border-left-color: #ff8b82;
+}
+
+.toast.info {
+    background: #1d4f6e;
+
+    border-left-color: #6cc3f0;
+}
+
+.toast.hide {
+    opacity: 0;
+
+    transform: translateX(30px);
+
+    transition:
+        opacity 0.3s ease,
+        transform 0.3s ease;
+}
+
+@keyframes toastIn {
+    from {
+        opacity: 0;
+        transform: translateX(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@media (max-width: 600px) {
+    .toast-container {
+        right: 12px;
+        bottom: 12px;
+        left: 12px;
+    }
+
+    .toast {
+        max-width: none;
+    }
+}

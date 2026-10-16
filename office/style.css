@@ -1,0 +1,6 @@
+/* Page content: cards stacked in a column, profile in two columns */
+.calendar-editor {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
