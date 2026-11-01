@@ -1,0 +1,93 @@
+<section class="greeting-row" aria-label="Greeting">
+    <div class="greeting">
+        <p class="greeting-sub">Academic Management</p>
+        <h1>View Records</h1>
+    </div>
+</section>
+
+<div class="dashboard">
+    <!-- Left Side: Filter & Filtered Records -->
+    <div class="dashboard-left">
+        <section class="card">
+            <h2>Filter</h2>
+            <div style="display: flex; gap: 10px; margin-top: 10px;">
+                <select style="flex: 1; padding: 8px; border-radius: 4px; border: 1px solid #ccc;">
+                    <option value="">Select Term</option>
+                    <option value="3">AY 2025-2026, Term 3</option>
+                    <option value="2">AY 2025-2026, Term 2</option>
+                </select>
+            </div>
+        </section>
+
+        <section class="card">
+            <h2>Filtered Record</h2>
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Course</th>
+                            <th>Units</th>
+                            <th>Grade</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>CCAPDEV</td>
+                            <td>3.0</td>
+                            <td>3.5</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div style="margin-top: 15px; text-align: right;">
+                <button class="filter-btn"
+                    style="background-color: #004d26; color: white; width: 100%;">Download filtered
+                    record</button>
+            </div>
+        </section>
+    </div>
+
+    <!-- Right Side: All Records -->
+    <div class="dashboard-right">
+        <section class="card" style="height: 100%;">
+            <h2>All Record</h2>
+            <div class="table-wrap" style="max-height: 400px; overflow-y: auto;">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Term</th>
+                            <th>Course</th>
+                            <th>Units</th>
+                            <th>Grade</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Y2526-1</td>
+                            <td>CCPROG1</td>
+                            <td>3.0</td>
+                            <td>4.0</td>
+                        </tr>
+                        <tr>
+                            <td>Y2526-1</td>
+                            <td>CCDSALM</td>
+                            <td>3.0</td>
+                            <td>3.5</td>
+                        </tr>
+                        <tr>
+                            <td>Y2526-2</td>
+                            <td>CCAPDEV</td>
+                            <td>3.0</td>
+                            <td>3.5</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div style="margin-top: 15px; text-align: right;">
+                <button class="filter-btn"
+                    style="background-color: #004d26; color: white; width: 100%;">Download Full
+                    record</button>
+            </div>
+        </section>
+    </div>
+</div>

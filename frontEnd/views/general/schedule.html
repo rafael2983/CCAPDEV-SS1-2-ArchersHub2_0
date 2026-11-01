@@ -1,0 +1,52 @@
+<h1 class="page-title">View Schedule</h1>
+
+<div class="view-schedule">
+
+    <section class="card" id="vs-schedule">
+
+        <div class="schedule-tools">
+            <label for="vs-term">Term</label>
+            <select id="vs-term">
+                <option value="">Loading terms...</option>
+            </select>
+
+            <!-- Weekly table or plain list -->
+            <div class="view-switch" id="vs-view">
+                <button class="view-btn active" data-view="week">Weekly</button>
+                <button class="view-btn" data-view="list">List</button>
+            </div>
+        </div>
+
+        <!-- Weekly view -->
+        <div class="table-wrap" id="vs-week">
+            <table class="schedule-table">
+                <thead>
+                    <tr>
+                        <th>Time</th>
+                        <th>Mon</th>
+                        <th>Tue</th>
+                        <th>Wed</th>
+                        <th>Thu</th>
+                        <th>Fri</th>
+                        <th>Sat</th>
+                    </tr>
+                </thead>
+                <tbody id="vs-week-body">
+                    <tr><td>7:30 AM</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                    <tr><td>9:15 AM</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                    <tr><td>11:00 AM</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                    <tr><td>1:00 PM</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                    <tr><td>2:45 PM</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                    <tr><td>4:30 PM</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- List view -->
+        <ul class="chosen-list" id="vs-list" hidden>
+            <li class="empty">No classes this term.</li>
+        </ul>
+
+    </section>
+
+</div>
