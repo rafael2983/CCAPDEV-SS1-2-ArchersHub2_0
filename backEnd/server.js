@@ -18,6 +18,9 @@ const DATA_FILE = path.join(ROOT_DIR, "admin", "account-management-data.txt");
 const PORT = Number(process.env.PORT || 3000);
 const MAX_BODY_BYTES = 2 * 1024 * 1024;
 
+const { testConnection } = require("./config/db");
+testConnection().catch(err => console.error("MySQL error:", err.message));
+
 const MIME_TYPES = {
     ".html": "text/html; charset=utf-8",
     ".css": "text/css; charset=utf-8",

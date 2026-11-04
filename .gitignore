@@ -1,0 +1,8 @@
+# Ignore actual local environment config files 
+.env
+.env.local
+.env.*.local
+
+# DO NOT ignore the template file so your team knows what keys to use
+!.env.example
+!.env.template
