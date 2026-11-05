@@ -4,17 +4,16 @@
 <head>
     <title>Home Page</title>
 
-    <script src="student/scripts.js" defer></script>
-    <script src="teacher/scripts.js" defer></script>
-    <script src="admin/scripts.js" defer></script>
-    <script src="chatbot.js" defer></script>
+    <script src="scripts/student.js" defer></script>
+    <script src="scripts/teacher.js" defer></script>
+    <script src="scripts/admin.js" defer></script>
 
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="student/style.css">
-    <link rel="stylesheet" href="teacher/style.css">
-    <link rel="stylesheet" href="admin/style.css">
+    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/student.css">
+    <link rel="stylesheet" href="styles/teacher.css">
+    <link rel="stylesheet" href="styles/admin.css">
 
-    <link rel="icon" href="images/school-logo.png">
+    <link rel="icon" href="views/images/school-logo.png">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
@@ -32,7 +31,7 @@
 
         <!-- Logo -->
         <a href="home.html" class="logo-link" aria-label="Go to homepage">
-            <img src="images/school-logo.png" alt="DLSU school logo">
+            <img src="views/images/school-logo.png" alt="DLSU school logo">
         </a>
 
         <div class="header-fill"></div>
@@ -49,7 +48,7 @@
         </button>
 
         <!-- ID -->
-        <a href="general/profile.html" class="user-id" id="user-profile" aria-label="Go to profile">ID12345678</a>
+        <a href="views/general/profile.html" class="user-id" id="user-profile" aria-label="Go to profile">ID12345678</a>
     </header>
 
     <!-- side menu -->
@@ -57,31 +56,30 @@
         <nav class="sidebar" id="sidebar" aria-label="Main navigation">
             <ul class="side-menu">
                 <li data-role="general"><a href="home.html" class="active" data-page="home">Home</a></li>
-                <li data-role="student"><a href="student/enlistment.html" data-page="enlistment">Enlistment</a></li>
-                <li data-role="student"><a href="student/add-drop.html" data-page="add/drop">Add / Drop</a></li>
-                <li data-role="student"><a href="student/apply-special.html" data-page="special-class">Special Class</a>
+                <li data-role="student"><a href="views/student/enlistment.html" data-page="enlistment">Enlistment</a></li>
+                <li data-role="student"><a href="views/student/add-drop.html" data-page="add/drop">Add / Drop</a></li>
+                <li data-role="student"><a href="views/student/apply-special.html" data-page="special-class">Special Class</a>
                 </li>
-                <li data-role="student"><a href="student/withdrawal.html" data-page="course-withdrawal">Course
+                <li data-role="student"><a href="views/student/withdrawal.html" data-page="course-withdrawal">Course
                         Withdrawal</a></li>
-                <li data-role="student"><a href="student/program-exchange.html" data-page="program-exchange">Program
+                <li data-role="student"><a href="views/student/program-exchange.html" data-page="program-exchange">Program
                         Exchange</a></li>
-                <li data-role="student"><a href="student/curriculum.html" data-page="curriculum-progression">Curriculum
+                <li data-role="student"><a href="views/student/curriculum.html" data-page="curriculum-progression">Curriculum
                         Progression</a></li>
-                <li data-role="general"><a href="general/schedule.html" data-page="view-schedule">View Schedule</a></li>
-                <li data-role="student"><a href="student/records.html" data-page="view-record">View Records</a></li>
-                <li data-role="general"><a href="general/calendar.html" data-page="calender">University Calendar</a>
+                <li data-role="general"><a href="views/general/schedule.html" data-page="view-schedule">View Schedule</a></li>
+                <li data-role="student"><a href="views/student/records.html" data-page="view-record">View Records</a></li>
+                <li data-role="general"><a href="views/general/calendar.html" data-page="calender">University Calendar</a>
                 </li>
-                <li data-role="general"><a href="general/organizations.html" data-page="organizations">Organizations</a>
+                <li data-role="general"><a href="views/general/organizations.html" data-page="organizations">Organizations</a>
                 </li>
-                <li data-role="teacher"><a href="teacher/grade-encoding.html" data-page="grade-encoding">Grade
+                <li data-role="teacher"><a href="views/teacher/grade-encoding.html" data-page="grade-encoding">Grade
                         Encoding</a></li>
-                <li data-role="teacher"><a href="teacher/application.html" data-page="view-application">View
+                <li data-role="teacher"><a href="views/teacher/application.html" data-page="view-application">View
                         Application</a></li>
-                <li data-role="office"><a href="office/announcements.html" data-page="make-announcements">Make
+                <li data-role="office"><a href="views/office/announcements.html" data-page="make-announcements">Make
                         Announcements</a></li>
-                <li data-role="admin"><a href="admin/account-menegement.html" data-page="account-menegement">Account
+                <li data-role="admin"><a href="views/admin/account-menegement.html" data-page="account-menegement">Account
                         Menegement</a></li>
-                <li data-role="general"><a href="general/ai-chat.html" data-page="ai-chat">AI Chat</a></li>
             </ul>
 
             <ul class="sidebar-bottom">
