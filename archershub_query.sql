@@ -78,6 +78,17 @@ CREATE TABLE IF NOT EXISTS student (
     FOREIGN KEY (program_id) REFERENCES program (program_id)
 ) ENGINE=InnoDB;
 
+CREATE TABLE IF NOT EXISTS student_status_history (
+    history_id  INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    student_id  INT UNSIGNED NOT NULL,
+    status      ENUM('Active','LOA','Discontinued','Expulsion','Graduate') NOT NULL,
+    start_date  DATE NOT NULL,
+    end_date    DATE NULL,
+    note        VARCHAR(255) NULL,
+    FOREIGN KEY (student_id) REFERENCES student (user_id) ON DELETE CASCADE,
+    CHECK (end_date IS NULL OR end_date >= start_date)
+) ENGINE=InnoDB;
+
 CREATE TABLE IF NOT EXISTS apo (
     user_id     INT UNSIGNED PRIMARY KEY,
     college_id  INT UNSIGNED NOT NULL,
@@ -256,6 +267,18 @@ CREATE TABLE IF NOT EXISTS organization (
     name         VARCHAR(150) NOT NULL UNIQUE,
     description  TEXT NULL
 ) ENGINE=InnoDB;
+
+CREATE TABLE IF NOT EXISTS org_member (
+    org_id      INT UNSIGNED NOT NULL,
+    student_id  INT UNSIGNED NOT NULL,
+    position    VARCHAR(50) NOT NULL DEFAULT 'Member',
+    can_post    BOOLEAN NOT NULL DEFAULT FALSE,
+    joined_at   TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (org_id, student_id),
+    FOREIGN KEY (org_id)     REFERENCES organization (org_id) ON DELETE CASCADE,
+    FOREIGN KEY (student_id) REFERENCES student (user_id) ON DELETE CASCADE
+) ENGINE=InnoDB;
+
 
 CREATE TABLE IF NOT EXISTS org_application (
     application_id  INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
