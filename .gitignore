@@ -6,3 +6,5 @@
 # DO NOT ignore the template file so your team knows what keys to use
 !.env.example
 !.env.template
+
+node_modules/
