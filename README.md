@@ -1,4 +1,20 @@
 ArchersHub 2.0
+MySQL
+1. Added the Sequelize connection setup, which reads the database settings from `.env` (`backEnd/config/sequelize.js`)
+2. Added the `User` model mapped to the existing `users` table (`backEnd/models/user.js`)
+
+Express
+1. Rewrote `backEnd/server.js` using Express (the old `http` module version is kept as `backEnd/server.old.js` for reference)
+2. Added `cors` and `express.json()` middleware
+3. Added a health check endpoint: `GET /api/health`
+4. Added the login endpoint `POST /api/login`, which checks the password with bcrypt and returns the user or a `401` (`backEnd/routes/auth.js`)
+
+Node
+1. Added `backEnd/package.json` and `package-lock.json` with the dependencies (`express`, `sequelize`, `mysql2`, `dotenv`, `cors`, `bcrypt`) and `nodemon` as a dev dependency
+2. Added the `npm run dev` (nodemon) and `npm start` scripts
+3. Added `.env.example` as the template for environment variables
+4. Added `node_modules/` to `.gitignore`
+
 Setup
 
 These steps work on Windows, macOS, and Linux. Where commands differ, each OS is listed.
