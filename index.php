@@ -1,7 +1,8 @@
 <?php
-require __DIR__ . '/backEnd/models/user.php';
+require __DIR__ . '/backEnd/core/helpers.php';
+require __DIR__ . '/backEnd/core/Router.php';
+require __DIR__ . '/backEnd/controllers/HomeController.php';
 
-$user = User::findByEmail('lean_gutierrez@dlsu.edu.ph');
-echo $user
-    ? htmlspecialchars($user['first_name'] . ' - ' . $user['role'])
-    : 'Not found';
+$router = new Router();
+$router->get('home', [new HomeController(), 'index']);
+$router->dispatch();
