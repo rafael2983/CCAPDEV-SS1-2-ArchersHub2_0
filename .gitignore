@@ -2,6 +2,7 @@
 .env
 .env.local
 .env.*.local
+backEnd/config/config.php
 
 # DO NOT ignore the template file so your team knows what keys to use
 !.env.example
