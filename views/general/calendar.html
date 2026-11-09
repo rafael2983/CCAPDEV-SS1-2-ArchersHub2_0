@@ -1,0 +1,37 @@
+<h1 class="page-title">University Calendar</h1>
+
+<div class="university-calendar">
+
+    <section class="card" id="uc-calendar">
+
+        <!-- Tabular or listed -->
+        <div class="view-switch" id="uc-view">
+            <button class="view-btn active" data-view="tabular">Tabular</button>
+            <button class="view-btn" data-view="list">List</button>
+        </div>
+
+        <div class="table-wrap" id="uc-table">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Start date</th>
+                        <th>End date</th>
+                        <th>Event</th>
+                        <th>Important</th>
+                    </tr>
+                </thead>
+                <tbody id="uc-body">
+                    <tr>
+                        <td colspan="4" class="empty">Loading calendar events...</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <ul class="event-list" id="uc-list" hidden>
+            <li class="empty">No calendar events.</li>
+        </ul>
+
+    </section>
+
+</div>

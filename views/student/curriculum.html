@@ -1,0 +1,94 @@
+<h1 class="page-title">Curriculum Progression</h1>
+
+<div class="curriculum">
+
+    <section class="card" id="cp-summary">
+        <h2>My progress</h2>
+        <p>Units completed: <span id="cp-done">0</span> of <span id="cp-total">0</span></p>
+        <progress id="cp-bar" value="0" max="100"></progress>
+    </section>
+
+    <section class="card" id="cp-courses">
+        <h2>Courses</h2>
+
+        <!-- Filter by status. Taken / Can take now / Needs a prerequisite -->
+        <div class="view-switch" id="cp-filter">
+            <button class="view-btn active" data-filter="all">All</button>
+            <button class="view-btn" data-filter="taken">Taken</button>
+            <button class="view-btn" data-filter="available">Can take now</button>
+            <button class="view-btn" data-filter="locked">Needs prerequisite</button>
+        </div>
+
+        <!-- Highest requirement first: Majors, then GEs -->
+        <div class="table-wrap">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Course code</th>
+                        <th>Course name</th>
+                        <th>Category</th>
+                        <th>Year level</th>
+                        <th>Term</th>
+                        <th>Units</th>
+                        <th>Prerequisite</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody id="cp-body">
+                    <tr data-status="taken">
+                        <td>CCPROG1</td>
+                        <td>Introduction to Programming</td>
+                        <td>Major</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>3</td>
+                        <td>None</td>
+                        <td>Taken</td>
+                    </tr>
+                    <tr data-status="available">
+                        <td>CCPROG2</td>
+                        <td>Programming 2</td>
+                        <td>Major</td>
+                        <td>1</td>
+                        <td>2</td>
+                        <td>3</td>
+                        <td>CCPROG1</td>
+                        <td>Can take now</td>
+                    </tr>
+                    <tr data-status="locked">
+                        <td>CBAPDEV</td>
+                        <td>Web Application Development</td>
+                        <td>Major</td>
+                        <td>2</td>
+                        <td>1</td>
+                        <td>3</td>
+                        <td>CCPROG2</td>
+                        <td>Needs prerequisite</td>
+                    </tr>
+                    <tr data-status="available">
+                        <td>GEETHIC</td>
+                        <td>Ethics</td>
+                        <td>GE</td>
+                        <td>1</td>
+                        <td>2</td>
+                        <td>3</td>
+                        <td>None</td>
+                        <td>Can take now</td>
+                    </tr>
+                    <tr data-status="taken">
+                        <td>LCLSONE</td>
+                        <td>Lasallian Studies 1</td>
+                        <td>GE</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>None</td>
+                        <td>Taken</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <p class="empty" id="cp-empty" hidden>No courses in this group.</p>
+    </section>
+
+</div>

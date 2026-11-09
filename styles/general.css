@@ -1,0 +1,74 @@
+/* Page content: cards stacked in a column, profile in two columns */
+.view-schedule, .university-calendar, .organizations {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.user-profile {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+
+    align-items: start;
+}
+
+.profile-head {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+
+    margin-bottom: 16px;
+}
+
+.profile-head img {
+    width: 72px;
+    height: 72px;
+
+    object-fit: cover;
+
+    background: var(--surface-alt);
+
+    border: 2px solid var(--border);
+    border-radius: 50%;
+}
+
+.profile-head h2 {
+    margin: 0 0 4px;
+}
+
+.profile-head p {
+    margin: 0;
+
+    font-size: 14px;
+    color: var(--text-muted);
+}
+
+.detail-list {
+    margin: 0 0 16px;
+    padding: 0;
+
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+    list-style: none;
+
+    font-size: 14px;
+    color: var(--text-muted);
+}
+
+.detail-list span {
+    font-weight: 700;
+    color: var(--text);
+}
+
+/* =========================================
+   MOBILE FORM CONTROLS
+========================================= */
+
+@media (max-width: 1000px) {
+    .user-profile {
+        grid-template-columns: 1fr;
+    }
+}
