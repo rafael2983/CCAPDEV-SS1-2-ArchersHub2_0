@@ -1,6 +1,7 @@
 <?php
-require __DIR__ . '/backEnd/core/Database.php';
+require __DIR__ . '/backEnd/models/user.php';
 
-$pdo = Database::connection();
-$count = $pdo->query("SELECT COUNT(*) FROM users")->fetchColumn();
-echo "Connected. Users in table: " . $count;
+$user = User::findByEmail('lean_gutierrez@dlsu.edu.ph');
+echo $user
+    ? htmlspecialchars($user['first_name'] . ' - ' . $user['role'])
+    : 'Not found';
