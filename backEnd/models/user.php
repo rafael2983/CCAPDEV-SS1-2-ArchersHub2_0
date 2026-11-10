@@ -12,5 +12,22 @@ class User
         $stmt->execute([$email]);
         $row = $stmt->fetch();
         return $row ?: null;
+	
+    }
+
+    // Accepts either an email or a numeric user ID.
+    public static function findByLogin(string $identifier): ?array
+    {
+        if (str_contains($identifier, '@')) {
+            return self::findByEmail($identifier);
+        }
+        if (ctype_digit($identifier)) {
+            $stmt = Database::connection()->prepare(
+                "SELECT * FROM users WHERE user_id = ? LIMIT 1"
+            );
+            $stmt->execute([(int) $identifier]);
+            return $stmt->fetch() ?: null;
+        }
+        return null;
     }
 }

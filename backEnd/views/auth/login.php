@@ -58,9 +58,9 @@
                     <?php endif; ?>
 
                     <div class="input-group">
-                        <label for="email">Email</label>
-                        <input type="email" id="email" name="email" placeholder="Enter your email"
-                               value="<?= e($email ?? '') ?>" required>
+                        <label for="identifier">Email/ID</label>
+                        <input type="text" id="identifier" name="identifier" placeholder="Enter your email or ID"
+                               value="<?= e($identifier ?? '') ?>" required>
                     </div>
 
                     <div class="input-group">

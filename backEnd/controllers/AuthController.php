@@ -12,10 +12,10 @@ class AuthController
     // POST: check the credentials
     public function login(): void
     {
-        $email = trim($_POST['email'] ?? '');
+        $identifier = trim($_POST['identifier'] ?? '');
         $password = $_POST['password'] ?? '';
 
-        $user = User::findByEmail($email);
+        $user = User::findByLogin($identifier);
 
         if (!$user || !$this->passwordMatches($password, $user['password_hash'])) {
             http_response_code(401);
