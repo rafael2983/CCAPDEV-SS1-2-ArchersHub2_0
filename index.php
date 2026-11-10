@@ -11,4 +11,6 @@ $router->get('home', [new HomeController(), 'index']);
 $router->get('login', [new AuthController(), 'showLogin']);
 $router->post('login', [new AuthController(), 'login']);
 $router->post('logout', [new AuthController(), 'logout']);
+$router->get('forgot-password', [new AuthController(), 'showForgot']);
+$router->post('forgot-password', [new AuthController(), 'forgot']);
 $router->dispatch();

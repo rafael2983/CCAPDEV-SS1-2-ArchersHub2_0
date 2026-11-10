@@ -19,13 +19,13 @@ class AuthController
 
         if (!$user || !$this->passwordMatches($password, $user['password_hash'])) {
             http_response_code(401);
-            view('auth/login', ['error' => 'Invalid email or password']);
+            view('auth/login', ['error' => 'Invalid email or password', 'email' => $email]);
             return;
         }
 
         if ($user['account_status'] === 'Disabled') {
             http_response_code(403);
-            view('auth/login', ['error' => 'Account is disabled']);
+            view('auth/login', ['error' => 'Account is disabled', 'email' => $email]);
             return;
         }
 
@@ -48,5 +48,19 @@ class AuthController
     private function passwordMatches(string $plain, string $stored): bool
     {
         return $plain === $stored;
+    }
+
+    // GET: show the forgot-password form
+    public function showForgot(): void
+    {
+        view('auth/forgot-password');
+    }
+
+    // POST: no email sending in this phase, just confirm the request
+    public function forgot(): void
+    {
+        view('auth/forgot-password', [
+            'message' => 'If that email is registered, reset instructions will be sent.'
+        ]);
     }
 }
