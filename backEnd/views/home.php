@@ -1,13 +1,9 @@
-<!DOCTYPE html>
-<html>
-<head><title>ArchersHub</title></head>
-<body>
 
-    <h1>ArchersHub</h1>
-    <?php if (!empty($_SESSION['user'])): ?>
-        <p>Logged in as <?= e($_SESSION['user']['first_name']) ?> (<?= e($_SESSION['user']['role']) ?>)</p>
-    <?php else: ?>
-        <p><a href="<?= url('login') ?>">Log in</a></p>
-    <?php endif; ?>
-</body>
-</html>
+<?php $title = 'Home - ArchersHub'; ?>
+<?php require __DIR__ . '/partials/header.php'; ?>
+
+<h1>ArchersHub</h1>
+<p>Welcome to the ArchersHub portal.</p>
+
+<?php require __DIR__ . '/partials/footer.php'; ?>
+

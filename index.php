@@ -10,4 +10,5 @@ $router = new Router();
 $router->get('home', [new HomeController(), 'index']);
 $router->get('login', [new AuthController(), 'showLogin']);
 $router->post('login', [new AuthController(), 'login']);
+$router->post('logout', [new AuthController(), 'logout']);
 $router->dispatch();

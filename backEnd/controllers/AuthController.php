@@ -37,6 +37,13 @@ class AuthController
         redirect('home');
     }
 
+    // POST: end the session
+    public function logout(): void
+    {
+        $_SESSION = [];
+        session_destroy();
+        redirect('home');
+    }
     // Plain-text for this phase. Only this function changes when hashing is added.
     private function passwordMatches(string $plain, string $stored): bool
     {

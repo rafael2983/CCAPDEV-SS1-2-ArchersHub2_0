@@ -1,19 +1,16 @@
-<!DOCTYPE html>
-<html>
-<head><title>Login - ArchersHub</title></head>
-<body>
-    <h1>Login</h1>
+<?php $title = 'Login - ArchersHub'; ?>
+<?php require __DIR__ . '/../partials/header.php'; ?>
 
-    <?php if (!empty($error)): ?>
-        <p style="color: red;"><?= e($error) ?></p>
-    <?php endif; ?>
+<h1>Login</h1>
 
-    <form method="POST" action="<?= url('login') ?>">
-        <label>Email <input type="email" name="email" required></label><br>
-        <label>Password <input type="password" name="password" required></label><br>
-        <button type="submit">Log in</button>
-    </form>
+<?php if (!empty($error)): ?>
+    <p style="color: red;"><?= e($error) ?></p>
+<?php endif; ?>
 
-    <p><a href="<?= url('home') ?>">Back to home</a></p>
-</body>
-</html>
+<form method="POST" action="<?= url('login') ?>">
+    <label>Email <input type="email" name="email" required></label><br>
+    <label>Password <input type="password" name="password" required></label><br>
+    <button type="submit">Log in</button>
+</form>
+
+<?php require __DIR__ . '/../partials/footer.php'; ?>
