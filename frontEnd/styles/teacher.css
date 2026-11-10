@@ -15,7 +15,7 @@
     gap: 8px;
 }
 
-.grade-field select, .grade-select {
+.grade-field select, .grade-input {
     width: 100%;
     padding: 9px 10px;
     border: 1px solid #ccc;
@@ -44,7 +44,7 @@
     overflow-wrap: anywhere;
 }
 
-.grade-select {
+.grade-input {
     box-sizing: border-box;
     width: 100%;
     max-width: 100%;

@@ -1,4 +1,3 @@
-
 /* =========================================
    ARCHERSHUB 2.0 — ACCOUNT MANAGEMENT
    Reads and writes user-data
@@ -11,7 +10,7 @@
     const API_URL = "/api/account-management";
     const scriptURL = document.currentScript?.src ||
         new URL("admin/scripts.js", window.location.href).href;
-    const DATA_URL = new URL("../user-data.txt", scriptURL).href;
+    const DATA_URL = new URL("../views/admin/account-management-data.txt", scriptURL).href;
 
     const today = () => {
         const date = new Date();
@@ -61,15 +60,9 @@
             timelineEvents: []
         };
 
-        const isMobile = () =>
-            window.matchMedia("(max-width: 700px)").matches;
-
+        const isMobile = () => window.matchMedia("(max-width: 700px)").matches;
         const cleanId = value => String(value ?? "").trim();
-
-        const findAccount = id =>
-            accounts.find(account =>
-                cleanId(account.id) === cleanId(id)
-            ) || null;
+        const findAccount = id => accounts.find(account => cleanId(account.id) === cleanId(id)) || null;
 
         function element(tag, className = "", text = "") {
             const node = document.createElement(tag);
@@ -101,21 +94,10 @@
         ========================================= */
 
         function getNameParts(account = {}) {
-            let firstName = String(
-                account.firstName || ""
-            ).trim();
-
-            let middleName = String(
-                account.middleName || ""
-            ).trim();
-
-            let surname = String(
-                account.surname || ""
-            ).trim();
-
-            const fullName = String(
-                account.name || ""
-            ).trim();
+            let firstName = String(account.firstName || "").trim();
+            let middleName = String(account.middleName || "").trim();
+            let surname = String(account.surname || "").trim();
+            const fullName = String(account.name || "").trim();
 
             /*
              * If firstName contains the same complete name
@@ -134,15 +116,8 @@
             /*
              * Normal case: use the separate fields.
              */
-            if (
-                (firstName || middleName || surname) &&
-                !combinedLegacyFirstName
-            ) {
-                return {
-                    firstName,
-                    middleName,
-                    surname
-                };
+            if ((firstName || middleName || surname) && !combinedLegacyFirstName) {
+                return { firstName, middleName, surname };
             }
 
             /*
@@ -198,37 +173,23 @@
         }
 
         function displayName(account = {}) {
-            const parts = [
-                account.firstName,
-                account.middleName,
-                account.surname
-            ]
+            const parts = [ account.firstName, account.middleName, account.surname]
                 .map(value => String(value || "").trim())
                 .filter(Boolean);
 
-            return parts.join(" ") ||
-                String(account.name || "Unnamed account");
+            return parts.join(" ") || String(account.name || "Unnamed account");
         }
 
         function currentNameParts() {
-            const firstName =
-                fields.firstName.value.trim();
-
-            const middleName =
-                fields.middleName.value.trim();
-
-            const surname =
-                fields.surname.value.trim();
+            const firstName = fields.firstName.value.trim();
+            const middleName = fields.middleName.value.trim();
+            const surname = fields.surname.value.trim();
 
             return {
                 firstName,
                 middleName,
                 surname,
-                name: [
-                    firstName,
-                    middleName,
-                    surname
-                ].filter(Boolean).join(" ")
+                name: [firstName, middleName, surname].filter(Boolean).join(" ")
             };
         }
 
@@ -251,19 +212,11 @@
                 .map(line => line.trim())
                 .filter(Boolean)
                 .map(line => {
-                    const match = line.match(
-                        /^(\d{4}-\d{2}-\d{2})\s*(?:—|–|-)\s*(.*)$/
-                    );
+                    const match = line.match(/^(\d{4}-\d{2}-\d{2})\s*(?:—|–|-)\s*(.*)$/);
 
                     return match
-                        ? {
-                            date: match[1],
-                            event: match[2].trim()
-                        }
-                        : {
-                            date: "",
-                            event: line
-                        };
+                        ? {date: match[1], event: match[2].trim()}
+                        : {date: "", event: line};
                 });
         }
 
@@ -279,18 +232,13 @@
                     if (!a.date && b.date) return 1;
                     if (a.date && !b.date) return -1;
 
-                    return a.date.localeCompare(b.date) ||
-                        a.index - b.index;
+                    return a.date.localeCompare(b.date) || a.index - b.index;
                 })
-                .map(({ date, event }) => ({
-                    date,
-                    event
-                }));
+                .map(({ date, event }) => ({date, event}));
         }
 
         function editor(which) {
-            const prefix =
-                which === "mobile" ? "ac-m-" : "ac-";
+            const prefix = which === "mobile" ? "ac-m-" : "ac-";
 
             return {
                 createdDate: $(prefix + "created"),
@@ -308,13 +256,8 @@
             return Array.from(
                 box.querySelectorAll(".ac-event-row")
             ).map(row => ({
-                date: row.querySelector(
-                    "[data-event-date]"
-                )?.value || "",
-
-                event: row.querySelector(
-                    "[data-event-text]"
-                )?.value.trim() || ""
+                date: row.querySelector("[data-event-date]")?.value || "",
+                event: row.querySelector("[data-event-text]")?.value.trim() || ""
             }));
         }
 
@@ -322,18 +265,15 @@
             const inputs = editor(which);
 
             if (inputs.createdDate) {
-                other.createdDate =
-                    inputs.createdDate.value || "";
+                other.createdDate = inputs.createdDate.value || "";
             }
 
             if (inputs.contactNumber) {
-                other.contactNumber =
-                    inputs.contactNumber.value.trim();
+                other.contactNumber = inputs.contactNumber.value.trim();
             }
 
             if (inputs.address) {
-                other.address =
-                    inputs.address.value.trim();
+                other.address = inputs.address.value.trim();
             }
 
             other.timelineEvents = readTimeline(which);
@@ -346,9 +286,7 @@
 
             box.replaceChildren();
 
-            const events = sortTimeline(
-                other.timelineEvents
-            );
+            const events = sortTimeline(other.timelineEvents);
 
             if (!events.length) {
                 box.append(
@@ -361,10 +299,7 @@
             }
 
             events.forEach((item, index) => {
-                const row = element(
-                    "div",
-                    "ac-event-row"
-                );
+                const row = element("div", "ac-event-row");
 
                 const date = document.createElement("input");
                 date.type = "date";
@@ -374,45 +309,25 @@
                 date.setAttribute("aria-label", "Event date");
                 date.setAttribute("form", "ac-form");
 
-                const description =
-                    document.createElement("input");
-
+                const description = document.createElement("input");
                 description.type = "text";
                 description.value = item.event;
                 description.placeholder = "Describe the event";
                 description.dataset.eventText = "true";
                 description.dataset.editor = which;
 
-                description.setAttribute(
-                    "aria-label",
-                    "Timeline event"
-                );
+                description.setAttribute("aria-label", "Timeline event");
+                description.setAttribute("form", "ac-form");
 
-                description.setAttribute(
-                    "form",
-                    "ac-form"
-                );
-
-                const remove = element(
-                    "button",
-                    "ac-event-remove",
-                    "×"
-                );
-
+                const remove = element("button", "ac-event-remove", "×");
                 remove.type = "button";
                 remove.title = "Remove event";
-
-                remove.setAttribute(
-                    "aria-label",
-                    "Remove timeline event"
-                );
+                remove.setAttribute("aria-label", "Remove timeline event");
 
                 remove.addEventListener("click", () => {
                     readOther(which);
 
-                    const sorted = sortTimeline(
-                        other.timelineEvents
-                    );
+                    const sorted = sortTimeline(other.timelineEvents);
 
                     sorted.splice(index, 1);
 
@@ -432,14 +347,9 @@
 
                 if (!inputs.createdDate) return;
 
-                inputs.createdDate.value =
-                    other.createdDate || today();
-
-                inputs.contactNumber.value =
-                    other.contactNumber || "";
-
-                inputs.address.value =
-                    other.address || "";
+                inputs.createdDate.value = other.createdDate || today();
+                inputs.contactNumber.value = other.contactNumber || "";
+                inputs.address.value = other.address || "";
 
                 renderTimeline(which);
             });
@@ -450,9 +360,7 @@
                 createdDate: account.createdDate || today(),
                 contactNumber: account.contactNumber || "",
                 address: account.address || "",
-                timelineEvents: sortTimeline(
-                    getTimeline(account)
-                )
+                timelineEvents: sortTimeline(getTimeline(account))
             };
 
             renderOtherEditors();
@@ -469,22 +377,15 @@
 
             const current = editId !== null
                 ? findAccount(editId)
-                : (
-                    account.id
-                        ? findAccount(account.id)
-                        : null
-                );
+                : (account.id ? findAccount(account.id) : null);
 
             const existing = Boolean(current);
-
-            const isAdminAccount =
-                existing && current.type === "Admin";
+            const isAdminAccount = existing && current.type === "Admin";
 
             fields.type.disabled = isAdminAccount;
 
             if (adminOption) {
-                adminOption.disabled =
-                    existing && !isAdminAccount;
+                adminOption.disabled = existing && !isAdminAccount;
             }
 
             const note = $("ac-type-note");
@@ -499,10 +400,7 @@
         }
 
         function updateSaveLabel() {
-            saveButton.textContent =
-                findAccount(idInput.value)
-                    ? "Edit"
-                    : "Create";
+            saveButton.textContent = findAccount(idInput.value) ? "Edit" : "Create";
         }
 
         /* =========================================
@@ -519,6 +417,7 @@
         function clearRelatedView() {
             activeView = "";
 
+            form.hidden = false;
             relatedPanel.hidden = true;
             relatedContent.hidden = false;
             otherEditor.hidden = true;
@@ -527,11 +426,7 @@
             root.querySelectorAll("[data-view]")
                 .forEach(button => {
                     button.classList.remove("active");
-
-                    button.setAttribute(
-                        "aria-pressed",
-                        "false"
-                    );
+                    button.setAttribute("aria-pressed", "false");
                 });
         }
 
@@ -546,24 +441,12 @@
             const nameParts = getNameParts(account);
 
             fields.id.value = account.id || "";
-
-            fields.firstName.value =
-                nameParts.firstName;
-
-            fields.middleName.value =
-                nameParts.middleName;
-
-            fields.surname.value =
-                nameParts.surname;
-
-            fields.email.value =
-                account.email || "";
-
-            fields.type.value =
-                account.type || "";
-
-            fields.status.value =
-                account.status || "";
+            fields.firstName.value = nameParts.firstName;
+            fields.middleName.value = nameParts.middleName;
+            fields.surname.value = nameParts.surname;
+            fields.email.value = account.email || "";
+            fields.type.value = account.type || "";
+            fields.status.value = account.status || "";
 
             Object.values(fields).forEach(field => {
                 field.removeAttribute("aria-invalid");
@@ -596,9 +479,7 @@
             const headerRow = document.createElement("tr");
 
             columns.forEach(column => {
-                headerRow.append(
-                    element("th", "", column.label)
-                );
+                headerRow.append(element("th", "", column.label));
             });
 
             thead.append(headerRow);
@@ -617,9 +498,7 @@
                             "",
                             value === undefined ||
                             value === null ||
-                            value === ""
-                                ? "—"
-                                : value
+                            value === "" ? "—" : value
                         )
                     );
                 });
@@ -665,13 +544,9 @@
             relatedTitle.textContent =
                 view === "enlistment"
                     ? "Enlistment"
-                    : view === "grade"
-                        ? "Grade"
-                        : "Other Information";
+                    : view === "grade" ? "Grade" : "Other Information";
 
-            relatedLabel.textContent =
-                `${displayName(account)} · ${account.id}`;
-
+            relatedLabel.textContent = `${displayName(account)} · ${account.id}`;
             relatedContent.hidden = view === "other";
             otherEditor.hidden = view !== "other";
 
@@ -723,10 +598,7 @@
                     `Select ${displayName(account)}, ID ${account.id}`
                 );
 
-                if (
-                    editId !== null &&
-                    cleanId(account.id) === cleanId(editId)
-                ) {
+                if (editId !== null && cleanId(account.id) === cleanId(editId)) {
                     item.classList.add("selected");
                     item.setAttribute("aria-current", "true");
                 }
@@ -818,10 +690,7 @@
                 return;
             }
 
-            if (
-                editId === null ||
-                cleanId(editId) !== cleanId(account.id)
-            ) {
+            if (editId === null || cleanId(editId) !== cleanId(account.id)) {
                 editId = account.id;
                 fillForm(account);
                 renderList();
@@ -830,19 +699,17 @@
             }
 
             activeView = view;
-            list.hidden = true;
+
+            form.hidden = true;
             relatedPanel.hidden = false;
+            list.hidden = false;
 
             root.querySelectorAll("[data-view]")
                 .forEach(button => {
                     const active = button.dataset.view === view;
 
                     button.classList.toggle("active", active);
-
-                    button.setAttribute(
-                        "aria-pressed",
-                        String(active)
-                    );
+                    button.setAttribute("aria-pressed", String(active));
                 });
 
             showRelated(view, account);
@@ -861,8 +728,7 @@
             renderList();
             setMobileDetail(false);
 
-            const detailScroll =
-                root.querySelector(".ac-detail-scroll");
+            const detailScroll = root.querySelector(".ac-detail-scroll");
 
             if (detailScroll) {
                 detailScroll.scrollTop = 0;
@@ -878,8 +744,7 @@
             renderList();
             setMobileDetail(true);
 
-            const detailScroll =
-                root.querySelector(".ac-detail-scroll");
+            const detailScroll = root.querySelector(".ac-detail-scroll");
 
             if (detailScroll) {
                 detailScroll.scrollTop = 0;
@@ -953,13 +818,9 @@
 
             const data = await response.json().catch(() => ({}));
 
-            if (
-                !response.ok ||
-                !Array.isArray(data.accounts)
-            ) {
+            if (!response.ok || !Array.isArray(data.accounts)) {
                 throw new Error(
-                    data.error ||
-                    `Save failed (HTTP ${response.status}).`
+                    data.error || `Save failed (HTTP ${response.status}).`
                 );
             }
 
@@ -1004,10 +865,7 @@
             }
 
             if (!fields.email.checkValidity()) {
-                fields.email.setAttribute(
-                    "aria-invalid",
-                    "true"
-                );
+                fields.email.setAttribute("aria-invalid", "true");
 
                 alert("Enter a valid email address.");
 
@@ -1035,19 +893,12 @@
                     ? target.value || ""
                     : target.value.trim();
 
-            } else if (
-                target.matches("[data-event-date], [data-event-text]")
-            ) {
+            } else if (target.matches("[data-event-date], [data-event-text]")) {
                 other.timelineEvents = readTimeline(which);
             }
 
-            if (
-                target.matches("[data-event-date]") &&
-                event.type === "change"
-            ) {
-                other.timelineEvents = sortTimeline(
-                    readTimeline(which)
-                );
+            if (target.matches("[data-event-date]") && event.type === "change") {
+                other.timelineEvents = sortTimeline(readTimeline(which));
 
                 renderTimeline(which);
             }
@@ -1111,18 +962,13 @@
 
             const selectedIndex = editId === null
                 ? -1
-                : accounts.findIndex(account =>
-                    cleanId(account.id) === cleanId(editId)
-                );
+                : accounts.findIndex(account => cleanId(account.id) === cleanId(editId));
 
             const enteredIndex = accounts.findIndex(account =>
                 cleanId(account.id) === newId
             );
 
-            if (
-                enteredIndex >= 0 &&
-                enteredIndex !== selectedIndex
-            ) {
+            if (enteredIndex >= 0 && enteredIndex !== selectedIndex) {
                 alert(
                     "This ID already exists. Select that account from the list before editing it."
                 );
@@ -1133,49 +979,29 @@
                 return;
             }
 
-            const oldIndex = selectedIndex >= 0 &&
-                cleanId(accounts[selectedIndex].id) === newId
+            const oldIndex = selectedIndex >= 0 && cleanId(accounts[selectedIndex].id) === newId
                     ? selectedIndex
                     : -1;
 
-            const oldAccount =
-                oldIndex >= 0 ? accounts[oldIndex] : null;
+            const oldAccount = oldIndex >= 0 ? accounts[oldIndex] : null;
 
             // Existing Admin accounts cannot change type.
             // Existing non-Admin accounts cannot be promoted to Admin.
             // New accounts may be created as Admin.
-            if (
-                oldAccount &&
-                oldAccount.type === "Admin" &&
-                fields.type.value !== "Admin"
-            ) {
-                alert(
-                    "The account type of an existing Admin cannot be changed."
-                );
+            if (oldAccount && oldAccount.type === "Admin" && fields.type.value !== "Admin") {
+                alert("The account type of an existing Admin cannot be changed.");
                 return;
             }
 
-            if (
-                oldAccount &&
-                oldAccount.type !== "Admin" &&
-                fields.type.value === "Admin"
-            ) {
-                alert(
-                    "An existing account cannot be changed to Admin."
-                );
+            if (oldAccount && oldAccount.type !== "Admin" && fields.type.value === "Admin") {
+                alert("An existing account cannot be changed to Admin.");
 
                 fields.type.focus();
                 return;
             }
 
-            if (
-                selectedIndex >= 0 &&
-                accounts[selectedIndex].type === "Admin" &&
-                newId !== cleanId(accounts[selectedIndex].id)
-            ) {
-                alert(
-                    "The ID of an existing Admin account cannot be changed here."
-                );
+            if (selectedIndex >= 0 && accounts[selectedIndex].type === "Admin" && newId !== cleanId(accounts[selectedIndex].id)) {
+                alert("The ID of an existing Admin account cannot be changed here.");
 
                 fields.id.value = accounts[selectedIndex].id;
                 fields.id.focus();
@@ -1243,17 +1069,13 @@
                 // On mobile, return to the account-list screen.
                 resetSelection();
 
-                alert(
-                    oldIndex < 0
-                        ? "Account created and saved to the TXT file."
-                        : "Account updated and saved to the TXT file."
+                alert(oldIndex < 0
+                    ? "Account created and saved to the TXT file."
+                    : "Account updated and saved to the TXT file."
                 );
 
             } catch (error) {
-                console.error(
-                    "Account Management save error:",
-                    error
-                );
+                console.error("Account Management save error:", error);
 
                 alert(
                     "Could not save the TXT file. " +
@@ -1267,10 +1089,7 @@
                 updateSaveLabel();
 
                 if (saveButton.textContent === "Saving…") {
-                    saveButton.textContent =
-                        findAccount(idInput.value)
-                            ? "Edit"
-                            : "Create";
+                    saveButton.textContent =findAccount(idInput.value) ? "Edit" : "Create";
                 }
             }
         });
@@ -1279,25 +1098,10 @@
            BUTTON EVENTS
         ========================================= */
 
-        $("ac-new").addEventListener(
-            "click",
-            newAccount
-        );
-
-        $("ac-reset").addEventListener(
-            "click",
-            newAccount
-        );
-
-        $("ac-back").addEventListener(
-            "click",
-            backToList
-        );
-
-        $("ac-related-back").addEventListener(
-            "click",
-            clearRelatedView
-        );
+        $("ac-new").addEventListener("click", newAccount);
+        $("ac-reset").addEventListener("click", newAccount);
+        $("ac-back").addEventListener("click", backToList);
+        $("ac-related-back").addEventListener("click", clearRelatedView);
 
         root.querySelectorAll("[data-view]")
             .forEach(button => {
@@ -1321,18 +1125,13 @@
 
             renderList();
 
-            fillForm({
-                createdDate: today()
-            });
+            fillForm({createdDate: today()});
 
             clearRelatedView();
             setMobileDetail(false);
 
         } catch (error) {
-            console.error(
-                "Account data loading error:",
-                error
-            );
+            console.error("Account data loading error:", error);
 
             count.textContent = "Unavailable";
 

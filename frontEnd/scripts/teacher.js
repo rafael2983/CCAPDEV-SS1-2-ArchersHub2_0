@@ -2,18 +2,6 @@
 // Grade Encoding - Frontend Mock Data
 // ========================================
 
-const GRADE_OPTIONS = [
-    "4.0",
-    "3.5",
-    "3.0",
-    "2.5",
-    "2.0",
-    "1.5",
-    "1.0",
-    "fail",
-    "pass"
-];
-
 // Courses and their available sections
 const MOCK_COURSES = [
     { code: "CCPROG3", sections: ["X05", "SS1"] },
@@ -135,33 +123,26 @@ function initGradeEncoding() {
             nameCell.textContent = student.name;
 
             const gradeCell = document.createElement("td");
-            const gradeSelect = document.createElement("select");
+            const gradeInput = document.createElement("input");
 
-            gradeSelect.className = "grade-select";
-            gradeSelect.setAttribute(
+            gradeInput.type = "text";
+            gradeInput.className = "grade-input";
+            gradeInput.placeholder = "Enter grade";
+            
+            gradeInput.setAttribute(
                 "aria-label",
                 `Grade for ${student.name}`
             );
 
-            gradeSelect.add(
-                new Option("-- Select grade --", "")
-            );
-
-            GRADE_OPTIONS.forEach(grade => {
-                gradeSelect.add(
-                    new Option(grade, grade)
-                );
-            });
-
             // Restore temporarily saved grade
             const savedGrade = MOCK_GRADES[enrollmentKey]?.[student.id] || "";
-            gradeSelect.value = savedGrade;
+            gradeInput.value = savedGrade;
 
-            gradeSelect.addEventListener("change", () => {
+            gradeInput.addEventListener("input", () => {
                 status.textContent = "Unsaved grade changes.";
             });
 
-            gradeCell.appendChild(gradeSelect);
+            gradeCell.appendChild(gradeInput);
 
             row.append(idCell, nameCell, gradeCell);
             studentBody.appendChild(row);
@@ -258,7 +239,7 @@ function initGradeEncoding() {
 
         rows.forEach(row => {
             const studentId = row.dataset.studentId;
-            const grade = row.querySelector(".grade-select").value;
+            const grade = row.querySelector(".grade-input").value.trim();
 
             if (grade !== "") {
                 MOCK_GRADES[enrollmentKey][studentId] = grade;

@@ -29,3 +29,8 @@ function e(?string $text): string
 {
     return htmlspecialchars($text ?? '', ENT_QUOTES, 'UTF-8');
 }
+// Builds a link to a static file (CSS, JS, images) under any subfolder.
+function asset(string $path): string
+{
+    return config()['base_url'] . '/' . ltrim($path, '/');
+}

@@ -2,6 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="<?= asset('frontEnd/styles/style.css') ?>">
     <title><?= e($title ?? 'ArchersHub') ?></title>
 </head>
 <body>
