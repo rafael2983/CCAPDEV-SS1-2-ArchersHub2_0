@@ -5,6 +5,7 @@ require __DIR__ . '/backEnd/core/helpers.php';
 require __DIR__ . '/backEnd/core/Router.php';
 require __DIR__ . '/backEnd/controllers/HomeController.php';
 require __DIR__ . '/backEnd/controllers/AuthController.php';
+require __DIR__ . '/backEnd/core/menu.php';
 
 $router = new Router();
 $router->get('home', [new HomeController(), 'index']);

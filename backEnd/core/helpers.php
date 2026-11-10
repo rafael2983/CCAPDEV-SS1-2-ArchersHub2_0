@@ -34,3 +34,11 @@ function asset(string $path): string
 {
     return config()['base_url'] . '/' . ltrim($path, '/');
 }
+
+// Sends visitors who aren't logged in to the login page.
+function require_login(): void
+{
+    if (empty($_SESSION['user'])) {
+        redirect('login');
+    }
+}
