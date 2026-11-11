@@ -1,104 +1,115 @@
-ArchersHub 2.0
-Setup
+# ArchersHub 2.0
 
-These steps work on Windows, macOS, and Linux. Where commands differ, each OS is listed.
+LAMP stack (Linux, Apache, MySQL/MariaDB, PHP) using the MVC pattern.
 
-1. Requirements
+## Setup (local)
 
-Node.js (LTS)
+### 1. Requirements
+- Apache 2.4
+- PHP 8 with the PDO MySQL driver
+- MySQL 8 or MariaDB
 
-Windows / macOS: download the LTS installer from nodejs.org.
-Linux: install with nvm (nvm install --lts). The version in apt is often too old.
+| OS | How to get them |
+|---|---|
+| Linux (Ubuntu / Mint) | `sudo apt install apache2 php libapache2-mod-php php-mysql mysql-server` |
+| Windows | Install [XAMPP](https://www.apachefriends.org) (Apache, PHP, and MariaDB in one installer) |
+| macOS | Install MAMP, or use Homebrew |
 
-Check it worked (open a new terminal first):
+### 2. Serve the project folder
+The app must be reachable under a folder name, for example `http://localhost/archershub/`.
 
-bash
-node -v
-npm -v
+- **Windows (XAMPP) / macOS (MAMP):** put the project folder inside `htdocs`. The URL is `http://localhost/<folder-name>/`.
+- **Linux:** create an Apache alias so the project can stay where you cloned it:
 
-MySQL 8
+```bash
+sudo nano /etc/apache2/conf-available/archershub.conf
+```
 
-Windows: MySQL Installer.
-macOS: brew install mysql, then brew services start mysql.
-Linux (Ubuntu / Mint): sudo apt install mysql-server, then sudo systemctl start mysql.
+```apache
+Alias /archershub /full/path/to/the/project
 
-2. Install backend dependencies
-bash
-cd backEnd
-npm install
+<Directory /full/path/to/the/project>
+    Options Indexes FollowSymLinks
+    AllowOverride All
+    Require all granted
+</Directory>
+```
 
-3. Environment variables
+```bash
+chmod o+x /home/<your-username>
+sudo a2enconf archershub
+sudo systemctl restart apache2
+```
 
-Copy the template to a real .env file in the project root (same folder as archershub_query.sql):
+The `chmod` lets Apache enter your home folder. Without it you get a `403 Forbidden`.
 
-OS	Command
-Windows (Command Prompt)	copy .env.example .env
-Windows (PowerShell / Git Bash), macOS, Linux	cp .env.example .env
+### 3. Configuration
+Copy the template to a real config file:
 
-Then open .env and fill in your own values:
+| OS | Command |
+|---|---|
+| Windows (Command Prompt) | `copy backEnd\config\config.example.php backEnd\config\config.php` |
+| Windows (PowerShell / Git Bash), macOS, Linux | `cp backEnd/config/config.example.php backEnd/config/config.php` |
 
-PORT=3000
-DB_HOST=127.0.0.1
-DB_PORT=3306
-DB_USER=<your mysql user>
-DB_PASSWORD=<your mysql password>
-DB_NAME=archershub
+Then open `backEnd/config/config.php` and fill in your own values:
 
-.env is ignored by git, so each person uses their own credentials.
+| Setting | What it is |
+|---|---|
+| `base_url` | The folder path from the URL, for example `/archershub` |
+| `db_host` | Usually `127.0.0.1` |
+| `db_port` | Usually `3306` |
+| `db_name` | `archershub` |
+| `db_user` | Your MySQL user (XAMPP default: `root`) |
+| `db_pass` | Your MySQL password (XAMPP default: empty) |
 
-4. Create the database
+`config.php` is ignored by git, so each person uses their own values.
 
+### 4. Create the database
 Open the MySQL shell:
 
-OS	Command
-Windows	Open MySQL Command Line Client from the Start menu, or run mysql -u root -p
-macOS	mysql -u root -p
-Linux	sudo mysql
+| OS | How |
+|---|---|
+| Linux | `sudo mysql` |
+| Windows (XAMPP) | XAMPP Control Panel, click **Shell**, then `mysql -u root` |
+| macOS | `mysql -u root -p` |
 
-Inside the MySQL shell, load the schema. Use the full path to the file, with forward slashes (this works on Windows too):
+Load the schema, using the full path to the file with forward slashes:
 
-sql
+```sql
 SOURCE /full/path/to/archershub_query.sql;
+```
 
-Check that it worked:
+(In XAMPP you can also use phpMyAdmin: **Import**, choose `archershub_query.sql`.)
 
-sql
-USE archershub;
-SHOW TABLES;
+On Linux, the MySQL `root` user often cannot log in from PHP. Create a dedicated user and put its details in `config.php`:
 
-Which MySQL user goes in .env?
-
-Windows / macOS: you can usually use root and the password you set.
-Linux: root often uses socket authentication and cannot log in from Node ("Access denied"). Create a dedicated user in the MySQL shell instead:
+```sql
 CREATE USER 'your_user'@'localhost' IDENTIFIED BY 'your_password';
 GRANT ALL PRIVILEGES ON archershub.* TO 'your_user'@'localhost';
 FLUSH PRIVILEGES;
+```
 
-Then use your_user and your_password in .env. (Any OS can use this approach if you prefer not to use root.)
+### 5. Add test accounts
+The schema does not insert any data, so add a college, a program, and a few accounts. Passwords are stored as plain text for this phase (hashing comes later).
 
-5. Add a test user
-
-The schema does not insert any users, and passwords must be bcrypt hashes. Generate one (same command on every OS):
-cd backEnd
-node -e "require('bcrypt').hash('your_test_password', 10).then(console.log)"
-
-Copy the line it prints (it starts with $2b$10$). Then, in the MySQL shell:
-
-sql
+```sql
 USE archershub;
+
+INSERT INTO college (name) VALUES ('College of Computer Studies');
+INSERT INTO program (college_id, name) VALUES (LAST_INSERT_ID(), 'BS Computer Science');
+
 INSERT INTO users (user_id, email, password_hash, role, first_name, last_name)
-VALUES (1, 'test@example.com', '<paste hash>', 'Admin', 'Test', 'User');
+VALUES (1, 'admin@example.com', 'admin1234', 'Admin', 'Test', 'Admin');
 
-Note: paste hash means the printed line when using the node command
+INSERT INTO users (user_id, email, password_hash, role, first_name, last_name)
+VALUES (12345678, 'student@example.com', 'student1234', 'Student', 'Test', 'Student');
 
-Keep the quotes around the email and the hash.
+INSERT INTO student (user_id, program_id, academic_status, campus)
+VALUES (12345678, (SELECT program_id FROM program WHERE name = 'BS Computer Science'), 'Active', 'Manila');
+```
 
-6. Run the backend
-bash
-cd backEnd
-npm run dev
+Run the college and program lines one after the other, with nothing in between. To test the other roles, add more rows to `users` with the role `Teacher`, `APO`, or `Provost` (those don't need a `student` row).
 
-Expected output:
-
-Sequelize connected to MySQL
-ArchersHub API running at http://localhost:3000
+### 6. Run
+Open `http://localhost/<folder-name>/`. You are sent to the login page. Log in with either the email or the user ID, for example `admin@example.com` or `12345678`, and the password from step 5.
+`frontEnd/scripts/nav.js` for the hamburger menu, dark mode, and filter panel
