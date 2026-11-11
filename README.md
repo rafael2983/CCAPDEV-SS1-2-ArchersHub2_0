@@ -3,21 +3,6 @@
 A student portal for enlistment, schedules, records, organizations and announcements.
 Built with **PHP, MySQL and Apache** (LAMP) using the **MVC** pattern.
 
-## What works right now
-
-| Feature | Status |
-|---|---|
-| Login with email **or** user ID, logout | Working |
-| Role-based sidebar (Student, Teacher, APO, Provost, Admin) | Working |
-| Blocking pages a role should not see (shows "Access denied") | Working |
-| Home dashboard | Working (layout only) |
-| Profile: view info, edit nickname, address and contact number | Working |
-| Enlistment, Add/Drop, Records, Calendar, and the other sidebar pages | Layout only, not connected to the database yet |
-| Forgot password | Layout only, no email is sent |
-
-Passwords are stored as plain text for this phase. Hashing comes later.
-
----
 
 ## Quick start
 
