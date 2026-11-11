@@ -15,6 +15,8 @@ $allowed = role_access($user['role']);
     <link rel="stylesheet" href="<?= asset('frontEnd/styles/student.css') ?>">
     <link rel="stylesheet" href="<?= asset('frontEnd/styles/teacher.css') ?>">
     <link rel="stylesheet" href="<?= asset('frontEnd/styles/admin.css') ?>">
+    <link rel="stylesheet" href="<?= asset('frontEnd/styles/general.css') ?>">
+    <link rel="stylesheet" href="<?= asset('frontEnd/styles/office.css') ?>">
     <script src="<?= asset('frontEnd/scripts/nav.js') ?>" defer></script>
 </head>
 

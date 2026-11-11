@@ -51,4 +51,12 @@ document.addEventListener("DOMContentLoaded", () => {
             filterBtn.setAttribute("aria-expanded", String(wasHidden));
         });
     }
+
+    // Server messages fade out like the other toasts
+    document.querySelectorAll(".toast").forEach(toast => {
+        setTimeout(() => {
+            toast.classList.add("hide");
+            setTimeout(() => toast.remove(), 300);
+        }, 3200);
+    });
 });

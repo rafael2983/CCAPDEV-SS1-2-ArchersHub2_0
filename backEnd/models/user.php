@@ -48,4 +48,13 @@ class User
         $stmt->execute([$userId]);
         return $stmt->fetch() ?: null;
     }
+
+    // Saves the fields a user can edit themselves.
+    public static function updateInfo(int $userId, ?string $nickname, ?string $address, ?string $contact): void
+    {
+        $stmt = Database::connection()->prepare(
+            "UPDATE users SET nickname = ?, address = ?, contact_number = ? WHERE user_id = ?"
+        );
+        $stmt->execute([$nickname, $address, $contact, $userId]);
+    }
 }

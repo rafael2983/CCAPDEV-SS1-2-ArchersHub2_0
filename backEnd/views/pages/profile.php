@@ -49,21 +49,40 @@
     <section class="card" id="pf-self-panel" hidden>
         <h2>Change self info</h2>
 
-        <label for="pf-nickname">Nickname</label>
-        <input type="text" id="pf-nickname">
+        <form method="POST" action="<?= url('profile-info') ?>">
+            <label for="pf-nickname">Nickname</label>
+            <input type="text" id="pf-nickname" name="nickname" maxlength="100" value="<?= e($profile['nickname']) ?>">
 
-        <label for="pf-address">Address</label>
-        <input type="text" id="pf-address">
+            <label for="pf-address">Address</label>
+            <input type="text" id="pf-address" name="address" maxlength="255" value="<?= e($profile['address']) ?>">
 
-        <label for="pf-contact">Contact number</label>
-        <input type="text" id="pf-contact">
+            <label for="pf-contact">Contact number</label>
+            <input type="text" id="pf-contact" name="contact" maxlength="15" value="<?= e($profile['contact_number']) ?>">
 
-        <div class="enlist-actions">
-            <button class="btn secondary" id="pf-self-cancel" type="button">Cancel</button>
-            <button class="btn primary" id="pf-self-submit" type="button">Save</button>
-        </div>
+            <div class="enlist-actions">
+                <button class="btn secondary" id="pf-self-cancel" type="button">Cancel</button>
+                <button class="btn primary" id="pf-self-submit" type="submit">Save</button>
+            </div>
+        </form>
     </section>
 
 </div>
 
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const passPanel = document.getElementById("pf-password-panel");
+    const selfPanel = document.getElementById("pf-self-panel");
+
+    // Only one side panel is shown at a time.
+    function show(panel) {
+        passPanel.hidden = panel !== passPanel;
+        selfPanel.hidden = panel !== selfPanel;
+    }
+
+    document.getElementById("pf-pass-btn").addEventListener("click", () => show(passPanel));
+    document.getElementById("pf-info-btn").addEventListener("click", () => show(selfPanel));
+    document.getElementById("pf-pass-cancel").addEventListener("click", () => show(null));
+    document.getElementById("pf-self-cancel").addEventListener("click", () => show(null));
+});
+</script>
 <?php require __DIR__ . '/../partials/app_footer.php'; ?>

@@ -42,3 +42,16 @@ function require_login(): void
         redirect('login');
     }
 }
+
+// One-time message shown on the next page (success / error / info).
+function flash(string $type, string $message): void
+{
+    $_SESSION['flash'] = ['type' => $type, 'message' => $message];
+}
+
+function take_flash(): ?array
+{
+    $flash = $_SESSION['flash'] ?? null;
+    unset($_SESSION['flash']);
+    return $flash;
+}

@@ -1,3 +1,4 @@
+
         </main>
 
         <footer class="footer-section">
@@ -7,5 +8,10 @@
 
         <div class="overlay" id="overlay"></div>
     </div>
+    <?php if ($flash = take_flash()): ?>
+    <div class="toast-container" aria-live="polite">
+        <div class="toast <?= e($flash['type']) ?>"><?= e($flash['message']) ?></div>
+    </div>
+    <?php endif; ?>
 </body>
 </html>
