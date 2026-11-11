@@ -30,4 +30,22 @@ class User
         }
         return null;
     }
+        // Profile info for one user. Students also get college, program and campus;
+    // other roles get null for those (LEFT JOIN).
+    public static function profile(int $userId): ?array
+    {
+        $stmt = Database::connection()->prepare(
+            "SELECT u.user_id, u.email, u.first_name, u.last_name, u.nickname, u.address,
+                    u.contact_number, u.account_status,
+                    c.name AS college, p.name AS program, s.campus
+             FROM users u
+             LEFT JOIN student s ON s.user_id = u.user_id
+             LEFT JOIN program p ON p.program_id = s.program_id
+             LEFT JOIN college c ON c.college_id = p.college_id
+             WHERE u.user_id = ?
+             LIMIT 1"
+        );
+        $stmt->execute([$userId]);
+        return $stmt->fetch() ?: null;
+    }
 }
