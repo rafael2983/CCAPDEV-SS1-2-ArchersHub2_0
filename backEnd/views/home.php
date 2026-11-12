@@ -47,9 +47,19 @@ require __DIR__ . '/partials/app_header.php';
                         </tr>
                     </thead>
                     <tbody id="schedule-body">
-                        <tr>
-                            <td colspan="4" class="empty">No classes yet. Enlist in a course to see your schedule here</td>
-                        </tr>
+                        <?php if (!$schedule): ?>
+                            <tr>
+                                <td colspan="4" class="empty">No classes yet. Enlist in a course to see your schedule here</td>
+                            </tr>
+                        <?php endif; ?>
+                        <?php foreach ($schedule as $m): ?>
+                            <tr>
+                                <td><?= e($m['course_code']) ?></td>
+                                <td><?= e($m['section_code']) ?></td>
+                                <td><?= $m['day'] === null ? 'TBA' : e($m['day'] . ' ' . format_time($m['start_time']) . '-' . format_time($m['end_time'])) ?></td>
+                                <td><?= e($m['room'] ?? '-') ?></td>
+                            </tr>
+                        <?php endforeach; ?>
                     </tbody>
                 </table>
             </div>

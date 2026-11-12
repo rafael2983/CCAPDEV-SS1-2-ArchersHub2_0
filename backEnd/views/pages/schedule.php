@@ -6,48 +6,74 @@
 
     <section class="card" id="vs-schedule">
 
-        <div class="schedule-tools">
+        <!-- Pick a term (GET), then switch between the weekly table and the list -->
+        <form method="GET" action="<?= e(index_url()) ?>" class="schedule-tools">
+            <input type="hidden" name="route" value="schedule">
+            <input type="hidden" name="view" value="<?= e($viewMode) ?>">
+
             <label for="vs-term">Term</label>
-            <select id="vs-term">
-                <option value="">Loading terms...</option>
+            <select id="vs-term" name="term">
+                <?php foreach ($terms as $t): ?>
+                    <option value="<?= e((string) $t['term_id']) ?>" <?= (int) $t['term_id'] === $selected ? 'selected' : '' ?>>
+                        AY <?= e($t['school_year']) ?>, Term <?= e((string) $t['term_no']) ?><?= $t['is_current'] ? ' (current)' : '' ?>
+                    </option>
+                <?php endforeach; ?>
             </select>
+            <button class="filter-btn" type="submit">Show</button>
 
-            <!-- Weekly table or plain list -->
             <div class="view-switch" id="vs-view">
-                <button class="view-btn active" data-view="week">Weekly</button>
-                <button class="view-btn" data-view="list">List</button>
+                <a class="view-btn <?= $viewMode === 'week' ? 'active' : '' ?>"
+                   href="<?= e(url('schedule') . '&term=' . $selected . '&view=week') ?>">Weekly</a>
+                <a class="view-btn <?= $viewMode === 'list' ? 'active' : '' ?>"
+                   href="<?= e(url('schedule') . '&term=' . $selected . '&view=list') ?>">List</a>
             </div>
-        </div>
+        </form>
 
-        <!-- Weekly view -->
-        <div class="table-wrap" id="vs-week">
-            <table class="schedule-table">
-                <thead>
-                    <tr>
-                        <th>Time</th>
-                        <th>Mon</th>
-                        <th>Tue</th>
-                        <th>Wed</th>
-                        <th>Thu</th>
-                        <th>Fri</th>
-                        <th>Sat</th>
-                    </tr>
-                </thead>
-                <tbody id="vs-week-body">
-                    <tr><td>7:30 AM</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-                    <tr><td>9:15 AM</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-                    <tr><td>11:00 AM</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-                    <tr><td>1:00 PM</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-                    <tr><td>2:45 PM</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-                    <tr><td>4:30 PM</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-                </tbody>
-            </table>
-        </div>
-
-        <!-- List view -->
-        <ul class="chosen-list" id="vs-list" hidden>
-            <li class="empty">No classes this term.</li>
-        </ul>
+        <?php if ($viewMode === 'week'): ?>
+            <!-- Weekly view -->
+            <div class="table-wrap" id="vs-week">
+                <table class="schedule-table">
+                    <thead>
+                        <tr>
+                            <th>Time</th>
+                            <?php foreach ($days as $day): ?>
+                                <th><?= e($day) ?></th>
+                            <?php endforeach; ?>
+                        </tr>
+                    </thead>
+                    <tbody id="vs-week-body">
+                        <?php if (!$grid): ?>
+                            <tr><td colspan="7" class="empty">No scheduled classes yet.</td></tr>
+                        <?php endif; ?>
+                        <?php foreach ($grid as $row): ?>
+                            <tr>
+                                <td><?= e($row['time']) ?></td>
+                                <?php foreach ($days as $day): ?>
+                                    <?php if ($row['cells'][$day]): ?>
+                                        <td class="filled"><?= implode('<br>', array_map('e', $row['cells'][$day])) ?></td>
+                                    <?php else: ?>
+                                        <td></td>
+                                    <?php endif; ?>
+                                <?php endforeach; ?>
+                            </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+            </div>
+        <?php else: ?>
+            <!-- List view -->
+            <ul class="chosen-list" id="vs-list">
+                <?php if (!$entries): ?>
+                    <li class="empty">No classes this term.</li>
+                <?php endif; ?>
+                <?php foreach ($entries as $en): ?>
+                    <li>
+                        <span><?= e($en['code']) ?> - <?= e($en['title']) ?> (<?= e($en['section']) ?>)</span>
+                        <small><?= $en['slots'] ? implode('<br>', array_map('e', $en['slots'])) : 'TBA' ?></small>
+                    </li>
+                <?php endforeach; ?>
+            </ul>
+        <?php endif; ?>
 
     </section>
 

@@ -2,24 +2,30 @@
 
 <h1 class="page-title">Curriculum Progression</h1>
 
+<?php if (!$hasProgram): ?>
+    <section class="card">
+        <p class="empty">Curriculum progression is only available to students with a program.</p>
+    </section>
+<?php else: ?>
 <div class="curriculum">
 
     <section class="card" id="cp-summary">
         <h2>My progress</h2>
-        <p>Units completed: <span id="cp-done">0</span> of <span id="cp-total">0</span></p>
-        <progress id="cp-bar" value="0" max="100"></progress>
+        <p>Units completed: <span id="cp-done"><?= e((string) $doneUnits) ?></span> of <span id="cp-total"><?= e((string) $totalUnits) ?></span></p>
+        <progress id="cp-bar" value="<?= e((string) $percent) ?>" max="100"></progress>
     </section>
 
     <section class="card" id="cp-courses">
         <h2>Courses</h2>
 
         <!-- Filter by status. Taken / Can take now / Needs a prerequisite -->
-        <div class="view-switch" id="cp-filter">
-            <button class="view-btn active" data-filter="all">All</button>
-            <button class="view-btn" data-filter="taken">Taken</button>
-            <button class="view-btn" data-filter="available">Can take now</button>
-            <button class="view-btn" data-filter="locked">Needs prerequisite</button>
-        </div>
+        <form method="GET" action="<?= e(index_url()) ?>" class="view-switch" id="cp-filter">
+            <input type="hidden" name="route" value="curriculum">
+            <button type="submit" name="status" value=""          class="view-btn <?= $status === ''          ? 'active' : '' ?>">All</button>
+            <button type="submit" name="status" value="taken"     class="view-btn <?= $status === 'taken'     ? 'active' : '' ?>">Taken</button>
+            <button type="submit" name="status" value="available" class="view-btn <?= $status === 'available' ? 'active' : '' ?>">Can take now</button>
+            <button type="submit" name="status" value="locked"    class="view-btn <?= $status === 'locked'    ? 'active' : '' ?>">Needs prerequisite</button>
+        </form>
 
         <!-- Highest requirement first: Majors, then GEs -->
         <div class="table-wrap">
@@ -37,62 +43,29 @@
                     </tr>
                 </thead>
                 <tbody id="cp-body">
-                    <tr data-status="taken">
-                        <td>CCPROG1</td>
-                        <td>Introduction to Programming</td>
-                        <td>Major</td>
-                        <td>1</td>
-                        <td>1</td>
-                        <td>3</td>
-                        <td>None</td>
-                        <td>Taken</td>
-                    </tr>
-                    <tr data-status="available">
-                        <td>CCPROG2</td>
-                        <td>Programming 2</td>
-                        <td>Major</td>
-                        <td>1</td>
-                        <td>2</td>
-                        <td>3</td>
-                        <td>CCPROG1</td>
-                        <td>Can take now</td>
-                    </tr>
-                    <tr data-status="locked">
-                        <td>CBAPDEV</td>
-                        <td>Web Application Development</td>
-                        <td>Major</td>
-                        <td>2</td>
-                        <td>1</td>
-                        <td>3</td>
-                        <td>CCPROG2</td>
-                        <td>Needs prerequisite</td>
-                    </tr>
-                    <tr data-status="available">
-                        <td>GEETHIC</td>
-                        <td>Ethics</td>
-                        <td>GE</td>
-                        <td>1</td>
-                        <td>2</td>
-                        <td>3</td>
-                        <td>None</td>
-                        <td>Can take now</td>
-                    </tr>
-                    <tr data-status="taken">
-                        <td>LCLSONE</td>
-                        <td>Lasallian Studies 1</td>
-                        <td>GE</td>
-                        <td>1</td>
-                        <td>1</td>
-                        <td>1</td>
-                        <td>None</td>
-                        <td>Taken</td>
-                    </tr>
+                    <?php
+                    $labels = ['taken' => 'Taken', 'available' => 'Can take now', 'locked' => 'Needs prerequisite'];
+                    foreach ($courses as $c): ?>
+                        <tr data-status="<?= e($c['status']) ?>">
+                            <td><?= e($c['course_code']) ?></td>
+                            <td><?= e($c['title']) ?></td>
+                            <td><?= e($c['category']) ?></td>
+                            <td><?= e((string) $c['year_lvl']) ?></td>
+                            <td><?= e((string) $c['term_no']) ?></td>
+                            <td><?= e((string) $c['units']) ?></td>
+                            <td><?= $c['prereqs'] ? e(implode(', ', $c['prereqs'])) : 'None' ?></td>
+                            <td><?= e($labels[$c['status']]) ?></td>
+                        </tr>
+                    <?php endforeach; ?>
                 </tbody>
             </table>
         </div>
-        <p class="empty" id="cp-empty" hidden>No courses in this group.</p>
+        <?php if (!$courses): ?>
+            <p class="empty" id="cp-empty">No courses in this group.</p>
+        <?php endif; ?>
     </section>
 
 </div>
+<?php endif; ?>
 
 <?php require __DIR__ . '/../partials/app_footer.php'; ?>
