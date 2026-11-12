@@ -101,7 +101,7 @@ class EnlistmentController
         $pending = array_values(array_filter($mine, fn($m) => $m['status'] === 'Pending'));
         $enlisted = array_values(array_filter($mine, fn($m) => $m['status'] === 'Enlisted'));
 
-        view('pages/enlistment', $data + [
+        view('pages/enlistment', array_merge($data, [
             'canChange'     => $periodOpen && $isActive,
             'period'        => $period,
             'periodOpen'    => $periodOpen,
@@ -118,7 +118,7 @@ class EnlistmentController
             'pendingUnits'  => array_sum(array_column($pending, 'units')),
             'days'          => self::DAYS,
             'grid'          => $this->grid($mine),
-        ]);
+        ]));
     }
 
     // POST: save a section as a Pending choice
