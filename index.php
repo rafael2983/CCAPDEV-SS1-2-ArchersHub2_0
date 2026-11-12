@@ -9,6 +9,7 @@ require __DIR__ . '/backEnd/controllers/HomeController.php';
 require __DIR__ . '/backEnd/controllers/AuthController.php';
 require __DIR__ . '/backEnd/controllers/PageController.php';
 require __DIR__ . '/backEnd/controllers/ProfileController.php';
+require __DIR__ . '/backEnd/controllers/RecordsController.php';
 
 $router = new Router();
 
@@ -33,5 +34,6 @@ foreach (menu_items() as $item) {
     $router->get($route, fn() => $pages->show($route));
 }
 $router->get('profile', [new ProfileController(), 'show']);
+$router->get('records', [new RecordsController(), 'index']);
 
 $router->dispatch();
