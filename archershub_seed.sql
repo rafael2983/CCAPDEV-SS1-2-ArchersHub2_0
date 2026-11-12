@@ -40,17 +40,17 @@ SET @dept_it     := (SELECT department_id FROM department WHERE name = 'Informat
 -- ---------------------------------------------------------------------
 -- USERS  (IDs: 1000000x staff, 1000001x teachers, 1230000x students)
 
-INSERT INTO users (user_id, email, password_hash, role, first_name, last_name, nickname, address, contact_number) VALUES
-    (10000001, 'admin@archershub.test',    'Password123', 'Admin',   'Alex',   'Admin',    NULL,    NULL,                      NULL),
-    (10000002, 'provost@archershub.test',  'Password123', 'Provost', 'Maria',  'Santos',   NULL,    NULL,                      NULL),
-    (10000003, 'apo@archershub.test',      'Password123', 'APO',     'Carlo',  'Mendoza',  NULL,    NULL,                      NULL),
-    (10000011, 'elena.cruz@archershub.test',      'Password123', 'Teacher', 'Elena', 'Cruz',     NULL, NULL, NULL),
-    (10000012, 'ramon.bautista@archershub.test',  'Password123', 'Teacher', 'Ramon', 'Bautista', NULL, NULL, NULL),
-    (12300001, 'ana.reyes@archershub.test',       'Password123', 'Student', 'Ana',     'Reyes',   'Ana',    'Taft Avenue, Manila',    '0917 123 4567'),
-    (12300002, 'miguel.torres@archershub.test',   'Password123', 'Student', 'Miguel',  'Torres',  'Migs',   NULL,                     NULL),
-    (12300003, 'sofia.lim@archershub.test',       'Password123', 'Student', 'Sofia',   'Lim',     NULL,     NULL,                     NULL),
-    (12300004, 'daniel.garcia@archershub.test',   'Password123', 'Student', 'Daniel',  'Garcia',  'Dan',    NULL,                     NULL),
-    (12300005, 'isabel.ramos@archershub.test',    'Password123', 'Student', 'Isabel',  'Ramos',   NULL,     NULL,                     NULL);
+INSERT INTO users (user_id, email, password_hash, role, first_name, middle_name, last_name, nickname, address, contact_number) VALUES
+    (10000001, 'admin@archershub.test',           'Password123', 'Admin',   'Alex',     NULL,   'Admin',    NULL,   NULL,                   NULL),
+    (10000002, 'provost@archershub.test',         'Password123', 'Provost', 'Maria',    NULL,   'Santos',   NULL,   NULL,                   NULL),
+    (10000003, 'apo@archershub.test',             'Password123', 'APO',     'Carlo',    NULL,   'Mendoza',  NULL,   NULL,                   NULL),
+    (10000011, 'elena.cruz@archershub.test',      'Password123', 'Teacher', 'Elena',    NULL,   'Cruz',     NULL,   NULL,                   NULL),
+    (10000012, 'ramon.bautista@archershub.test',  'Password123', 'Teacher', 'Ramon',    NULL,   'Bautista', NULL,   NULL,                   NULL),
+    (12300001, 'ana.reyes@archershub.test',       'Password123', 'Student', 'Ana',      NULL,   'Reyes',    'Ana',  'Taft Avenue, Manila',  '0917 123 4567'),
+    (12300002, 'miguel.torres@archershub.test',   'Password123', 'Student', 'Miguel',   NULL,   'Torres',   'Migs', NULL,                   NULL),
+    (12300003, 'sofia.lim@archershub.test',       'Password123', 'Student', 'Sofia',    NULL,   'Lim',      NULL,   NULL,                   NULL),
+    (12300004, 'daniel.garcia@archershub.test',   'Password123', 'Student', 'Daniel',   NULL,   'Garcia',   'Dan',  NULL,                   NULL),
+    (12300005, 'isabel.ramos@archershub.test',    'Password123', 'Student', 'Isabel',   NULL,   'Ramos',    NULL,   NULL,                   NULL);
 
 INSERT INTO admin    (user_id, created_by)            VALUES (10000001, NULL);
 INSERT INTO provost  (user_id)                        VALUES (10000002);
