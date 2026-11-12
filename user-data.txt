@@ -1,0 +1,106 @@
+{
+  "accounts": [
+    {
+      "id": "12208469",
+      "name": "student1",
+      "email": "student1@example.edu",
+      "type": "Student",
+      "status": "Active",
+      "createdDate": "2026-08-01",
+      "address": "Not provided",
+      "contactNumber": "Not provided",
+      "timeline": "2026-08-01 — Account created",
+      "enlistment": [
+        {
+          "course": "CCPROG3",
+          "section": "X05",
+          "term": "AY2026-2027 Term 3",
+          "status": "Enlisted"
+        },
+        {
+          "course": "CCAPDEV",
+          "section": "N24",
+          "term": "AY2026-2027 Term 3",
+          "status": "Enlisted"
+        }
+      ],
+      "grades": [
+        {
+          "course": "CCPROG3",
+          "term": "AY2026-2027 Term 2",
+          "grade": "3.5"
+        },
+        {
+          "course": "CCAPDEV",
+          "term": "AY2026-2027 Term 2",
+          "grade": "3.0"
+        }
+      ]
+    },
+    {
+      "id": "12308468",
+      "name": "student2",
+      "email": "student2@example.edu",
+      "type": "Student",
+      "status": "Active",
+      "createdDate": "2026-08-02",
+      "address": "Not provided",
+      "contactNumber": "Not provided",
+      "timeline": "2026-08-02 — Account created",
+      "enlistment": [
+        {
+          "course": "CCPROG3",
+          "section": "SS1",
+          "term": "AY2026-2027 Term 3",
+          "status": "Enlisted"
+        },
+        {
+          "course": "STADVDB",
+          "section": "S40B",
+          "term": "AY2026-2027 Term 3",
+          "status": "Pending"
+        }
+      ],
+      "grades": [
+        {
+          "course": "CCPROG3",
+          "term": "AY2026-2027 Term 2",
+          "grade": "3.0"
+        }
+      ]
+    },
+    {
+      "id": "12345678",
+      "name": "student3",
+      "email": "student3@example.edu",
+      "type": "Student",
+      "status": "Active",
+      "createdDate": "2026-08-03",
+      "address": "Not provided",
+      "contactNumber": "Not provided",
+      "timeline": "2026-08-03 — Account created",
+      "enlistment": [
+        {
+          "course": "GEETHIC",
+          "section": "XZ08",
+          "term": "AY2026-2027 Term 3",
+          "status": "Enlisted"
+        }
+      ],
+      "grades": []
+    },
+    {
+      "id": "12412312",
+      "name": "student4",
+      "email": "student4@example.edu",
+      "type": "Student",
+      "status": "Active",
+      "createdDate": "2026-08-04",
+      "address": "Not provided",
+      "contactNumber": "Not provided",
+      "timeline": "2026-08-04 — Account created",
+      "enlistment": [],
+      "grades": []
+    }
+  ]
+}

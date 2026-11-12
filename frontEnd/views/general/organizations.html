@@ -1,0 +1,111 @@
+<h1 class="page-title">Organizations</h1>
+
+<div class="organizations">
+
+    <section class="card" id="org-browse">
+        <h2>Browse organizations</h2>
+
+        <label for="org-search">Search</label>
+        <input type="search" id="org-search" placeholder="Search by organization name">
+
+
+        <div class="org-list" id="org-list">
+
+            <article class="card org-card" data-org="1">
+                <h3>La Salle Computer Society</h3>
+                <p>A professional organization dedicated to developing students' knowledge and skills in information
+                    technology, programming, and computer science through workshops, seminars, and collaborative
+                    projects.</p>
+                <button class="row-btn add" data-action="apply">Apply</button>
+            </article>
+
+            <article class="card org-card" data-org="2">
+                <h3>DLSU Pusa</h3>
+                <p>A student-led organization advocating for animal welfare, particularly stray cats around the
+                    university, through feeding initiatives, awareness campaigns, and animal care activities.</p>
+                <button class="row-btn add" data-action="apply">Apply</button>
+            </article>
+
+            <article class="card org-card" data-org="3">
+                <h3>NHK</h3>
+                <p>An organization that promotes Japanese culture, language, traditions, and entertainment through
+                    cultural events, interactive activities, and community engagement.</p>
+                <button class="row-btn add" data-action="apply">Apply</button>
+            </article>
+
+            <article class="card org-card" data-org="4">
+                <h3>DLSU UNICEF</h3>
+                <p>A student organization committed to advocating for children's rights and welfare through volunteer
+                    programs, fundraising activities, awareness campaigns, and initiatives supporting UNICEF's mission.
+                </p>
+                <button class="row-btn add" data-action="apply">Apply</button>
+            </article>
+
+            <article class="card org-card" data-org="5">
+                <h3>DLSU Business Management Society</h3>
+                <p>A professional student organization focused on developing future business leaders through management
+                    workshops, networking opportunities, industry talks, and professional development activities.</p>
+                <button class="row-btn add" data-action="apply">Apply</button>
+            </article>
+
+            <article class="card org-card" data-org="6">
+                <h3>ARCHERS Network</h3>
+                <p>A student organization dedicated to promoting leadership, community involvement, and personal
+                    development through collaborative projects, student initiatives, and campus activities.</p>
+                <button class="row-btn add" data-action="apply">Apply</button>
+            </article>
+
+            <article class="card org-card" data-org="7">
+                <h3>DLSU Green Media Group</h3>
+                <p>A creative organization that encourages students to explore photography, videography, graphic design,
+                    and multimedia storytelling through creative projects and workshops.</p>
+                <button class="row-btn add" data-action="apply">Apply</button>
+            </article>
+
+            <article class="card org-card" data-org="8">
+                <h3>La Salle Debate Society</h3>
+                <p>An organization that cultivates critical thinking, public speaking, research, and argumentation
+                    skills through debate tournaments, training sessions, and intellectual discussions.</p>
+                <button class="row-btn add" data-action="apply">Apply</button>
+            </article>
+
+            <article class="card org-card" data-org="9">
+                <h3>DLSU Peer Tutors Society</h3>
+                <p>A student-led academic organization that promotes collaborative learning by providing peer tutoring,
+                    academic support, review sessions, and educational activities.</p>
+                <button class="row-btn add" data-action="apply">Apply</button>
+            </article>
+
+            <article class="card org-card" data-org="10">
+                <h3>Lasallian Student Volunteers</h3>
+                <p>An organization that encourages social responsibility and community service through outreach
+                    programs, donation drives, environmental initiatives, and volunteer activities.</p>
+                <button class="row-btn add" data-action="apply">Apply</button>
+            </article>
+
+        </div>
+
+        <p class="empty" id="org-empty" hidden>No organizations match your search.</p>
+    </section>
+
+    <section class="card" id="org-applications">
+        <h2>My applications</h2>
+        <div class="table-wrap">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Organization</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="org-app-body">
+                    <tr>
+                        <td colspan="3" class="empty">You have not applied to any organization.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+</div>
