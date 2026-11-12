@@ -42,6 +42,7 @@ CREATE TABLE IF NOT EXISTS users (
     password_hash   VARCHAR(255) NOT NULL,           -- bcrypt hash, never plain text
     role            ENUM('Student','Teacher','APO','Provost','Admin') NOT NULL,
     first_name      VARCHAR(100) NOT NULL,
+    middle_name     VARCHAR(100) NOT NULL,
     last_name       VARCHAR(100) NOT NULL,
     nickname        VARCHAR(100) NULL,
     address         VARCHAR(255) NULL,
