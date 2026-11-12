@@ -19,16 +19,3 @@ function page_info(string $route): ?array
     }
     return null;
 }
-
-// Stops the request unless the logged-in user's role may open this page.
-function require_page_access(string $route): void
-{
-    require_login();
-
-    $page = page_info($route);
-    if ($page === null || !in_array($page['access'], role_access($_SESSION['user']['role']), true)) {
-        http_response_code(403);
-        view('pages/forbidden', ['title' => 'Access denied - ArchersHub', 'active' => '']);
-        exit;
-    }
-}

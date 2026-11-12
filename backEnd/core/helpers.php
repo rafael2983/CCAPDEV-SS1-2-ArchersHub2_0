@@ -55,9 +55,3 @@ function take_flash(): ?array
     unset($_SESSION['flash']);
     return $flash;
 }
-
-// The address GET forms send to (the route goes in a hidden field).
-function index_url(): string
-{
-    return config()['base_url'] . '/index.php';
-}
