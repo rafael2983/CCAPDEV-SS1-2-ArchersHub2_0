@@ -16,6 +16,7 @@ require __DIR__ . '/backEnd/controllers/EnlistmentController.php';
 require __DIR__ . '/backEnd/controllers/AddDropController.php';
 require __DIR__ . '/backEnd/controllers/WithdrawalController.php';
 require __DIR__ . '/backEnd/controllers/SpecialClassController.php';
+require __DIR__ . '/backEnd/controllers/ProgramExchangeController.php';
 
 $router = new Router();
 
@@ -69,5 +70,10 @@ $specialClass = new SpecialClassController();
 $router->get('special-class', [$specialClass, 'index']);
 $router->post('special-class-apply', [$specialClass, 'apply']);
 $router->post('special-class-withdraw', [$specialClass, 'withdraw']);
+
+//Program Exchange
+$router->get('program-exchange', [new ProgramExchangeController(), 'index']);
+$router->post('program-exchange-apply', [new ProgramExchangeController(), 'apply']);
+$router->post('program-exchange-cancel', [new ProgramExchangeController(), 'cancel']);
 
 $router->dispatch();

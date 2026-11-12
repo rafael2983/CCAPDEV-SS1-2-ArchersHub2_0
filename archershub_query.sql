@@ -251,6 +251,7 @@ CREATE TABLE IF NOT EXISTS program_exchange_application (
     application_id     INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     student_id         INT UNSIGNED NOT NULL,
     target_program_id  INT UNSIGNED NOT NULL,
+    reason             VARCHAR(500) NULL,
     status             ENUM('Pending','Approved','Rejected') NOT NULL DEFAULT 'Pending',
     reviewed_by        INT UNSIGNED NULL,
     created_at         TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
