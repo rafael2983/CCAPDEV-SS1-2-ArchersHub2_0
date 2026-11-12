@@ -45,6 +45,24 @@
                         <label for="ac-email">Email <b class="ac-required">*</b></label>
                         <input id="ac-email" name="email" type="email" required autocomplete="email" placeholder="name@example.edu">
                     </div>
+
+                    <div class="ac-field ac-wide">
+                        <div class="ac-name-fields">
+                            <div class="ac-field">
+                                <label for="ac-college">College</label>
+                                <input id="ac-college" name="college" autocomplete="off" placeholder="College" readonly>
+                            </div>
+                            <div class="ac-field">
+                                <label for="ac-program">Program</label>
+                                <input id="ac-program" name="program" autocomplete="off" placeholder="Program" readonly>
+                            </div>
+                            <div class="ac-field">
+                                <label for="ac-campus">Campus</label>
+                                <input id="ac-campus" name="campus" autocomplete="off" placeholder="Campus" readonly>
+                            </div>
+                        </div>
+                    </div>
+                    
                     <div class="ac-field">
                         <label for="ac-type">Account Type <b class="ac-required">*</b></label>
                         <select id="ac-type" name="type" required>
