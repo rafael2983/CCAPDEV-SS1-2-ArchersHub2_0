@@ -7,10 +7,7 @@
 (() => {
     "use strict";
 
-    const API_URL = "/api/account-management";
-    const scriptURL = document.currentScript?.src ||
-        new URL("admin/scripts.js", window.location.href).href;
-    const DATA_URL = new URL("../views/admin/account-management-data.txt", scriptURL).href;
+    const API_URL = "/backEnd/api/users.php";
 
     const today = () => {
         const date = new Date();
@@ -44,6 +41,9 @@
             middleName: $("ac-middle"),
             firstName: $("ac-first"),
             email: $("ac-email"),
+            college: $("ac-college"),
+            program: $("ac-program"),
+            campus: $("ac-campus"),
             type: $("ac-type"),
             status: $("ac-status")
         };
@@ -201,8 +201,10 @@
             if (Array.isArray(account.timelineEvents)) {
                 return account.timelineEvents
                     .map(item => ({
+                        id: item?.id ?? "",
                         date: String(item?.date || "").trim(),
-                        event: String(item?.event || "").trim()
+                        event: String(item?.event || "").trim(),
+                        status: item?.status || ""
                     }))
                     .filter(item => item.date || item.event);
             }
@@ -215,16 +217,18 @@
                     const match = line.match(/^(\d{4}-\d{2}-\d{2})\s*(?:—|–|-)\s*(.*)$/);
 
                     return match
-                        ? {date: match[1], event: match[2].trim()}
-                        : {date: "", event: line};
+                        ? {id: "", date: match[1], event: match[2].trim(), status: ""}
+                        : {id: "", date: "", event: line, status: ""};
                 });
         }
 
         function sortTimeline(events) {
             return events
                 .map((item, index) => ({
+                    id: item?.id ?? "",
                     date: String(item.date || "").trim(),
                     event: String(item.event || "").trim(),
+                    status: item.status || "",
                     index
                 }))
                 .filter(item => item.date || item.event)
@@ -234,7 +238,7 @@
 
                     return a.date.localeCompare(b.date) || a.index - b.index;
                 })
-                .map(({ date, event }) => ({date, event}));
+                .map(({id, date, event, status}) => ({id, date, event, status}));
         }
 
         function editor(which) {
@@ -256,8 +260,10 @@
             return Array.from(
                 box.querySelectorAll(".ac-event-row")
             ).map(row => ({
+                id: row.dataset.eventId || "",
                 date: row.querySelector("[data-event-date]")?.value || "",
-                event: row.querySelector("[data-event-text]")?.value.trim() || ""
+                event: row.querySelector("[data-event-text]")?.value.trim() || "",
+                status: row.dataset.eventStatus || ""
             }));
         }
 
@@ -300,6 +306,8 @@
 
             events.forEach((item, index) => {
                 const row = element("div", "ac-event-row");
+                row.dataset.eventId = item.id || "";
+                row.dataset.eventStatus = item.status || "";
 
                 const date = document.createElement("input");
                 date.type = "date";
@@ -364,6 +372,48 @@
             };
 
             renderOtherEditors();
+        }
+
+
+        function getFilteredAccounts() {
+            const filters = {
+                id: $("ac-id").value.trim().toLowerCase(),
+                surname: $("ac-surname").value.trim().toLowerCase(),
+                middleName: $("ac-middle").value.trim().toLowerCase(),
+                firstName: $("ac-first").value.trim().toLowerCase(),
+                email: $("ac-email").value.trim().toLowerCase(),
+                college: $("ac-college").value.trim().toLowerCase(),
+                program: $("ac-program").value.trim().toLowerCase(),
+                campus: $("ac-campus").value.trim().toLowerCase(),
+                type: $("ac-type").value.trim().toLowerCase(),
+                status: $("ac-status").value.trim().toLowerCase()
+            };
+
+            return accounts.filter(account => {
+                const id = String(account.id ?? "").trim().toLowerCase();
+                const surname = String(account.surname ?? "").toLowerCase();
+                const middleName = String(account.middleName ?? "").toLowerCase();
+                const firstName = String(account.firstName ?? "").toLowerCase();
+                const email = String(account.email ?? "").toLowerCase();
+                const college = String(account.college ?? "").toLowerCase();
+                const program = String(account.program ?? "").toLowerCase();
+                const campus = String(account.campus ?? "").toLowerCase();
+                const type = String(account.type ?? "").toLowerCase();
+                const status = String(account.status ?? "").toLowerCase();
+
+                return (
+                    (!filters.id || id.startsWith(filters.id)) &&
+                    (!filters.surname || surname.includes(filters.surname)) &&
+                    (!filters.middleName || middleName.includes(filters.middleName)) &&
+                    (!filters.firstName || firstName.includes(filters.firstName)) &&
+                    (!filters.email || email.includes(filters.email)) &&
+                    (!filters.college || college.includes(filters.college)) &&
+                    (!filters.program || program.includes(filters.program)) &&
+                    (!filters.campus || campus.includes(filters.campus)) &&
+                    (!filters.type || filters.type === "all" || type === filters.type) &&
+                    (!filters.status || filters.status === "all" || status === filters.status)
+                );
+            });
         }
 
         /* =========================================
@@ -445,6 +495,9 @@
             fields.middleName.value = nameParts.middleName;
             fields.surname.value = nameParts.surname;
             fields.email.value = account.email || "";
+            fields.college.value = account.college || "";
+            fields.program.value = account.program || "";
+            fields.campus.value = account.campus || "";
             fields.type.value = account.type || "";
             fields.status.value = account.status || "";
 
@@ -541,31 +594,39 @@
         }
 
         function showRelated(view, account) {
-            relatedTitle.textContent =
-                view === "enlistment"
-                    ? "Enlistment"
-                    : view === "grade" ? "Grade" : "Other Information";
+            const titles = {
+                enlistment: "Enlistment",
+                grade: "Grade",
+                other: "Other Information"
+            };
 
+            if (!titles[view]) return;
+
+            relatedTitle.textContent = titles[view];
             relatedLabel.textContent = `${displayName(account)} · ${account.id}`;
             relatedContent.hidden = view === "other";
             otherEditor.hidden = view !== "other";
 
-            if (view === "enlistment") {
-                renderTable(
-                    relatedContent,
-                    enlistColumns,
-                    account.enlistment || [],
-                    "No enlistment records for this account."
-                );
-            } else if (view === "grade") {
-                renderTable(
-                    relatedContent,
-                    gradeColumns,
-                    account.grades || [],
-                    "No grade records for this account."
-                );
-            } else {
-                renderOtherEditors();
+            switch (view) {
+                case "enlistment":
+                    renderTable(
+                        relatedContent,
+                        enlistColumns,
+                        account.enlistment,
+                        "No enlistment records for this account."
+                    );
+                    break;
+                case "grade":
+                    renderTable(
+                        relatedContent,
+                        gradeColumns,
+                        account.grades,
+                        "No grade records for this account."
+                    );
+                    break;
+                case "other":
+                    renderOtherEditors();
+                    break;
             }
         }
 
@@ -588,7 +649,7 @@
                 return;
             }
 
-            accounts.forEach(account => {
+            getFilteredAccounts().forEach(account => {
                 const item = element("button", "ac-item");
 
                 item.type = "button";
@@ -644,32 +705,43 @@
 
                 item.append(avatar, copy, meta);
 
-                item.addEventListener("click", () => {
-                    // Clicking the selected account again cancels selection.
-                    if (
-                        editId !== null &&
-                        cleanId(editId) === cleanId(account.id)
-                    ) {
+                item.addEventListener("click", async () => {
+                    if (editId !== null && cleanId(editId) === cleanId(account.id)) {
                         resetSelection();
                         return;
                     }
 
-                    const selected = findAccount(account.id);
+                    const index = accounts.findIndex(item => cleanId(item.id) === cleanId(account.id));
 
-                    if (!selected) return;
+                    if (index < 0) return;
 
-                    editId = selected.id;
+                    try {
+                        let selected = accounts[index];
 
-                    fillForm(selected);
-                    renderList();
-                    clearRelatedView();
-                    setMobileDetail(true);
+                        if (!selected.detailsLoaded) {
+                            item.disabled = true;
+                            selected = await readAccountProfile(selected.id);
+                            accounts[index] = selected;
+                        }
 
-                    const detailScroll =
-                        root.querySelector(".ac-detail-scroll");
+                        editId = selected.id;
 
-                    if (detailScroll) {
-                        detailScroll.scrollTop = 0;
+                        fillForm(selected);
+                        renderList();
+                        clearRelatedView();
+                        setMobileDetail(true);
+
+                        const detailScroll = root.querySelector(".ac-detail-scroll");
+
+                        if (detailScroll) {
+                            detailScroll.scrollTop = 0;
+                        }
+
+                    } catch (error) {
+                        console.error("Account profile loading error:", error);
+                        alert("Unable to load account details.\n\n" + error.message);
+                    } finally {
+                        item.disabled = false;
                     }
                 });
 
@@ -677,42 +749,82 @@
             });
         }
 
-        function openRelatedView(view) {
-            // Keep the current view when ID is blank or does not exist.
-            const account = cleanId(idInput.value)
+        async function openRelatedView(view) {
+            if (!["enlistment", "grade", "other"].includes(view)) return;
+
+            let account = cleanId(idInput.value)
                 ? findAccount(idInput.value)
                 : null;
 
             if (!account) return;
 
-            if (activeView === view) {
-                clearRelatedView();
-                return;
+            try {
+                if (editId === null || cleanId(editId) !== cleanId(account.id)) {
+                    editId = account.id;
+
+                    if (!account.detailsLoaded) {
+                        const details = await readAccountProfile(account.id);
+                        const index = accounts.findIndex(
+                            item => cleanId(item.id) === cleanId(account.id)
+                        );
+
+                        if (index >= 0) {
+                            accounts[index] = {
+                                ...accounts[index],
+                                ...details,
+                                detailsLoaded: true
+                            };
+                        }
+
+                        account = findAccount(account.id);
+                    }
+
+                    fillForm(account);
+                    renderList();
+                } else if (!account.detailsLoaded) {
+                    const details = await readAccountProfile(account.id);
+                    const index = accounts.findIndex(
+                        item => cleanId(item.id) === cleanId(account.id)
+                    );
+
+                    if (index >= 0) {
+                        accounts[index] = {
+                            ...accounts[index],
+                            ...details,
+                            detailsLoaded: true
+                        };
+                    }
+
+                    account = findAccount(account.id);
+                    fillForm(account);
+                }
+
+                if (!otherEditor.hidden && view !== "other") {
+                    readOther("desktop");
+                }
+
+                if (activeView === view) {
+                    clearRelatedView();
+                    return;
+                }
+
+                activeView = view;
+                form.hidden = true;
+                relatedPanel.hidden = false;
+                list.hidden = false;
+
+                root.querySelectorAll("[data-view]")
+                    .forEach(button => {
+                        const active = button.dataset.view === view;
+                        button.classList.toggle("active", active);
+                        button.setAttribute("aria-pressed", String(active));
+                    });
+
+                showRelated(view, account);
+            } catch (error) {
+                console.error("Related information loading error:", error);
+                alert("Unable to load account information.\n\n" + error.message);
             }
-
-            if (editId === null || cleanId(editId) !== cleanId(account.id)) {
-                editId = account.id;
-                fillForm(account);
-                renderList();
-            } else if (!otherEditor.hidden) {
-                readOther("desktop");
-            }
-
-            activeView = view;
-
-            form.hidden = true;
-            relatedPanel.hidden = false;
-            list.hidden = false;
-
-            root.querySelectorAll("[data-view]")
-                .forEach(button => {
-                    const active = button.dataset.view === view;
-
-                    button.classList.toggle("active", active);
-                    button.setAttribute("aria-pressed", String(active));
-                });
-
-            showRelated(view, account);
         }
 
         /* =========================================
@@ -760,71 +872,143 @@
         }
 
         /* =========================================
-           READ TXT
+        NORMALIZE ACCOUNT
         ========================================= */
 
-        async function readTxt() {
-            try {
-                const response = await fetch(API_URL, {
-                    cache: "no-store"
-                });
+        function normalizeAccount(row = {}) {
+            const firstName = String(row.firstName ?? row.first_name ?? "").trim();
+            const middleName = String(row.middleName ?? row.middle_name ?? "").trim();
+            const surname = String(row.surname ?? row.last_name ?? "").trim();
+            const rawType = row.type ?? row.account_type ?? row.user_type ?? row.role ?? "";
 
-                if (response.ok) {
-                    const data = await response.json();
+            return {
+                id: String(row.id ?? row.user_id ?? ""),
+                name: row.name || [firstName, middleName, surname].filter(Boolean).join(" "),
+                firstName,
+                middleName,
+                surname,
+                email: row.email ?? "",
+                college: row.college || "",
+                program: row.program || "",
+                campus: row.campus || "",
+                type: rawType === "APO" ? "Officer" : rawType,
+                status: 
+                    String(row.account_status || "").toLowerCase() === "disabled"
+                    ? "Disabled"
+                    : (row.academic_status || row.status || row.account_status || ""),
 
-                    if (Array.isArray(data.accounts)) {
-                        return data.accounts;
-                    }
-                }
-            } catch (_) {
-                // Try the TXT file directly in read-only mode.
-            }
+                // Other Information
+                createdDate: String(
+                    row.createdDate ?? row.created_date ?? row.created_at ?? ""
+                ).slice(0, 10),
+                contactNumber: row.contactNumber ?? row.contact_number ?? "",
+                address: row.address ?? "",
+                timeline: row.timeline ?? "",
+                timelineEvents: Array.isArray(row.timelineEvents) 
+                    ? row.timelineEvents.map(item => ({
+                        id: item.id ?? "",
+                        date: item.date ?? "",
+                        event: item.event ?? "",
+                        status: item.status ?? ""
+                    }))
+                    : Array.isArray(row.timeline_events) 
+                        ? row.timeline_events.map(item => ({
+                            id: item.id ?? "",
+                            date: item.date ?? "",
+                            event: item.event ?? "",
+                            status: item.status ?? ""
+                        }))
+                    : [],
 
-            const response = await fetch(DATA_URL, {
-                cache: "no-store"
-            });
-
-            if (!response.ok) {
-                throw new Error(
-                    `Could not read user-data (${response.status}).`
-                );
-            }
-
-            const data = JSON.parse(await response.text());
-
-            if (!data || !Array.isArray(data.accounts)) {
-                throw new Error(
-                    "TXT must contain an object with an accounts array."
-                );
-            }
-
-            return data.accounts;
+                // Academic Records
+                enlistment: Array.isArray(row.enlistment) ? row.enlistment : [],
+                grades: Array.isArray(row.grades) ? row.grades : []
+            };
         }
 
         /* =========================================
-           WRITE TXT
+           READ DATABASE
         ========================================= */
 
-        async function writeTxt(nextAccounts) {
+        async function readDatabase() {
+            const response = await fetch(API_URL, {
+                method: "GET",
+                headers: {
+                    "Accept": "application/json"
+                },
+                cache: "no-store"
+            });
+
+            const data = await response.json();
+
+            if (!response.ok || data.success !== true) {
+                throw new Error(data.error || `HTTP Error: ${response.status}`);
+            }
+
+            if (!Array.isArray(data.accounts)) { 
+                throw new Error("Invalid account list.");
+            }
+
+            return data.accounts.map(row =>normalizeAccount(row, false));
+        }
+
+        /* =========================================
+        READ ACCOUNT PROFILE
+        ========================================= */
+
+        async function readAccountProfile(userId) {
+            const response = await fetch(
+                `${API_URL}?id=${encodeURIComponent(userId)}`, {
+                    method: "GET",
+                    headers: {
+                        "Accept": "application/json"
+                    },
+                    cache: "no-store"
+                }
+            );
+
+            const data = await response.json();
+
+            if (!response.ok || data.success !== true) {
+                throw new Error(data.error || `HTTP Error: ${response.status}`);
+            }
+
+            if (!data.account) {
+                throw new Error("Account profile not found.");
+            }
+
+            return normalizeAccount(data.account, true);
+        }
+
+        /* =========================================
+           WRITE DATABASE
+        ========================================= */
+
+        async function writeDatabase(account, action) {
             const response = await fetch(API_URL, {
                 method: "POST",
                 headers: {
-                    "Content-Type": "application/json"
+                    "Content-Type": "application/json",
+                    "Accept": "application/json"
                 },
-                body: JSON.stringify({
-                    accounts: nextAccounts
-                })
+                body: JSON.stringify({action, account})
             });
 
-            const data = await response.json().catch(() => ({}));
+            let data;
 
-            if (!response.ok || !Array.isArray(data.accounts)) {
+            try {
+                data = await response.json();
+            } catch {
+                throw new Error("The API did not return valid JSON.");
+            }
+
+            if (!response.ok || data.success !== true) {
                 throw new Error(
-                    data.error || `Save failed (HTTP ${response.status}).`
+                    data.debug || data.error || `Database save failed (HTTP ${response.status}).`
                 );
             }
 
-            return data.accounts;
+            return data;
         }
 
         /* =========================================
@@ -866,9 +1050,7 @@
 
             if (!fields.email.checkValidity()) {
                 fields.email.setAttribute("aria-invalid", "true");
-
                 alert("Enter a valid email address.");
-
                 fields.email.focus();
                 return false;
             }
@@ -888,18 +1070,13 @@
 
             if (target.dataset.other) {
                 const key = target.dataset.other;
-
-                other[key] = key === "createdDate"
-                    ? target.value || ""
-                    : target.value.trim();
-
+                other[key] = key === "createdDate" ? target.value || "" : target.value.trim();
             } else if (target.matches("[data-event-date], [data-event-text]")) {
                 other.timelineEvents = readTimeline(which);
             }
 
             if (target.matches("[data-event-date]") && event.type === "change") {
                 other.timelineEvents = sortTimeline(readTimeline(which));
-
                 renderTimeline(which);
             }
         }
@@ -914,31 +1091,27 @@
             if (event.target === idInput) {
                 updateSaveLabel();
             }
+
+            renderList();
         });
 
-        root.addEventListener("change", handleOtherInput);
+        root.addEventListener("change", event => {
+            handleOtherInput(event);
+            renderList();
+        });
 
         root.querySelectorAll("[data-add-event]")
             .forEach(button => {
                 button.addEventListener("click", () => {
                     const which = button.dataset.addEvent;
-
                     readOther(which);
 
-                    other.timelineEvents.push({
-                        date: today(),
-                        event: ""
-                    });
-
-                    other.timelineEvents = sortTimeline(
-                        other.timelineEvents
-                    );
+                    other.timelineEvents.push({date: today(), event: ""});
+                    other.timelineEvents = sortTimeline(other.timelineEvents);
 
                     renderTimeline(which);
 
-                    const textInputs = editor(which).events
-                        .querySelectorAll("[data-event-text]");
-
+                    const textInputs = editor(which).events.querySelectorAll("[data-event-text]");
                     textInputs[textInputs.length - 1]?.focus();
                 });
             });
@@ -969,19 +1142,15 @@
             );
 
             if (enteredIndex >= 0 && enteredIndex !== selectedIndex) {
-                alert(
-                    "This ID already exists. Select that account from the list before editing it."
-                );
-
+                alert("This ID already exists. Select that account from the list before editing it.");
                 fields.id.setAttribute("aria-invalid", "true");
                 fields.id.focus();
-
                 return;
             }
 
             const oldIndex = selectedIndex >= 0 && cleanId(accounts[selectedIndex].id) === newId
-                    ? selectedIndex
-                    : -1;
+                ? selectedIndex
+                : -1;
 
             const oldAccount = oldIndex >= 0 ? accounts[oldIndex] : null;
 
@@ -1027,6 +1196,9 @@
                 surname: names.surname,
 
                 email: fields.email.value.trim(),
+                college: fields.college.value,
+                program: fields.program.value,
+                campus: fields.campus.value,
                 type: fields.type.value,
                 status: fields.status.value,
 
@@ -1050,46 +1222,41 @@
                     : []
             };
 
-            const nextAccounts = accounts.slice();
-
-            if (oldIndex < 0) {
-                nextAccounts.push(savedAccount);
-            } else {
-                nextAccounts[oldIndex] = savedAccount;
-            }
-
             saving = true;
             saveButton.disabled = true;
             saveButton.textContent = "Saving…";
 
             try {
-                accounts = await writeTxt(nextAccounts);
+                // Create a new account or update an existing account.
+                await writeDatabase(
+                    savedAccount,
+                    oldIndex < 0 ? "create" : "update"
+                );
 
-                // After a successful save, clear the form and selection.
-                // On mobile, return to the account-list screen.
+                // Reload the latest data from MySQL.
+                accounts = await readDatabase();
+
+                // Clear the form and selection after successful saving.
                 resetSelection();
 
                 alert(oldIndex < 0
-                    ? "Account created and saved to the TXT file."
-                    : "Account updated and saved to the TXT file."
+                    ? "Account created successfully."
+                    : "Account updated successfully."
                 );
-
             } catch (error) {
                 console.error("Account Management save error:", error);
 
                 alert(
-                    "Could not save the TXT file. " +
-                    "Run node server.js from the project root.\n\n" +
+                    "Could not save account to the database.\n\n" +
                     error.message
                 );
-
             } finally {
                 saving = false;
                 saveButton.disabled = false;
                 updateSaveLabel();
 
                 if (saveButton.textContent === "Saving…") {
-                    saveButton.textContent =findAccount(idInput.value) ? "Edit" : "Create";
+                    saveButton.textContent = findAccount(idInput.value) ? "Edit" : "Create";
                 }
             }
         });
@@ -1117,29 +1284,20 @@
         });
 
         /* =========================================
-           LOAD TXT
+           LOAD DATABASE
         ========================================= */
 
         try {
-            accounts = await readTxt();
+            accounts = await readDatabase();
 
             renderList();
-
             fillForm({createdDate: today()});
-
             clearRelatedView();
             setMobileDetail(false);
-
         } catch (error) {
             console.error("Account data loading error:", error);
-
             count.textContent = "Unavailable";
-
-            showEmpty(
-                list,
-                "Cannot load user-data. " +
-                "Start the app with node server.js."
-            );
+            showEmpty(list, "Cannot load user-data. " + "Start the app with node server.js.");
         }
     };
 
