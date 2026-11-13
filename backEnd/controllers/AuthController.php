@@ -19,13 +19,13 @@ class AuthController
 
         if (!$user || !$this->passwordMatches($password, $user['password_hash'])) {
             http_response_code(401);
-            view('auth/login', ['error' => 'Invalid email or password', 'email' => $email]);
+            view('auth/login', ['error' => 'Invalid email or password', 'identifier' => $identifier]);
             return;
         }
 
         if ($user['account_status'] === 'Disabled') {
             http_response_code(403);
-            view('auth/login', ['error' => 'Account is disabled', 'email' => $email]);
+            view('auth/login', ['error' => 'Account is disabled', 'identifier' => $identifier]);
             return;
         }
 

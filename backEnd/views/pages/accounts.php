@@ -62,7 +62,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="ac-field">
                         <label for="ac-type">Account Type <b class="ac-required">*</b></label>
                         <select id="ac-type" name="type" required>

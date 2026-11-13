@@ -1,254 +1,339 @@
-// ========================================
-// Grade Encoding - Frontend Mock Data
-// ========================================
-
-// Courses and their available sections
-const MOCK_COURSES = [
-    { code: "CCPROG3", sections: ["X05", "SS1"] },
-    { code: "CCAPDEV", sections: ["N24", "SS1"] },
-    { code: "STADVDB", sections: ["S40B"] },
-    { code: "GEETHIC", sections: ["XZ08", "XZ09"] },
-    { code: "SAS2000", sections: ["X05"] }
-];
-
-// Student information
-const MOCK_STUDENTS = [
-    { id: "12208469", name: "student1" },
-    { id: "12308468", name: "student2" },
-    { id: "12345678", name: "student3" },
-    { id: "12412312", name: "student4" }
-];
-
-// Course-section enrollments
-const MOCK_ENROLLMENTS = {
-    "CCAPDEV_SS1": ["12208469"],
-    "STADVDB_S40B": [
-        "12208469",
-        "12308468",
-        "12345678"
-    ],
-    "GEETHIC_XZ09": ["12208469"],
-    "SAS2000_X05": [
-        "12208469",
-        "12308468",
-        "12345678"
-    ],
-    "CCAPDEV_N24": ["12308468"],
-    "CCPROG3_SS1": ["12345678"],
-    "CCPROG3_X05": ["12412312"],
-    "GEETHIC_XZ08": ["12412312"]
-};
-
-// Temporary grade storage (frontend only)
-const MOCK_GRADES = {};
-
 /* ========================================
    GRADE ENCODING INITIALIZATION
 ======================================== */
 
-function initGradeEncoding() {
-    const courseSelect = document.getElementById("course-select");
-    const sectionSelect = document.getElementById("section-select");
-    const studentBody = document.getElementById("grade-students-body");
-    const status = document.getElementById("grade-status");
-    const saveButton = document.getElementById("save-grades-btn");
+(() => {
+    "use strict";
+    const API_URL = "/backEnd/api/grades.php";
 
-    if (!courseSelect || !sectionSelect || !studentBody || !status || !saveButton) return;
+    window.initGradeEncoding = function initGradeEncoding() {
+        const root = document.getElementById("grade-encoding");
 
-    // Populate the course dropdown
-    courseSelect.replaceChildren(
-        new Option("-- Select course --", "")
-    );
+        if (!root || root.dataset.ready === "1") return;
 
-    MOCK_COURSES.forEach(course => {
-        courseSelect.add(
-            new Option(course.code, course.code)
-        );
-    });
+        root.dataset.ready = "1";
 
-    sectionSelect.replaceChildren(
-        new Option("Select a course first", "")
-    );
+        const courseSelect = document.getElementById("course-select");
+        const sectionSelect = document.getElementById("section-select");
+        const studentBody = document.getElementById("grade-students-body");
+        const status = document.getElementById("grade-status");
+        const saveButton = document.getElementById("save-grades-btn");
 
-    sectionSelect.disabled = true;
-    saveButton.disabled = true;
-
-    /* =====================================
-       HELPERS
-    ===================================== */
-
-    function showMessage(message) {
-        studentBody.replaceChildren();
-
-        const row = document.createElement("tr");
-        const cell = document.createElement("td");
-
-        cell.colSpan = 3;
-        cell.textContent = message;
-
-        row.appendChild(cell);
-        studentBody.appendChild(row);
-    }
-
-    /* =====================================
-       RENDER STUDENTS
-    ===================================== */
-
-    function renderStudents(courseCode, sectionCode) {
-        studentBody.replaceChildren();
-
-        const enrollmentKey = `${courseCode}_${sectionCode}`;
-        const studentIds = MOCK_ENROLLMENTS[enrollmentKey] || [];
-
-        const students = studentIds
-            .map(id => MOCK_STUDENTS.find(student => student.id === id))
-            .filter(Boolean)
-            .sort((a, b) => a.id.localeCompare(b.id));
-
-        if (students.length === 0) {
-            showMessage("No students are enrolled in this section.");
-            saveButton.disabled = true;
-            status.textContent = "No students found.";
+        if (!courseSelect || !sectionSelect || !studentBody || !status || !saveButton) {
+            root.dataset.ready = "0";
             return;
         }
 
-        students.forEach(student => {
+        let csrfToken = "";
+        let isSaving = false;
+
+        /* =====================================
+        HELPERS
+        ===================================== */
+
+        function showMessage(message) {
+            studentBody.replaceChildren();
+
             const row = document.createElement("tr");
-            row.dataset.studentId = student.id;
+            const cell = document.createElement("td");
+            cell.colSpan = 3;
+            cell.textContent = message;
 
-            const idCell = document.createElement("td");
-            idCell.textContent = student.id;
+            row.appendChild(cell);
+            studentBody.appendChild(row);
+        }
 
-            const nameCell = document.createElement("td");
-            nameCell.textContent = student.name;
+        function resetSectionSelect(message = "Select a course first") {
+            sectionSelect.replaceChildren(new Option(message, ""));
+            sectionSelect.disabled = true;
+        }
 
-            const gradeCell = document.createElement("td");
-            const gradeInput = document.createElement("input");
+        function setSaveEnabled(enabled) {
+            saveButton.disabled = !enabled || isSaving;
+        }
 
-            gradeInput.type = "text";
-            gradeInput.className = "grade-input";
-            gradeInput.placeholder = "Enter grade";
-            
-            gradeInput.setAttribute(
-                "aria-label",
-                `Grade for ${student.name}`
-            );
+        async function request(url, options = {}) {
+            const headers = {
+                Accept: "application/json",
+                ...(options.headers || {})
+            };
 
-            // Restore temporarily saved grade
-            const savedGrade = MOCK_GRADES[enrollmentKey]?.[student.id] || "";
-            gradeInput.value = savedGrade;
+            if (options.body !== undefined) {
+                headers["Content-Type"] = "application/json";
+            }
 
-            gradeInput.addEventListener("input", () => {
-                status.textContent = "Unsaved grade changes.";
+            const response = await fetch(`${API_URL}${url}`, {
+                credentials: "same-origin",
+                cache: "no-store",
+                ...options,
+                headers
             });
 
-            gradeCell.appendChild(gradeInput);
+            let data;
+            
+            try {
+                data = await response.json();
+            } catch {
+                throw new Error("Server did not return a valid JSON response.");
+            }
 
-            row.append(idCell, nameCell, gradeCell);
-            studentBody.appendChild(row);
-        });
+            if (!response.ok || data.success !== true) {
+                throw new Error(
+                    data.error || `Request failed. (HTTP ${response.status})`
+                );
+            }
 
-        saveButton.disabled = false;
-        status.textContent = `${students.length} student(s) found.`;
-    }
+            if (data.csrfToken) {
+                csrfToken = data.csrfToken;
+            }
 
-    /* =====================================
-       COURSE SELECTION
-    ===================================== */
-
-    courseSelect.addEventListener("change", () => {
-        const courseCode = courseSelect.value;
-
-        sectionSelect.replaceChildren(
-            new Option(
-                courseCode
-                    ? "-- Select section --"
-                    : "Select a course first",
-                ""
-            )
-        );
-
-        studentBody.replaceChildren();
-        saveButton.disabled = true;
-
-        if (!courseCode) {
-            sectionSelect.disabled = true;
-            showMessage("Select a course and section first.");
-            status.textContent = "Select a course first.";
-            return;
+            return data;
         }
 
-        const course = MOCK_COURSES.find(
-            item => item.code === courseCode
-        );
+        /* =====================================
+           STUDENT LIST
+        ===================================== */
 
-        if (!course) return;
+        function renderStudents(students) {
+            studentBody.replaceChildren();
 
-        course.sections.forEach(section => {
-            sectionSelect.add(
-                new Option(section, section)
-            );
-        });
+            if (!Array.isArray(students) || students.length === 0) {
+                showMessage("No enlisted students found in this section.");
+                setSaveEnabled(false);
+                status.textContent = "No students found.";
+                return;
+            }
 
-        sectionSelect.disabled = false;
+            students.forEach(student => {
+                const row = document.createElement("tr");
+                row.dataset.studentId = String(student.student_id);
 
-        showMessage("Select a section to view students.");
-        status.textContent = "Select a section.";
-    });
+                const idCell = document.createElement("td");
+                idCell.textContent = String(student.student_id);
 
-    /* =====================================
-       SECTION SELECTION
-    ===================================== */
+                const nameCell = document.createElement("td");
+                nameCell.textContent = student.student_name || "—";
 
-    sectionSelect.addEventListener("change", () => {
-        const courseCode = courseSelect.value;
-        const sectionCode = sectionSelect.value;
+                const gradeCell = document.createElement("td");
+                const gradeInput = document.createElement("input");
+                gradeInput.type = "text";
+                gradeInput.className = "grade-input";
+                gradeInput.placeholder = "Enter grade";
+                gradeInput.maxLength = 5;
+                gradeInput.autocomplete = "off";
+                gradeInput.value = student.grade_value ?? "";
+                gradeInput.setAttribute(
+                    "aria-label",
+                    `Grade for ${student.student_name || student.student_id}`
+                );
 
-        saveButton.disabled = true;
+                gradeInput.addEventListener("input", () => {
+                    status.textContent = "Unsaved grade changes.";
+                });
 
-        if (!courseCode || !sectionCode) {
-            showMessage("Select a section first.");
-            status.textContent = "Select a section.";
-            return;
+                gradeCell.appendChild(gradeInput);
+                row.append(idCell, nameCell, gradeCell);
+                studentBody.appendChild(row);
+            });
+
+            setSaveEnabled(true);
+            status.textContent = `${students.length} student(s) found.`;
         }
 
-        renderStudents(courseCode, sectionCode);
-    });
+        /* =====================================
+           LOAD COURSES
+        ===================================== */
 
-    /* =====================================
-       SAVE GRADES
-    ===================================== */
+        async function loadCourses() {
+            courseSelect.replaceChildren(new Option("Loading courses...", ""));
+            courseSelect.disabled = true;
+            resetSectionSelect();
+            showMessage("Loading courses...");
+            setSaveEnabled(false);
 
-    saveButton.addEventListener("click", () => {
-        const courseCode = courseSelect.value;
-        const sectionCode = sectionSelect.value;
+            try {
+                const data = await request("?action=courses");
+                const courses = Array.isArray(data.courses) ? data.courses : [];
 
-        if (!courseCode || !sectionCode) return;
+                courseSelect.replaceChildren(new Option("-- Select course --", ""));
 
-        const enrollmentKey = `${courseCode}_${sectionCode}`;
+                courses.forEach(course => {
+                    const label = course.title
+                        ? `${course.course_code} — ${course.title}`
+                        : course.course_code;
+                    courseSelect.add(new Option(label, course.course_code));
+                });
 
-        if (!MOCK_GRADES[enrollmentKey]) {
-            MOCK_GRADES[enrollmentKey] = {};
+                courseSelect.disabled = false;
+
+                if (courses.length === 0) {
+                    showMessage("No courses are assigned to you for the current term.");
+                    status.textContent = "No assigned courses found.";
+                } else {
+                    showMessage("Select a course and section first.");
+                    status.textContent = `${courses.length} course(s) found.`;
+                }
+            } catch (error) {
+                courseSelect.replaceChildren(new Option("Unable to load courses", ""));
+                courseSelect.disabled = true;
+                showMessage(error.message);
+                status.textContent = "Course loading failed.";
+                console.error("Grade Encoding course loading error:", error);
+            }
         }
 
-        const rows = Array.from(
-            studentBody.querySelectorAll("tr[data-student-id]")
-        );
+        /* =====================================
+           COURSE SELECTION / LOAD SECTIONS
+        ===================================== */
 
-        let savedCount = 0;
+        courseSelect.addEventListener("change", async () => {
+            const courseCode = courseSelect.value;
 
-        rows.forEach(row => {
-            const studentId = row.dataset.studentId;
-            const grade = row.querySelector(".grade-input").value.trim();
+            resetSectionSelect(courseCode ? "Loading sections..." : "Select a course first");
+            showMessage("Select a section to view students.");
+            setSaveEnabled(false);
 
-            if (grade !== "") {
-                MOCK_GRADES[enrollmentKey][studentId] = grade;
-                savedCount++;
-            } else {
-                delete MOCK_GRADES[enrollmentKey][studentId];
+            if (!courseCode) {
+                status.textContent = "Select a course first.";
+                return;
+            }
+
+            try {
+                const data = await request(
+                    `?action=sections&course_code=${encodeURIComponent(courseCode)}`
+                );
+                const sections = Array.isArray(data.sections) ? data.sections : [];
+
+                sectionSelect.replaceChildren(new Option("-- Select section --", ""));
+
+                sections.forEach(section => {
+                    sectionSelect.add(
+                        new Option(section.section_code, String(section.section_id))
+                    );
+                });
+
+                sectionSelect.disabled = sections.length === 0;
+
+                if (sections.length === 0) {
+                    sectionSelect.replaceChildren(new Option("No sections available", ""));
+                    showMessage("No sections are assigned to you for this course.");
+                    status.textContent = "No sections found.";
+                } else {
+                    status.textContent = `${sections.length} section(s) found.`;
+                }
+            } catch (error) {
+                resetSectionSelect("Unable to load sections");
+                showMessage(error.message);
+                status.textContent = "Section loading failed.";
+                console.error("Grade Encoding section loading error:", error);
             }
         });
 
-        status.textContent = `${savedCount} grade(s) saved temporarily.`;
-    });
-}
+        /* =====================================
+           SECTION SELECTION / LOAD STUDENTS
+        ===================================== */
+
+        sectionSelect.addEventListener("change", async () => {
+            const sectionId = sectionSelect.value;
+            setSaveEnabled(false);
+
+            if (!sectionId) {
+                showMessage("Select a section first.");
+                status.textContent = "Select a section.";
+                return;
+            }
+
+            showMessage("Loading students...");
+            status.textContent = "Loading students...";
+
+            try {
+                const data = await request(
+                    `?action=students&section_id=${encodeURIComponent(sectionId)}`
+                );
+
+                renderStudents(data.students || []);
+            } catch (error) {
+                showMessage(error.message);
+                status.textContent = "Student loading failed.";
+                console.error("Grade Encoding student loading error:", error);
+            }
+        });
+
+        /* =====================================
+           SAVE GRADES TO MYSQL
+        ===================================== */
+
+        saveButton.addEventListener("click", async () => {
+            const sectionId = Number(sectionSelect.value);
+            if (!sectionId || isSaving) return;
+
+            const rows = Array.from(
+                studentBody.querySelectorAll("tr[data-student-id]")
+            );
+
+            const grades = rows
+                .map(row => ({
+                    studentId: Number(row.dataset.studentId),
+                    grade: row.querySelector(".grade-input")?.value.trim() || ""
+                }))
+                .filter(item => item.grade !== "");
+
+            if (grades.length === 0) {
+                status.textContent = "No grades entered. Existing grades were not changed.";
+                return;
+            }
+
+            isSaving = true;
+            saveButton.disabled = true;
+            saveButton.textContent = "Saving...";
+            status.textContent = "Saving grades to the database...";
+
+            try {
+                const result = await request("", {
+                    method: "POST",
+                    headers: {
+                        "X-CSRF-Token": csrfToken
+                    },
+                    body: JSON.stringify({ sectionId, grades })
+                });
+
+                const data = await request(
+                    `?action=students&section_id=${encodeURIComponent(sectionId)}`
+                );
+                
+                renderStudents(data.students || []);
+                status.textContent = result.message || `${result.savedCount || 0} grade(s) saved to the database.`;
+            } catch (error) {
+                status.textContent = error.message;
+                console.error("Grade Encoding save error:", error);
+            } finally {
+                isSaving = false;
+                saveButton.textContent = "Save";
+
+                setSaveEnabled(
+                    studentBody.querySelectorAll("tr[data-student-id]").length > 0
+                );
+            }
+        });
+
+        loadCourses();
+    };
+
+    function tryInitGradeEncoding() {
+        const root = document.getElementById("grade-encoding");
+        if (root && root.dataset.ready !== "1") {
+            window.initGradeEncoding();
+        }
+    }
+
+    if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", tryInitGradeEncoding, { once: true });
+    } else {
+        tryInitGradeEncoding();
+    }
+
+    if (document.body) {
+        const observer = new MutationObserver(tryInitGradeEncoding);
+        observer.observe(document.body, { childList: true, subtree: true });
+    }
+})();

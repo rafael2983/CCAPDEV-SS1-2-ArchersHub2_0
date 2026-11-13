@@ -18,9 +18,11 @@ function view(string $name, array $data = []): void
     require __DIR__ . '/../views/' . $name . '.php';
 }
 
-function redirect(string $route): void
+// $params are extra query values (for example the filters of the page).
+function redirect(string $route, array $params = []): void
 {
-    header('Location: ' . url($route));
+    $extra = $params ? '&' . http_build_query($params) : '';
+    header('Location: ' . url($route) . $extra);
     exit;
 }
 
@@ -54,4 +56,22 @@ function take_flash(): ?array
     $flash = $_SESSION['flash'] ?? null;
     unset($_SESSION['flash']);
     return $flash;
+}
+// The address GET forms send to (the route goes in a hidden field).
+function index_url(): string
+{
+    return config()['base_url'] . '/index.php';
+}
+
+// "08:00:00" -> "8:00 AM"
+function format_time(?string $time): string
+{
+    return $time === null ? '' : date('g:i A', strtotime($time));
+}
+
+// A meeting row -> "Mon 8:00 AM-9:30 AM | G201"
+function format_meeting(array $m): string
+{
+    return $m['day'] . ' ' . format_time($m['start_time']) . '-' . format_time($m['end_time'])
+        . ' | ' . ($m['room'] ?? '-');
 }

@@ -9,6 +9,9 @@ $allowed = role_access($user['role']);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= e($title ?? 'ArchersHub') ?></title>
 
+    <script src="<?= asset('frontEnd/scripts/teacher.js') ?>" defer></script>
+    <script src="<?= asset('frontEnd/scripts/admin.js') ?>" defer></script>
+
     <link rel="icon" href="<?= asset('frontEnd/views/images/school-logo.png') ?>">
     <link rel="stylesheet" href="<?= asset('frontEnd/styles/style.css') ?>">
     <link rel="stylesheet" href="<?= asset('frontEnd/styles/menu.css') ?>">

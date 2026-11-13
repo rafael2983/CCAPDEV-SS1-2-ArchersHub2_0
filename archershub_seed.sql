@@ -4,8 +4,16 @@
 -- Run it AFTER archershub_query.sql, on a database with no other rows:
 --     SOURCE /full/path/to/archershub_seed.sql;
 --
+-- To start over:  DROP DATABASE archershub;  then load archershub_query.sql
+-- and this file again.
+--
+-- Every sample account uses the password:  Password123
+-- (stored as plain text for this phase; hashing comes later)
+--
 -- Dates are set around the current term (2026-2027, term 1). The
--- enlistment/add-drop/withdrawal/etc. 
+-- enlistment/add-drop/withdrawal/etc. windows are wide on purpose so every
+-- feature can be tried at any time. Change them if you need to test a
+-- closed period.
 -- =====================================================================
 
 USE archershub;
@@ -82,7 +90,9 @@ INSERT INTO course (course_code, title, units) VALUES
     ('CCAPDEV', 'Web Application Development',   3),
     ('CSMATH1', 'Discrete Mathematics',          3),
     ('GEETHIC', 'Ethics',                        3),
-    ('BIO101',  'General Biology',               3);
+    ('BIO101',  'General Biology',               3),
+    ('GEWORLD', 'The Contemporary World',        3),
+    ('LCLSONE', 'Lasallian Studies 1',           3);
 
 INSERT INTO course_requirements (course_code, pre_req_code) VALUES
     ('CCPROG2', 'CCPROG1'),
@@ -100,7 +110,13 @@ INSERT INTO curriculum_course (program_id, course_code, year_lvl, term_no, categ
     (@bsis,  'GEETHIC', 1, 1, 'GE'),
     (@bsis,  'CCPROG2', 1, 2, 'Major'),
     (@bsbio, 'BIO101',  1, 1, 'Major'),
-    (@bsbio, 'GEETHIC', 1, 1, 'GE');
+    (@bsbio, 'GEETHIC', 1, 1, 'GE'),
+    (@bscs,  'GEWORLD', 1, 1, 'GE'),
+    (@bscs,  'LCLSONE', 1, 1, 'GE'),
+    (@bsis,  'GEWORLD', 1, 1, 'GE'),
+    (@bsis,  'LCLSONE', 1, 1, 'GE'),
+    (@bsbio, 'GEWORLD', 1, 1, 'GE'),
+    (@bsbio, 'LCLSONE', 1, 1, 'GE');
 
 -- ---------------------------------------------------------------------
 -- TERMS
@@ -133,6 +149,10 @@ INSERT INTO section (section_code, course_code, term_id, teacher_id, campus, slo
     ('S51', 'CSMATH1', @cur,  10000012, 'Manila', 40),
     ('S61', 'GEETHIC', @cur,  10000012, 'Manila', 40),
     ('S71', 'BIO101',  @cur,  NULL,     'Manila', 40),
+    ('S81', 'GEWORLD', @cur,  10000012, 'Manila', 40),
+    ('S82', 'GEWORLD', @cur,  10000012, 'Laguna', 40),
+    ('S91', 'LCLSONE', @cur,  10000011, 'Manila', 40),
+    ('S92', 'LCLSONE', @cur,  10000012, 'Laguna', 40),
     ('P11', 'CCPROG1', @past, 10000011, 'Manila', 40),
     ('P51', 'CSMATH1', @past, 10000012, 'Manila', 40);
 
@@ -144,6 +164,10 @@ SET @s41 := (SELECT section_id FROM section WHERE course_code = 'CCAPDEV' AND te
 SET @s51 := (SELECT section_id FROM section WHERE course_code = 'CSMATH1' AND term_id = @cur  AND section_code = 'S51');
 SET @s61 := (SELECT section_id FROM section WHERE course_code = 'GEETHIC' AND term_id = @cur  AND section_code = 'S61');
 SET @s71 := (SELECT section_id FROM section WHERE course_code = 'BIO101'  AND term_id = @cur  AND section_code = 'S71');
+SET @s81 := (SELECT section_id FROM section WHERE course_code = 'GEWORLD' AND term_id = @cur  AND section_code = 'S81');
+SET @s82 := (SELECT section_id FROM section WHERE course_code = 'GEWORLD' AND term_id = @cur  AND section_code = 'S82');
+SET @s91 := (SELECT section_id FROM section WHERE course_code = 'LCLSONE' AND term_id = @cur  AND section_code = 'S91');
+SET @s92 := (SELECT section_id FROM section WHERE course_code = 'LCLSONE' AND term_id = @cur  AND section_code = 'S92');
 SET @p11 := (SELECT section_id FROM section WHERE course_code = 'CCPROG1' AND term_id = @past AND section_code = 'P11');
 SET @p51 := (SELECT section_id FROM section WHERE course_code = 'CSMATH1' AND term_id = @past AND section_code = 'P51');
 
@@ -163,6 +187,12 @@ INSERT INTO section_meeting (section_id, day, start_time, end_time, room) VALUES
     (@s61, 'Fri', '11:30:00', '13:00:00', 'G204'),
     (@s71, 'Mon', '13:15:00', '14:45:00', 'S404'),
     (@s71, 'Thu', '13:15:00', '14:45:00', 'S404'),
+    (@s81, 'Tue', '14:45:00', '16:15:00', 'G205'),
+    (@s81, 'Fri', '14:45:00', '16:15:00', 'G205'),
+    (@s82, 'Mon', '15:00:00', '16:30:00', 'online'),
+    (@s82, 'Thu', '15:00:00', '16:30:00', 'online'),
+    (@s91, 'Sat', '09:15:00', '10:45:00', 'G206'),
+    (@s92, 'Sat', '09:15:00', '10:45:00', 'L301'),
     (@p11, 'Mon', '08:00:00', '10:00:00', 'G201'),
     (@p51, 'Wed', '10:00:00', '12:00:00', 'G301');
 
@@ -170,18 +200,17 @@ INSERT INTO section_meeting (section_id, day, start_time, end_time, room) VALUES
 -- ENROLLMENTS AND GRADES
 
 INSERT INTO enrollment (student_id, section_id, status, reason, date_enrolled, enrolled_by) VALUES
-    -- Ana: finished two courses last term, enlisted in two now, one still pending
-    (12300001, @p11, 'Enlisted', NULL, '2026-04-10 09:00:00', 12300001),
+    -- Ana (Manila): finished two courses last term, enlisted in two now, one still pending    (12300001, @p11, 'Enlisted', NULL, '2026-04-10 09:00:00', 12300001),
     (12300001, @p51, 'Enlisted', NULL, '2026-04-10 09:05:00', 12300001),
     (12300001, @s21, 'Enlisted', NULL, '2026-08-05 10:00:00', 12300001),
     (12300001, @s41, 'Enlisted', NULL, '2026-08-05 10:05:00', 12300001),
-    (12300001, @s51, 'Pending',  NULL, '2026-08-05 10:10:00', 12300001),
-    -- Miguel: two enlisted, one dropped
-    (12300002, @s11, 'Enlisted', NULL,                '2026-08-06 11:00:00', 12300002),
-    (12300002, @s61, 'Enlisted', NULL,                '2026-08-06 11:05:00', 12300002),
+    (12300001, @s61, 'Pending',  NULL, '2026-08-05 10:10:00', 12300001),
+    -- Miguel (Laguna): two enlisted on his campus, one dropped
+    (12300002, @s12, 'Enlisted', NULL,                '2026-08-06 11:00:00', 12300002),
+    (12300002, @s82, 'Enlisted', NULL,                '2026-08-06 11:05:00', 12300002),
     (12300002, @s31, 'Dropped',  'Schedule conflict', '2026-08-06 11:10:00', 12300002),
-    -- Sofia, Daniel
-    (12300003, @s12, 'Enlisted', NULL, '2026-08-07 09:30:00', 12300003),
+    -- Sofia (Manila), Daniel (Manila)
+    (12300003, @s11, 'Enlisted', NULL, '2026-08-07 09:30:00', 12300003),
     (12300004, @s71, 'Enlisted', NULL, '2026-08-07 09:40:00', 12300004),
     -- Isabel (on leave): last term's course
     (12300005, @p11, 'Enlisted', NULL, '2026-04-11 09:00:00', 12300005);
@@ -200,8 +229,9 @@ INSERT INTO special_class_application (student_id, course_code, term_id, campus,
     (12300002, 'CCDSTRU', @cur, 'Either', 'The regular section clashes with my other classes.', 'Pending',  NULL),
     (12300003, 'CCPROG2', @cur, 'Manila', 'I need the course to stay on track with my program.', 'Approved', 10000003);
 
-INSERT INTO program_exchange_application (student_id, target_program_id, status, reviewed_by) VALUES
-    (12300003, @bscs, 'Pending', NULL);
+INSERT INTO program_exchange_application (student_id, target_program_id, reason, status, reviewed_by) VALUES
+    (12300003, @bscs, 'I want to focus on software development.',          'Pending',  NULL),
+    (12300004, @bscs, 'I am more interested in computing than in biology.', 'Rejected', 10000003);
 
 -- ---------------------------------------------------------------------
 -- ORGANIZATIONS
@@ -249,3 +279,4 @@ INSERT INTO announcement (provost_id, title, content, is_important, start_date, 
     (10000002, 'Extended library hours during finals',
         'The library will open until 10 PM from December 1 to December 12.',
         FALSE, '2026-12-01 08:00:00', '2026-12-12 22:00:00');
+        
