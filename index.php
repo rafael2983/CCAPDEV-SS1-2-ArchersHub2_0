@@ -17,6 +17,7 @@ require __DIR__ . '/backEnd/controllers/AddDropController.php';
 require __DIR__ . '/backEnd/controllers/WithdrawalController.php';
 require __DIR__ . '/backEnd/controllers/SpecialClassController.php';
 require __DIR__ . '/backEnd/controllers/ProgramExchangeController.php';
+require __DIR__ . '/backEnd/controllers/CalendarController.php';
 
 $router = new Router();
 
@@ -45,6 +46,7 @@ $router->get('profile', [new ProfileController(), 'show']);
 $router->get('records', [new RecordsController(), 'index']);
 $router->get('curriculum', [new CurriculumController(), 'index']);
 $router->get('schedule', [new ScheduleController(), 'index']);
+$router->get('calendar', [new CalendarController(), 'index']);
 
 // Enlistment
 $enlistment = new EnlistmentController();

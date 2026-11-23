@@ -75,3 +75,15 @@ function format_meeting(array $m): string
     return $m['day'] . ' ' . format_time($m['start_time']) . '-' . format_time($m['end_time'])
         . ' | ' . ($m['room'] ?? '-');
 }
+
+
+// "2026-11-23 08:00:00" -> "Nov 23, 2026 8:00 AM" (no time shown for midnight)
+function format_event_date(?string $dateTime): string
+{
+    if ($dateTime === null) {
+        return '';
+    }
+    $stamp = strtotime($dateTime);
+    $text = date('M j, Y', $stamp);
+    return date('H:i:s', $stamp) === '00:00:00' ? $text : $text . ' ' . date('g:i A', $stamp);
+}
