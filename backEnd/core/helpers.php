@@ -15,7 +15,7 @@ function url(string $route = 'home'): string
 function view(string $name, array $data = []): void
 {
     extract($data);
-    require __DIR__ . '/../views/' . $name . '.php';
+    require __DIR__ . '/../../frontEnd/views/' . $name . '.php';
 }
 
 // $params are extra query values (for example the filters of the page).

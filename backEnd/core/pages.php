@@ -2,7 +2,7 @@
 // True if backEnd/views/<name>.php exists.
 function view_exists(string $name): bool
 {
-    return is_file(__DIR__ . '/../views/' . $name . '.php');
+    return is_file(__DIR__ . '/../../fronEnd/views/' . $name . '.php');
 }
 
 // Looks up a page's label and access group by its route name.
