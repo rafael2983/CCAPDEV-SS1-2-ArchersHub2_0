@@ -18,6 +18,8 @@ require __DIR__ . '/backEnd/controllers/WithdrawalController.php';
 require __DIR__ . '/backEnd/controllers/SpecialClassController.php';
 require __DIR__ . '/backEnd/controllers/ProgramExchangeController.php';
 require __DIR__ . '/backEnd/controllers/CalendarController.php';
+require __DIR__ . '/backEnd/controllers/AnnouncementController.php';
+require __DIR__ . '/backEnd/controllers/GradeEncodingController.php';
 
 $router = new Router();
 
@@ -46,7 +48,19 @@ $router->get('profile', [new ProfileController(), 'show']);
 $router->get('records', [new RecordsController(), 'index']);
 $router->get('curriculum', [new CurriculumController(), 'index']);
 $router->get('schedule', [new ScheduleController(), 'index']);
-$router->get('calendar', [new CalendarController(), 'index']);
+$calendar = new CalendarController();
+$router->get('calendar', [$calendar, 'index']);
+$router->post('calendar-save', [$calendar, 'save']);
+$router->post('calendar-delete', [$calendar, 'delete']);
+
+$announcements = new AnnouncementController();
+$router->get('announcements', [$announcements, 'index']);
+$router->post('announcements-save', [$announcements, 'save']);
+$router->post('announcements-delete', [$announcements, 'delete']);
+
+$grades = new GradeEncodingController();
+$router->get('grade-encoding', [$grades, 'index']);
+$router->post('grade-encoding-save', [$grades, 'save']);
 
 // Enlistment
 $enlistment = new EnlistmentController();

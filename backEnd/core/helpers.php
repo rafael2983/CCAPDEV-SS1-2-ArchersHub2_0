@@ -87,3 +87,34 @@ function format_event_date(?string $dateTime): string
     $text = date('M j, Y', $stamp);
     return date('H:i:s', $stamp) === '00:00:00' ? $text : $text . ' ' . date('g:i A', $stamp);
 }
+
+// "2026-11-23 08:00:00" -> "2026-11-23T08:00" for a datetime-local input.
+function datetime_local(?string $dateTime): string
+{
+    return $dateTime === null || $dateTime === '' ? '' : date('Y-m-d\TH:i', strtotime($dateTime));
+}
+
+// A date or datetime-local value -> "Y-m-d H:i:s", or null when it is empty or invalid.
+function parse_datetime(?string $value): ?string
+{
+    $value = trim(str_replace('T', ' ', (string) $value));
+    if ($value === '') {
+        return null;
+    }
+    if (preg_match('/^\d{4}-\d{2}-\d{2}$/', $value)) {
+        $value .= ' 00:00:00';
+    } elseif (preg_match('/^\d{4}-\d{2}-\d{2} \d{2}:\d{2}$/', $value)) {
+        $value .= ':00';
+    } elseif (!preg_match('/^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$/', $value)) {
+        return null;
+    }
+    $stamp = strtotime($value);
+    return $stamp === false ? null : date('Y-m-d H:i:s', $stamp);
+}
+
+// Provost, APO and Admin can post announcements and edit the calendar.
+function can_manage_office(): bool
+{
+    return !empty($_SESSION['user'])
+        && in_array('office', role_access($_SESSION['user']['role']), true);
+}

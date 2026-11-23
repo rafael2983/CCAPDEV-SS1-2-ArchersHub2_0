@@ -111,6 +111,7 @@
     flex: 1;
 }
 .main-section input[type="search"], .main-section input[type="text"],
+.main-section input[type="date"], .main-section input[type="datetime-local"],
 .main-section select, .main-section textarea {
     width: 100%;
     padding: 11px 14px;
@@ -591,6 +592,7 @@
 }
 
 .main-section input[type="search"]:focus, .main-section input[type="text"]:focus,
+.main-section input[type="date"]:focus, .main-section input[type="datetime-local"]:focus,
 .main-section select:focus, .main-section textarea:focus {
     border-color: var(--green);
     box-shadow: 0 0 0 3px rgba(8, 120, 48, 0.12);

@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../models/Announcement.php';
+require_once __DIR__ . '/../models/CalendarEvent.php';
 require_once __DIR__ . '/../models/Schedule.php';
 
 class HomeController
@@ -13,6 +15,10 @@ class HomeController
             ? Schedule::meetings((int) $_SESSION['user']['user_id'], $_SESSION['user']['role'], $termId)
             : [];
 
-        view('home', ['schedule' => $schedule]);
+        view('home', [
+            'schedule'      => $schedule,
+            'events'        => CalendarEvent::upcoming(),
+            'announcements' => Announcement::active(),
+        ]);
     }
 }

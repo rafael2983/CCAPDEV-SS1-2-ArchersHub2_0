@@ -4,3 +4,65 @@
     flex-direction: column;
     gap: 20px;
 }
+
+.editor-form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.editor-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+.editor-form label, .announce-list h2 {
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.check-line {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.check-line input {
+    width: auto;
+}
+
+.editor-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.file-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    font-size: 14px;
+}
+
+.row-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    align-items: center;
+}
+
+.row-actions form {
+    margin: 0;
+}
+
+@media (max-width: 700px) {
+    .editor-row {
+        grid-template-columns: 1fr;
+    }
+}

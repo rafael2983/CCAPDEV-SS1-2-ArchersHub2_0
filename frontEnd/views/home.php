@@ -67,9 +67,24 @@ require __DIR__ . '/partials/app_header.php';
 
         <section class="card" id="school-calendar">
             <h2>School Calendar</h2>
-            <div class="calendar-view">
-                <p>calendar goes here</p>
-            </div>
+            <ul class="event-list">
+                <?php if (!$events): ?>
+                    <li class="empty">No upcoming calendar events.</li>
+                <?php endif; ?>
+                <?php foreach (array_slice($events, 0, 5) as $ev): ?>
+                    <li>
+                        <span>
+                            <?= e($ev['title']) ?>
+                            <?= $ev['is_important'] ? ' (Important)' : '' ?>
+                        </span>
+                        <span>
+                            <?= e(format_event_date($ev['start_date'])) ?>
+                            <?= $ev['end_date'] ? ' to ' . e(format_event_date($ev['end_date'])) : '' ?>
+                        </span>
+                    </li>
+                <?php endforeach; ?>
+            </ul>
+            <p class="chosen-total"><a href="<?= url('calendar') ?>">Open the full calendar</a></p>
         </section>
     </div>
 
@@ -77,14 +92,38 @@ require __DIR__ . '/partials/app_header.php';
         <section class="card" id="events">
             <h2>Events</h2>
             <ul class="event-list" id="events-list">
-                <li class="empty">No upcoming events.</li>
+                <?php if (!$events): ?>
+                    <li class="empty">No upcoming events.</li>
+                <?php endif; ?>
+                <?php foreach ($events as $ev): ?>
+                    <li>
+                        <span>
+                            <?= e($ev['title']) ?>
+                            <?= $ev['is_important'] ? ' (Important)' : '' ?>
+                        </span>
+                        <span><?= e(format_event_date($ev['start_date'])) ?></span>
+                    </li>
+                <?php endforeach; ?>
             </ul>
         </section>
 
         <section class="card" id="announcements">
             <h2>Announcements</h2>
             <ul class="event-list" id="announcements-list">
-                <li class="empty">No announcements from the Provost.</li>
+                <?php if (!$announcements): ?>
+                    <li class="empty">No announcements from the Provost.</li>
+                <?php endif; ?>
+                <?php foreach ($announcements as $item): ?>
+                    <li>
+                        <span>
+                            <strong><?= e($item['title']) ?></strong>
+                            <?= $item['is_important'] ? ' (Important)' : '' ?>
+                            <br>
+                            <?= e(mb_strimwidth($item['content'], 0, 180, '…')) ?>
+                        </span>
+                        <span><?= e(format_event_date($item['start_date'])) ?></span>
+                    </li>
+                <?php endforeach; ?>
             </ul>
         </section>
 

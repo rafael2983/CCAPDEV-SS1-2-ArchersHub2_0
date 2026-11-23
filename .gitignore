@@ -9,3 +9,5 @@ backEnd/config/config.php
 !.env.template
 
 node_modules/
+frontEnd/uploads/announcements/*
+!frontEnd/uploads/announcements/.gitkeep
