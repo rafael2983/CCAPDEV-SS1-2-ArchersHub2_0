@@ -47,7 +47,7 @@ class AuthController
     // Plain-text for this phase. Only this function changes when hashing is added.
     private function passwordMatches(string $plain, string $stored): bool
     {
-        return $plain === $stored;
+        return password_verify($plain, $stored);
     }
 
     // GET: show the forgot-password form

@@ -8,7 +8,7 @@
 -- and this file again.
 --
 -- Every sample account uses the password:  Password123
--- (stored as plain text for this phase; hashing comes later)
+-- (stored as bcrypt hashes)
 --
 -- Dates are set around the current term (2026-2027, term 1). The
 -- enlistment/add-drop/withdrawal/etc. windows are wide on purpose so every
@@ -49,16 +49,16 @@ SET @dept_it     := (SELECT department_id FROM department WHERE name = 'Informat
 -- USERS  (IDs: 1000000x staff, 1000001x teachers, 1230000x students)
 
 INSERT INTO users (user_id, email, password_hash, role, first_name, last_name, nickname, address, contact_number) VALUES
-    (10000001, 'admin@archershub.test',    'Password123', 'Admin',   'Alex',   'Admin',    NULL,    NULL,                      NULL),
-    (10000002, 'provost@archershub.test',  'Password123', 'Provost', 'Maria',  'Santos',   NULL,    NULL,                      NULL),
-    (10000003, 'apo@archershub.test',      'Password123', 'APO',     'Carlo',  'Mendoza',  NULL,    NULL,                      NULL),
-    (10000011, 'elena.cruz@archershub.test',      'Password123', 'Teacher', 'Elena', 'Cruz',     NULL, NULL, NULL),
-    (10000012, 'ramon.bautista@archershub.test',  'Password123', 'Teacher', 'Ramon', 'Bautista', NULL, NULL, NULL),
-    (12300001, 'ana.reyes@archershub.test',       'Password123', 'Student', 'Ana',     'Reyes',   'Ana',    'Taft Avenue, Manila',    '0917 123 4567'),
-    (12300002, 'miguel.torres@archershub.test',   'Password123', 'Student', 'Miguel',  'Torres',  'Migs',   NULL,                     NULL),
-    (12300003, 'sofia.lim@archershub.test',       'Password123', 'Student', 'Sofia',   'Lim',     NULL,     NULL,                     NULL),
-    (12300004, 'daniel.garcia@archershub.test',   'Password123', 'Student', 'Daniel',  'Garcia',  'Dan',    NULL,                     NULL),
-    (12300005, 'isabel.ramos@archershub.test',    'Password123', 'Student', 'Isabel',  'Ramos',   NULL,     NULL,                     NULL);
+    (10000001, 'admin@archershub.test',    '$2y$10$28t0Pq.3Ted31fuqDEoWk.pzbXF7WeCQp0R50bNPlO0LoDN1AJdHG', 'Admin',   'Alex',   'Admin',    NULL,    NULL,                      NULL),
+    (10000002, 'provost@archershub.test',  '$2y$10$Ji7CZ6bWW3yFFRx5DiETEu5E7GeFWVpmbyo2bediThvuxAnPkilBW', 'Provost', 'Maria',  'Santos',   NULL,    NULL,                      NULL),
+    (10000003, 'apo@archershub.test',      '$2y$10$cjWtCuM4kw4l8xWB4XP1z.NOHg7KXXbPOUvEHh99uVgnqNJFlBftW', 'APO',     'Carlo',  'Mendoza',  NULL,    NULL,                      NULL),
+    (10000011, 'elena.cruz@archershub.test',      '$2y$10$v7GKcT1AXdJxsKC3rqtTFuHwayx.VrjliCsbF4g2S0J38KZzQY8G2', 'Teacher', 'Elena', 'Cruz',     NULL, NULL, NULL),
+    (10000012, 'ramon.bautista@archershub.test',  '$2y$10$Rv5oaeZN.oMg9VWG/qK9HOK.zVGQlWWYd7wl3.aEOrhzXPez1ob2e', 'Teacher', 'Ramon', 'Bautista', NULL, NULL, NULL),
+    (12300001, 'ana.reyes@archershub.test',       '$2y$10$kD2qCTF6vCWOZ5UavEwMQumKE8y8/Cd0qRRBp4jNV1ABZpsHJLe.y', 'Student', 'Ana',     'Reyes',   'Ana',    'Taft Avenue, Manila',    '0917 123 4567'),
+    (12300002, 'miguel.torres@archershub.test',   '$2y$10$ipD6gzEMVc4.oI9Hfmmjxe6DyWHNw8PjvqiCc4R6pkIR71jMU/fVW', 'Student', 'Miguel',  'Torres',  'Migs',   NULL,                     NULL),
+    (12300003, 'sofia.lim@archershub.test',       '$2y$10$B5e5IfGZxIHlkg5qA5Gim.clGDEdZsP7NcZxpY9XkyQSIx5o5hDuS', 'Student', 'Sofia',   'Lim',     NULL,     NULL,                     NULL),
+    (12300004, 'daniel.garcia@archershub.test',   '$2y$10$j8GTr0o9dAjn3XLTDmZb/uP5zDPb6wP2rzOW5Qb1FZggMtobfM3cm', 'Student', 'Daniel',  'Garcia',  'Dan',    NULL,                     NULL),
+    (12300005, 'isabel.ramos@archershub.test',    '$2y$10$41TaGvlIzw5/TfRGL3Ri9uQKh2wIES9edd1ZMonJeIzVQAVbKtkPK', 'Student', 'Isabel',  'Ramos',   NULL,     NULL,                     NULL);
 
 INSERT INTO admin    (user_id, created_by)            VALUES (10000001, NULL);
 INSERT INTO provost  (user_id)                        VALUES (10000002);
