@@ -6,7 +6,7 @@ class AnnouncementController
 {
     private const MAX_CONTENT = 8000;
     private const MAX_BYTES = 5 * 1024 * 1024;
-    private const ALLOWED = ['pdf', 'png', 'jpg', 'jpeg', 'gif', 'txt', 'doc', 'docx'];
+    private const ALLOWED = ['png', 'jpg', 'jpeg', 'gif', 'webp'];
 
     public function index(): void
     {
@@ -44,11 +44,11 @@ class AnnouncementController
             flash('error', 'That announcement no longer exists.');
             redirect('announcements');
         }
-        if ($title === '' || mb_strlen($title) > 200) {
+        if ($title === '' || strlen($title) > 200) {
             flash('error', 'Enter a title of 200 characters or fewer.');
             $this->back($id);
         }
-        if ($content === '' || mb_strlen($content) > self::MAX_CONTENT) {
+        if ($content === '' || strlen($content) > self::MAX_CONTENT) {
             flash('error', 'Enter the announcement text, up to ' . self::MAX_CONTENT . ' characters.');
             $this->back($id);
         }
@@ -142,7 +142,12 @@ class AnnouncementController
             $ext = strtolower(pathinfo($original, PATHINFO_EXTENSION));
             if (!in_array($ext, self::ALLOWED, true)) {
                 $this->discardUploads($saved);
-                flash('error', 'Files must be pdf, png, jpg, gif, txt, doc, or docx.');
+                flash('error', 'Only image files are allowed (png, jpg, gif, webp).');
+                return null;
+            }
+            if (@getimagesize($_FILES['files']['tmp_name'][$i]) === false) {
+                $this->discardUploads($saved);
+                flash('error', 'One of the files is not a real image.');
                 return null;
             }
             if ((int) $_FILES['files']['size'][$i] > self::MAX_BYTES) {

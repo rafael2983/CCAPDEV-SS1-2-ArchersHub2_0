@@ -15,10 +15,15 @@ class HomeController
             ? Schedule::meetings((int) $_SESSION['user']['user_id'], $_SESSION['user']['role'], $termId)
             : [];
 
-        view('home', [
-            'schedule'      => $schedule,
-            'events'        => CalendarEvent::upcoming(),
-            'announcements' => Announcement::active(),
-        ]);
+            // Each announcement also gets its image list
+            $announcements = Announcement::active();
+            foreach ($announcements as $i => $item) {
+                $announcements[$i]['images'] = Announcement::attachments((int) $item['announcement_id']);
+            }        
+            view('home', [
+                'schedule'      => $schedule,
+                'events'        => CalendarEvent::upcoming(),
+                'announcements' => $announcements,
+            ]);
     }
 }

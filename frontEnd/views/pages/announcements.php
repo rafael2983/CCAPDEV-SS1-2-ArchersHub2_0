@@ -71,11 +71,12 @@
                           style="min-height: 220px;"><?= e($editing['content'] ?? '') ?></textarea>
 
                 <?php if ($files): ?>
-                    <p><strong>Attached files</strong></p>
+                    <p><strong>Current images</strong></p>
                     <ul class="file-list">
                         <?php foreach ($files as $file): ?>
                             <li>
-                                <a href="<?= e(asset($file['file_path'])) ?>"><?= e($file['file_name']) ?></a>
+                                <img class="ann-img" src="<?= e(asset($file['file_path'])) ?>"
+                                     alt="<?= e($file['file_name']) ?>">
                                 <label class="check-line">
                                     <input type="checkbox" name="remove_file[]" value="<?= (int) $file['attachment_id'] ?>">
                                     Remove
@@ -85,9 +86,9 @@
                     </ul>
                 <?php endif; ?>
 
-                <label for="ann-files">Attach files (pdf, images, txt, doc — 5 MB each)</label>
+                <label for="ann-files">Add images (png, jpg, gif, webp, 5 MB each)</label>
                 <input type="file" id="ann-files" name="files[]" multiple
-                       accept=".pdf,.png,.jpg,.jpeg,.gif,.txt,.doc,.docx">
+                       accept="image/png,image/jpeg,image/gif,image/webp">
 
                 <div class="editor-actions">
                     <button class="btn primary" type="submit">Save</button>

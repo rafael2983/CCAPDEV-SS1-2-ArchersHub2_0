@@ -120,6 +120,10 @@ require __DIR__ . '/partials/app_header.php';
                             <?= $item['is_important'] ? ' (Important)' : '' ?>
                             <br>
                             <?= e(mb_strimwidth($item['content'], 0, 180, '…')) ?>
+                            <?php foreach ($item['images'] as $img): ?>
+                                <img class="ann-img" src="<?= e(asset($img['file_path'])) ?>"
+                                     alt="<?= e($item['title']) ?>">
+                            <?php endforeach; ?>
                         </span>
                         <span><?= e(format_event_date($item['start_date'])) ?></span>
                     </li>
