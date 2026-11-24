@@ -1,173 +1,221 @@
 # ArchersHub 2.0
 
-A student portal for enlistment, schedules, records, organizations and announcements.
-Built with **PHP, MySQL and Apache** (LAMP) using the **MVC** pattern.
+A student portal for enlistment, schedules, records, organizations, and announcements. Built with **PHP, MySQL, and Apache** (LAMP) using the **MVC** pattern.
 
+---
 
-## Quick start
+## Table of Contents
 
-You need: **Apache 2.4**, **PHP 8** (with PDO MySQL) and **MySQL 8 or MariaDB**.
+1. [Project Structure Overview](#project-structure-overview)
+2. [Setup Guide: Windows (XAMPP)](#setup-guide-windows-xampp)
+3. [Setup Guide: macOS (MAMP)](#setup-guide-macos-mamp)
+4. [Setup Guide: Linux (Ubuntu / Debian LAMP)](#setup-guide-linux-ubuntu--debian-lamp)
+5. [Default Login & Resetting the Database](#default-login--resetting-the-database)
+6. [Troubleshooting](#troubleshooting)
 
-| OS | Install |
-|---|---|
-| Windows | [XAMPP](https://www.apachefriends.org) (includes all three) |
-| macOS | MAMP, or Homebrew |
-| Linux (Ubuntu / Mint) | `sudo apt install apache2 php libapache2-mod-php php-mysql mysql-server` |
+---
 
-### 1. Put the project where Apache can serve it
+## Project Structure Overview
 
-The app must run inside a folder, for example `http://localhost/archershub/`.
+Before starting, verify that you have the root project directory. Whether you cloned the repository or extracted a `.zip` archive, open the folders until you see `index.php`, `backEnd/`, and `frontEnd/` side by side. **That directory is your project root**, which must be placed in your web server's document root and named **`archershub`**.
 
-**Windows / macOS:** copy the project folder into `htdocs`.
-
-**Linux:** keep the project where you cloned it and add an Apache alias:
-
-```bash
-sudo nano /etc/apache2/conf-available/archershub.conf
+```text
+archershub/
+├── index.php
+├── archershub_query.sql       # Database schema (run first)
+├── archershub_seed.sql        # Sample accounts & data (run second)
+├── backEnd/
+│   └── config/
+│       └── config.example.php # Template for your local config.php
+└── frontEnd/
 ```
 
-```apache
-Alias /archershub /full/path/to/the/project
+> **Important:** The folder name **`archershub`** must match the `base_url` setting in your configuration file.
 
-<Directory /full/path/to/the/project>
-    Options Indexes FollowSymLinks
-    AllowOverride All
-    Require all granted
-</Directory>
-```
+---
 
-```bash
-chmod o+x /home/<your-username>
-sudo a2enconf archershub
-sudo systemctl restart apache2
-```
+## Setup Guide: Windows (XAMPP)
 
-> The `chmod` lets Apache enter your home folder. Skip it and you get **403 Forbidden**.
+### Step 1: Install and Start XAMPP
+1. Download XAMPP from [apachefriends.org](https://www.apachefriends.org) and run the installer with default settings (installs to `C:\xampp`).
+2. Open the **XAMPP Control Panel**.
+3. Click **Start** next to **Apache** and **MySQL**. Wait until both module labels turn green.
 
-### 2. Create your config file
+### Step 2: Place the Project in `htdocs`
+1. Navigate to your **Downloads** folder, right-click the downloaded `.zip` file, and select **Extract All...**
+2. Locate the inner folder containing `index.php`, `backEnd`, and `frontEnd`.
+3. Move or copy that folder into `C:\xampp\htdocs\` and rename it to **`archershub`**.
+4. Confirm the path looks like this: `C:\xampp\htdocs\archershub\index.php`.
 
-```bash
-cp backEnd/config/config.example.php backEnd/config/config.php
-```
-
-On Windows Command Prompt, use `copy` with backslashes instead.
-
-Open `backEnd/config/config.php` and fill in:
+### Step 3: Create and Configure `config.php`
+1. Open `C:\xampp\htdocs\archershub\backEnd\config\`.
+2. Duplicate `config.example.php` and rename the copy to **`config.php`**.
+   * *Tip:* In File Explorer, enable **View > Show > File name extensions** to ensure it is not accidentally named `config.php.txt`.
+3. Open `config.php` in a text editor (e.g., VS Code or Notepad) and update the values:
 
 | Setting | Value |
-|---|---|
-| `base_url` | The folder name from the URL, for example `/archershub` |
+| :--- | :--- |
+| `base_url` | `/archershub` |
 | `db_host` | `127.0.0.1` |
 | `db_port` | `3306` |
 | `db_name` | `archershub` |
-| `db_user` | Your MySQL user (XAMPP default: `root`) |
-| `db_pass` | Your MySQL password (XAMPP default: empty) |
+| `db_user` | `root` |
+| `db_pass` | `''` *(leave empty)* |
 
-`config.php` is ignored by git, so everyone uses their own values.
+### Step 4: Import the Database
+1. Open your browser and navigate to `http://localhost/phpmyadmin`.
+2. Click the **Import** tab at the top of the page (do **not** select an existing database first; the SQL script creates `archershub` automatically).
+3. Click **Choose File**, select `archershub_query.sql` from your `archershub` folder, and click **Import** at the bottom.
+4. Click the **Import** tab again, select `archershub_seed.sql`, and click **Import**.
+   * **Note:** Always import `archershub_query.sql` **before** `archershub_seed.sql`.
 
-### 3. Load the database
-
-Open the MySQL shell (`sudo mysql` on Linux, `mysql -u root -p` on macOS, or the **Shell** button in XAMPP), then run these **in order**:
-
-```sql
-SOURCE /full/path/to/archershub_query.sql;
-SOURCE /full/path/to/archershub_seed.sql;
-```
-
-The first file creates the tables. The second adds sample accounts and data.
-With XAMPP you can also use phpMyAdmin: **Import**, then pick each file in the same order.
-
-> **Linux:** the MySQL `root` user often cannot log in from PHP. Create your own user and put it in `config.php`:
->
-> ```sql
-> CREATE USER 'your_user'@'localhost' IDENTIFIED BY 'your_password';
-> GRANT ALL PRIVILEGES ON archershub.* TO 'your_user'@'localhost';
-> FLUSH PRIVILEGES;
-> ```
-
-**To start over:** run `DROP DATABASE archershub;` and repeat this step.
-
-### 4. Open it
-
-Go to `http://localhost/<folder-name>/` and log in with a test account below.
+### Step 5: Launch the Application
+Open your browser and go to: **`http://localhost/archershub/`**
 
 ---
 
-## Test accounts
+## Setup Guide: macOS (MAMP)
 
-Every account uses the password **`Password123`**. You can log in with the email or the ID.
+### Step 1: Install and Start MAMP
+1. Download MAMP (free version) from [mamp.info](https://www.mamp.info) and install it into your `/Applications` folder.
+2. Open **MAMP** from Applications.
+3. Click **Start** (top right) to launch both the Apache and MySQL servers. Wait for the indicator dots to turn green.
 
-| Role | Email | ID |
-|---|---|---|
-| Admin | `admin@archershub.test` | `10000001` |
-| Provost | `provost@archershub.test` | `10000002` |
-| APO | `apo@archershub.test` | `10000003` |
-| Teacher | `elena.cruz@archershub.test` | `10000011` |
-| Teacher | `ramon.bautista@archershub.test` | `10000012` |
-| Student | `ana.reyes@archershub.test` | `12300001` |
-| Student | `miguel.torres@archershub.test` | `12300002` |
-| Student | `sofia.lim@archershub.test` | `12300003` |
-| Student | `daniel.garcia@archershub.test` | `12300004` |
-| Student | `isabel.ramos@archershub.test` | `12300005` |
+### Step 2: Place the Project in `htdocs`
+1. Double-click the downloaded `.zip` file in **Downloads** to extract it.
+2. Locate the folder containing `index.php`, `backEnd`, and `frontEnd`.
+3. Move that folder to `/Applications/MAMP/htdocs/` and rename it to **`archershub`**.
+4. Confirm the path looks like this: `/Applications/MAMP/htdocs/archershub/index.php`.
 
-**Who sees what:**
+### Step 3: Create and Configure `config.php`
+1. Navigate to `/Applications/MAMP/htdocs/archershub/backEnd/config/`.
+2. Copy `config.example.php` and rename the copy to **`config.php`**.
+3. Open `config.php` in TextEdit, VS Code, or via Terminal (`nano config.php`) and set the MAMP-specific defaults:
 
-| Role | Sidebar pages |
-|---|---|
-| Student | General pages + student pages (enlistment, add/drop, records, ...) |
-| Teacher | General pages + grade encoding and applications |
-| APO / Provost | General pages + announcements |
-| Admin | Everything, including account management |
+| Setting | Value |
+| :--- | :--- |
+| `base_url` | `/archershub` |
+| `db_host` | `127.0.0.1` |
+| `db_port` | `8889` *(MAMP's default MySQL port)* |
+| `db_name` | `archershub` |
+| `db_user` | `root` |
+| `db_pass` | `root` *(MAMP's default MySQL password)* |
 
-The seed dates are set wide on purpose so every feature can be tried at any time.
+### Step 4: Import the Database
+1. In the MAMP window, click **WebStart** (or open `http://localhost:8888/phpMyAdmin/` in your browser).
+2. Click the **Import** tab at the top without selecting a database on the left.
+3. Click **Choose File**, select `/Applications/MAMP/htdocs/archershub/archershub_query.sql`, and click **Import**.
+4. Repeat the process to import `archershub_seed.sql`.
+
+### Step 5: Launch the Application
+Because MAMP defaults to port `8888` for Apache, open your browser and go to: **`http://localhost:8888/archershub/`**
 
 ---
 
-## Project layout
+## Setup Guide: Linux (Ubuntu / Debian LAMP)
 
-```
-index.php               Entry point. All routes are registered here.
-archershub_query.sql    Database schema (tables)
-archershub_seed.sql     Sample data for testing
+### Step 1: Install Apache, PHP, and MariaDB/MySQL
+Open your terminal and run the following commands to update your package index and install the required LAMP stack packages:
 
-backEnd/
-  config/               config.example.php (template) and your config.php
-  core/                 Router, database connection, helpers, sidebar menu
-  controllers/          Auth, Home, Page and Profile controllers
-  models/               user.php (database queries)
-  views/                PHP pages (auth/, pages/, partials/)
-
-frontEnd/
-  styles/               CSS files
-  scripts/              JavaScript (nav.js handles the hamburger menu,
-                        dark mode and filter panel)
-  views/images/         Logo and pictures
+```bash
+sudo apt update
+sudo apt install apache2 php libapache2-mod-php php-mysql mariadb-server unzip -y
 ```
 
-**How a request flows:** the browser opens `index.php?route=profile`, the router finds the controller, the controller asks the model for data, then it loads a view.
+Ensure both services are running and enabled on boot:
 
-### Adding a new page
+```bash
+sudo systemctl enable --now apache2
+sudo systemctl enable --now mariadb
+```
 
-1. Add the page to `backEnd/core/menu.php` (route, label, who can see it).
-2. Create `backEnd/views/pages/<route>.php`.
+### Step 2: Move Project Files and Set Permissions
+1. Extract your downloaded archive (assuming it is in `~/Downloads/`):
+   ```bash
+   unzip ~/Downloads/*.zip -d ~/Downloads/archershub_extracted
+   ```
+2. Move the folder containing `index.php`, `backEnd`, and `frontEnd` to Apache's document root as **`archershub`**:
+   ```bash
+   sudo mv ~/Downloads/archershub_extracted/path/to/root /var/www/html/archershub
+   ```
+   *(Adjust the source path so `/var/www/html/archershub/index.php` exists directly inside it.)*
+3. Set appropriate ownership so Apache (`www-data`) can read and serve the files:
+   ```bash
+   sudo chown -R www-data:www-data /var/www/html/archershub
+   sudo chmod -R 755 /var/www/html/archershub
+   ```
 
-Until the view file exists, the page shows an "under construction" message.
+### Step 3: Create a Dedicated Database User
+On modern Linux distributions, the database `root` user uses `unix_socket` authentication and cannot be used directly by PHP web applications. Create a dedicated database user for ArchersHub:
+
+1. Open the MySQL/MariaDB shell:
+   ```bash
+   sudo mysql
+   ```
+2. Run the following SQL commands (replace `'your_user'` and `'your_password'` with your own credentials):
+   ```sql
+   CREATE USER 'your_user'@'localhost' IDENTIFIED BY 'your_password';
+   GRANT ALL PRIVILEGES ON archershub.* TO 'your_user'@'localhost';
+   FLUSH PRIVILEGES;
+   EXIT;
+   ```
+
+### Step 4: Import the Database via CLI
+Navigate to your project directory and import the schema first, followed by the seed data:
+
+```bash
+cd /var/www/html/archershub
+sudo mysql < archershub_query.sql
+sudo mysql < archershub_seed.sql
+```
+
+### Step 5: Create and Configure `config.php`
+1. Copy the example configuration file:
+   ```bash
+   sudo cp /var/www/html/archershub/backEnd/config/config.example.php /var/www/html/archershub/backEnd/config/config.php
+   ```
+2. Edit `config.php` using `nano` or your preferred editor:
+   ```bash
+   sudo nano /var/www/html/archershub/backEnd/config/config.php
+   ```
+3. Set the following values (using the credentials you created in Step 3):
+
+| Setting | Value |
+| :--- | :--- |
+| `base_url` | `/archershub` |
+| `db_host` | `127.0.0.1` |
+| `db_port` | `3306` |
+| `db_name` | `archershub` |
+| `db_user` | `your_user` |
+| `db_pass` | `your_password` |
+
+### Step 6: Launch the Application
+Open your browser and go to: **`http://localhost/archershub/`**
+
+---
+
+## Default Login & Resetting the Database
+
+### Test Account
+Once the site loads, log in using the sample account created by `archershub_seed.sql`:
+* **ID:** `12300001`
+* **Password:** `Password123`
+
+### Resetting the Database
+If you need a clean slate:
+* **Windows / macOS (phpMyAdmin):** Select `archershub` in the left sidebar, click **Operations** at the top, and select **Drop the database (DROP)**. Then re-import `archershub_query.sql` and `archershub_seed.sql`.
+* **Linux (CLI):**
+  ```bash
+  sudo mysql -e "DROP DATABASE IF EXISTS archershub;"
+  cd /var/www/html/archershub
+  sudo mysql < archershub_query.sql && sudo mysql < archershub_seed.sql
+  ```
 
 ---
 
 ## Troubleshooting
 
-| Problem | Fix |
-|---|---|
-| **403 Forbidden** (Linux) | Run `chmod o+x /home/<your-username>` |
-| Blank page or error about `config.php` | You skipped step 2. Copy `config.example.php` to `config.php` |
-| Database connection error | Check `db_user` and `db_pass` in `config.php` |
-| Login says "Invalid email or password" | The seed file was not loaded, or you typed the password wrong |
-| Page has no styling | `base_url` in `config.php` does not match your folder name |
-
----
-
-## Ignore these
-
-- `backEnd_old/`, `.env` and `start-server.bat` belong to the old Node.js version. The app no longer uses them.
-- `frontEnd/*.html` and `frontEnd/views/**/*.html` are the original static mockups. The PHP views replaced them.
+* **Apache will not start on Windows:** Another program (such as Skype, IIS, or VMware) is occupying port `80`. Close the conflicting application, or in XAMPP click **Config > Service and Port Settings** to change Apache's main port (e.g., to `8080`, which changes your URL to `http://localhost:8080/archershub/`).
+* **Database Connection Error:** Double-check that MySQL/MariaDB is actively running and that `db_port`, `db_user`, and `db_pass` in `backEnd/config/config.php` match your OS setup (`3306` / empty password on XAMPP; `8889` / `root` on MAMP; custom user on Linux).
+* **404 Not Found or Broken Styling/Links:** Ensure the folder inside `htdocs` or `/var/www/html/` is named **`archershub`** in all lowercase and that `base_url` in `config.php` is set to `'/archershub'` without a trailing slash.
+* **Git Note:** `config.php` is listed in `.gitignore` so each developer maintains their own local database credentials without affecting the repository.
