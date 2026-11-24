@@ -3,7 +3,9 @@
 ========================================= */
 
 .top-bar {
-    position: sticky;
+    position: fixed;
+    left: 0;
+    right: 0;
     top: 0;
     z-index: 1000;
 
@@ -198,7 +200,9 @@
 }
 
 .side-menu a, .sidebar-bottom a {
-    display: block;
+    display: flex;
+    align-items: center;
+    gap: 12px;
     padding: 12px 20px;
 
     font-size: 15px;
@@ -236,6 +240,7 @@
     display: flex;
     flex-direction: column;
     min-height: calc(100vh - var(--header-h));
+    padding-top: var(--header-h);
     transition: padding-left 0.3s ease;
 }
 
@@ -311,4 +316,16 @@ body.dark-mode .card:hover { box-shadow: 0 14px 34px rgba(0, 0, 0, 0.45); }
     }
     .sidebar.open { transform: translateX(0); }
     .layout { padding-left: 0; }
+}
+
+.side-icon {
+    flex-shrink: 0;
+}
+
+.logout {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 20px !important;
+    width: 100%;
 }

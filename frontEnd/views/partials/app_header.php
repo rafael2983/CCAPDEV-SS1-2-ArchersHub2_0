@@ -49,7 +49,10 @@ $allowed = role_access($user['role']);
                         <li>
                             <a href="<?= url($item['route']) ?>"
                                class="<?= ($active ?? '') === $item['route'] ? 'active' : '' ?>">
-                                <?= e($item['label']) ?>
+                                <?= menu_icon($item['icon']) ?>
+                                <span class="side-icon-label">
+                                    <?= e($item['label']) ?>
+                                </span>
                             </a>
                         </li>
                     <?php endif; ?>
@@ -61,7 +64,7 @@ $allowed = role_access($user['role']);
                     <form method="POST" action="<?= url('logout') ?>">
                         <button type="submit" class="logout"
                                 style="background:none;border:none;font:inherit;color:inherit;cursor:pointer;padding:0;">
-                            Log out
+                                <?= menu_icon('logout') ?> <span>Log out</span>
                         </button>
                     </form>
                 </li>
