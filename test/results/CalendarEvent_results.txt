@@ -1,0 +1,78 @@
+CalendarEvent model - unit test results
+Date:  2026-11-25 07:01:21
+PHP:   8.3.6
+MySQL: 8.0.46-0ubuntu0.24.04.5
+
+== create()
+  [PASS] returns nothing (void)
+  [PASS] adds exactly one row
+  [PASS] saves the title
+  [PASS] saves the start date
+  [PASS] saves the end date
+  [PASS] important = true is saved as 1
+  [PASS] saves the provost as created_by
+  [PASS] important = false is saved as 0
+  [PASS] a missing end date is saved as NULL
+  [PASS] created_by can be NULL
+  [PASS] a created_by that is not a provost is rejected
+  [PASS] special characters are stored as plain text (no SQL injection)
+
+== find()
+  [PASS] returns an array for an existing id
+  [PASS] returns the right event
+  [PASS] returns the expected columns
+  [PASS] returns null for an id that does not exist
+  [PASS] returns null for id 0
+
+== all()
+  [PASS] returns an array
+  [PASS] has one more row after a create
+  [PASS] contains the new event
+  [PASS] each row has the expected columns
+  [PASS] is sorted by start date, earliest first
+  [PASS] also contains events that already ended
+
+== upcoming()
+  [PASS] excludes an event that already ended
+  [PASS] excludes a past event that has no end date
+  [PASS] includes an event in the future
+  [PASS] includes an event that is still ongoing
+  [PASS] returns fewer or equal rows than all()
+  [PASS] is sorted by start date, earliest first
+
+== update()
+  [PASS] returns nothing (void)
+  [PASS] changes the title
+  [PASS] changes the start date
+  [PASS] changes the end date
+  [PASS] changes important to 1
+  [PASS] keeps the same creator
+  [PASS] does not change other events
+  [PASS] the end date can be cleared back to NULL
+  [PASS] important can be changed back to 0
+  [PASS] updating an id that does not exist raises no error
+  [PASS] updating an id that does not exist changes nothing
+
+== delete()
+  [PASS] returns nothing (void)
+  [PASS] removes exactly one row
+  [PASS] the event can no longer be found
+  [PASS] the event is gone from all()
+  [PASS] other events are not deleted
+  [PASS] deleting an id that does not exist raises no error
+  [PASS] deleting an id that does not exist changes nothing
+
+== provostId()
+  [PASS] returns the id for a provost
+  [PASS] the id is returned as an integer
+  [PASS] returns null for a user who is not a provost
+  [PASS] returns null for a user that does not exist
+  [PASS] returns null for id 0
+
+== cleanup
+  [PASS] all test data was rolled back (row count is back to 5)
+  [PASS] no TEST rows are left in the database
+
+---------------------------------------------
+Total: 54   Passed: 54   Failed: 0
+RESULT: ALL TESTS PASSED
