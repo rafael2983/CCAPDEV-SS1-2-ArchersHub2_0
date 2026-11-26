@@ -1,0 +1,798 @@
+/* =========================================
+   ARCHERSHUB DASHBOARD
+   DLSU GREEN THEME
+========================================= */
+
+:root {
+    --primary-green: #006B35;
+    --dark-green: #00552B;
+    --deep-green: #004522;
+    --light-green: #E6F0E8;
+    --pale-green: #F1F7F2;
+
+    --background: #F0F6F1;
+    --white: #FFFFFF;
+
+    --text-primary: #202D25;
+    --text-secondary: #687A6E;
+
+    --border-color: #D6E5D9;
+
+    --card-shadow: 0 5px 20px rgba(0, 70, 35, 0.06);
+
+    --topbar-height: 80px;
+    --sidebar-width: 332px;
+}
+
+
+/* =========================================
+   GLOBAL RESET
+========================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: var(--background);
+    color: var(--text-primary);
+}
+
+button {
+    font-family: inherit;
+    cursor: pointer;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+
+/* =========================================
+   MAIN CONTAINER
+========================================= */
+
+.app-container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+
+/* =========================================
+   TOPBAR
+========================================= */
+
+.topbar {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+
+    height: var(--topbar-height);
+    width: 100%;
+
+    background: linear-gradient(110deg,
+            #00552B,
+            #00803D);
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 20px;
+
+    color: white;
+    z-index: 10;
+}
+
+
+/* University Logo */
+
+.topbar-logo {
+    display: flex;
+    align-items: center;
+}
+
+.university-logo {
+    width: 87px;
+    height: 66px;
+
+    background: white;
+    border-radius: 13px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: var(--primary-green);
+    font-size: 19px;
+    font-weight: 800;
+    letter-spacing: 1px;
+}
+
+
+/* Right-side controls */
+
+.topbar-actions {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+
+/* Role Switcher */
+
+.role-switcher {
+    min-width: 135px;
+    height: 54px;
+
+    padding: 0 17px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+
+    border: 1px solid rgba(255, 255, 255, 0.45);
+    border-radius: 12px;
+
+    background: rgba(255, 255, 255, 0.20);
+
+    color: white;
+    font-weight: 800;
+    font-size: 14px;
+}
+
+.role-switcher:hover {
+    background: rgba(255, 255, 255, 0.30);
+}
+
+.switch-icon {
+    font-size: 18px;
+}
+
+
+/* Theme Toggle */
+
+.theme-toggle {
+    width: 54px;
+    height: 54px;
+
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.65);
+
+    background: transparent;
+    color: white;
+
+    font-size: 25px;
+
+    transition: 0.2s;
+}
+
+.theme-toggle:hover {
+    background: rgba(255, 255, 255, 0.20);
+}
+
+
+/* Student ID */
+
+.student-id {
+    padding: 10px 20px;
+
+    border-radius: 30px;
+    border: 1px solid rgba(255, 255, 255, 0.45);
+
+    background: rgba(255, 255, 255, 0.20);
+
+    font-weight: 800;
+    font-size: 16px;
+}
+
+
+/* =========================================
+   APPLICATION LAYOUT
+========================================= */
+
+.app-layout {
+    flex: 1;
+
+    display: grid;
+    grid-template-columns: var(--sidebar-width) minmax(0, 1fr);
+
+    min-height: calc(100vh - var(--topbar-height));
+}
+
+
+/* =========================================
+   SIDEBAR
+========================================= */
+
+.sidebar {
+    background: var(--white);
+
+    border-right: 1px solid var(--border-color);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    min-height: 0;
+}
+
+
+/* Sidebar Navigation */
+
+.sidebar-navigation {
+    display: flex;
+    flex-direction: column;
+
+    padding-top: 15px;
+}
+
+.nav-item {
+    width: 100%;
+    min-height: 53px;
+
+    padding: 0 30px;
+
+    display: flex;
+    align-items: center;
+
+    border: none;
+    border-left: 5px solid transparent;
+
+    background: transparent;
+
+    color: var(--text-primary);
+
+    text-align: left;
+    font-size: 18px;
+    font-weight: 500;
+
+    transition: 0.2s;
+}
+
+.nav-item:hover {
+    background: var(--pale-green);
+    color: var(--primary-green);
+}
+
+.nav-item.active {
+    background: #E2ECE4;
+    border-left-color: var(--primary-green);
+
+    color: var(--dark-green);
+    font-weight: 700;
+}
+
+
+/* Sidebar Logout */
+
+.sidebar-bottom {
+    border-top: 1px solid var(--border-color);
+}
+
+.logout-button {
+    width: 100%;
+    height: 64px;
+
+    padding: 0 30px;
+
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    border: none;
+    background: var(--white);
+
+    color: var(--text-primary);
+
+    text-align: left;
+    font-size: 17px;
+}
+
+.logout-button:hover {
+    background: var(--light-green);
+    color: var(--primary-green);
+}
+
+
+/* =========================================
+   DASHBOARD MAIN
+========================================= */
+
+.dashboard-main {
+    display: flex;
+    flex-direction: column;
+
+    min-width: 0;
+
+    background:
+        radial-gradient(circle at 85% 10%,
+            rgba(0, 107, 53, 0.07),
+            transparent 35%),
+        var(--background);
+}
+
+
+/* Main Content */
+
+.dashboard-content {
+    flex: 1;
+    padding: 34px 26px 35px;
+}
+
+
+/* =========================================
+   DASHBOARD HEADING
+========================================= */
+
+.dashboard-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    margin-bottom: 35px;
+}
+
+.welcome-text {
+    color: var(--text-secondary);
+    font-size: 17px;
+    font-weight: 600;
+
+    margin-bottom: 5px;
+}
+
+.dashboard-heading h1 {
+    color: var(--dark-green);
+
+    font-size: 36px;
+    font-weight: 800;
+    letter-spacing: -1px;
+}
+
+
+/* Filter Button */
+
+.filter-button {
+    padding: 13px 27px;
+
+    background: var(--white);
+    color: #405B49;
+
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+
+    font-size: 16px;
+    font-weight: 700;
+
+    transition: 0.2s;
+}
+
+.filter-button:hover {
+    border-color: var(--primary-green);
+    color: var(--primary-green);
+}
+
+
+/* =========================================
+   DASHBOARD GRID
+========================================= */
+
+.dashboard-grid {
+    display: grid;
+
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+
+    gap: 26px;
+    align-items: start;
+}
+
+.dashboard-column {
+    display: flex;
+    flex-direction: column;
+    gap: 26px;
+}
+
+
+/* =========================================
+   DASHBOARD CARDS
+========================================= */
+
+.dashboard-card {
+    background: var(--white);
+
+    border: 1px solid var(--border-color);
+    border-radius: 18px;
+
+    padding: 25px 26px;
+
+    box-shadow: var(--card-shadow);
+}
+
+.dashboard-card h2 {
+    color: var(--dark-green);
+
+    font-size: 23px;
+    font-weight: 800;
+
+    margin-bottom: 18px;
+}
+
+
+/* Schedule Card */
+
+.schedule-card {
+    min-height: 204px;
+}
+
+.table-container {
+    width: 100%;
+    overflow-x: auto;
+
+    border: 1px solid var(--border-color);
+    border-radius: 15px;
+}
+
+.schedule-table {
+    width: 100%;
+    border-collapse: collapse;
+
+    text-align: left;
+}
+
+.schedule-table th {
+    background: linear-gradient(110deg,
+            #00803D,
+            #00602E);
+
+    color: white;
+
+    padding: 15px 17px;
+
+    font-size: 15px;
+    font-weight: 800;
+
+    white-space: nowrap;
+}
+
+.schedule-table td {
+    padding: 16px;
+
+    font-size: 15px;
+}
+
+.empty-state {
+    text-align: center;
+
+    color: var(--text-secondary);
+    font-style: italic;
+    font-weight: 500;
+}
+
+
+/* Calendar Card */
+
+.calendar-card {
+    min-height: 145px;
+}
+
+.calendar-placeholder {
+    font-size: 18px;
+    color: var(--text-primary);
+}
+
+
+/* =========================================
+   RIGHT COLUMN CARDS
+========================================= */
+
+.events-card {
+    min-height: 165px;
+}
+
+.announcements-card {
+    min-height: 165px;
+}
+
+.other-events-card {
+    min-height: 215px;
+}
+
+.empty-message {
+    min-height: 55px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+
+    color: var(--text-secondary);
+
+    font-size: 16px;
+    font-weight: 500;
+    font-style: italic;
+}
+
+.other-events-card h3 {
+    color: var(--text-secondary);
+
+    font-size: 15px;
+    font-weight: 800;
+
+    margin-top: -1px;
+}
+
+.organization-message {
+    margin-top: 12px;
+}
+
+
+/* =========================================
+   FOOTER
+========================================= */
+
+.dashboard-footer {
+    min-height: 64px;
+
+    padding: 0 30px;
+
+    border-top: 1px solid var(--border-color);
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    background: var(--white);
+
+    color: var(--text-secondary);
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.dashboard-footer a:hover {
+    color: var(--primary-green);
+}
+
+
+/* =========================================
+   NOTIFICATION
+========================================= */
+
+.dashboard-notice {
+    position: fixed;
+    bottom: 85px;
+    right: 25px;
+
+    padding: 14px 20px;
+
+    background: var(--dark-green);
+    color: white;
+
+    border-radius: 10px;
+
+    font-size: 14px;
+
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+
+    z-index: 100;
+}
+
+
+/* =========================================
+   DARK MODE
+========================================= */
+
+body.dark-theme {
+    --background: #17251C;
+    --white: #203329;
+    --light-green: #294637;
+    --pale-green: #263E30;
+
+    --text-primary: #E7F0E9;
+    --text-secondary: #B0C4B5;
+
+    --border-color: #385342;
+
+    --card-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+}
+
+.dark-theme .dashboard-main {
+    background: var(--background);
+}
+
+.dark-theme .nav-item.active {
+    background: #294637;
+    color: #9BDBAE;
+}
+
+.dark-theme .dashboard-heading h1,
+.dark-theme .dashboard-card h2 {
+    color: #9BDBAE;
+}
+
+.dark-theme .schedule-table td {
+    background: var(--white);
+    color: var(--text-primary);
+}
+
+.dark-theme .dashboard-footer,
+.dark-theme .logout-button {
+    background: var(--white);
+}
+
+
+/* =========================================
+   RESPONSIVE DESIGN
+========================================= */
+
+@media (max-width: 1100px) {
+
+    :root {
+        --sidebar-width: 260px;
+    }
+
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .dashboard-column {
+        gap: 20px;
+    }
+
+}
+
+
+@media (max-width: 700px) {
+
+    .topbar {
+        padding: 0 12px;
+    }
+
+    .topbar-actions {
+        gap: 7px;
+    }
+
+    .university-logo {
+        width: 55px;
+        height: 48px;
+    }
+
+    .role-switcher {
+        min-width: auto;
+        padding: 0 10px;
+    }
+
+    .student-id {
+        padding: 9px 11px;
+        font-size: 12px;
+    }
+
+    .theme-toggle {
+        width: 43px;
+        height: 43px;
+    }
+
+    .app-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .sidebar {
+        min-height: auto;
+    }
+
+    .sidebar-navigation {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        padding: 8px;
+    }
+
+    .nav-item {
+        min-height: 45px;
+        padding: 8px 12px;
+        font-size: 13px;
+        border-left-width: 3px;
+    }
+
+    .sidebar-bottom {
+        display: none;
+    }
+
+    .dashboard-content {
+        padding: 25px 14px;
+    }
+
+    .dashboard-heading h1 {
+        font-size: 29px;
+    }
+
+    .dashboard-card {
+        padding: 19px 16px;
+    }
+
+    .dashboard-footer {
+        padding: 15px;
+        font-size: 11px;
+        gap: 10px;
+        flex-wrap: wrap;
+    }
+
+}
+
+/* =========================================
+   GLOBAL DASHBOARD SCALING
+========================================= */
+
+
+/* =========================================
+   PERSISTENT DASHBOARD CONTENT
+========================================= */
+
+#pageContent {
+    flex: 1;
+    width: 100%;
+    min-width: 0;
+}
+
+#pageContent .dashboard-content {
+    width: 100%;
+}
+
+
+/* =========================================
+   HOME ANNOUNCEMENTS
+========================================= */
+
+#homeAnnouncementsList {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 12px;
+}
+
+.home-announcement-item {
+    padding: 14px;
+    border: 1px solid rgba(128, 128, 128, 0.25);
+    border-radius: 10px;
+    background: transparent;
+}
+
+.home-announcement-item.important {
+    border-left: 4px solid #198754;
+}
+
+.home-announcement-title {
+    font-size: 15px;
+    font-weight: 700;
+    margin: 0 0 8px;
+}
+
+.home-announcement-important {
+    display: inline-block;
+    padding: 4px 8px;
+    margin-bottom: 10px;
+    border-radius: 6px;
+    background: rgba(25, 135, 84, 0.12);
+    color: #198754;
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.home-announcement-contents {
+    font-size: 13px;
+    line-height: 1.6;
+    margin: 0 0 10px;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+}
+
+.home-announcement-date {
+    display: block;
+    font-size: 11px;
+    opacity: 0.7;
+}

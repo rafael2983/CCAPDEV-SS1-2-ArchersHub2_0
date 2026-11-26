@@ -1,0 +1,329 @@
+/* =========================================
+   SPECIAL CLASS PAGE
+========================================= */
+
+.special-class-content {
+    padding: 26px 35px 40px;
+}
+
+.special-page-title {
+    font-size: 27px;
+    font-weight: 800;
+    color: var(--dark-green, #07562c);
+    margin: 0 0 18px;
+}
+
+.special-class-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+    gap: 20px;
+    align-items: start;
+}
+
+.special-left,
+.special-right {
+    min-width: 0;
+}
+
+/* CAMPUS FILTERS */
+
+.special-campus-tabs {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 15px;
+}
+
+.special-campus-btn {
+    padding: 10px 22px;
+    border-radius: 9px;
+    border: 1px solid var(--border-color, #d9e5dd);
+    background: var(--white, #fff);
+    color: var(--text-primary, #172b20);
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.special-campus-btn.active {
+    background: #007b35;
+    color: white;
+    border-color: #007b35;
+}
+
+/* CARDS */
+
+.special-card {
+    background: var(--white, #fff);
+    border: 1px solid var(--border-color, #dce8df);
+    border-radius: 13px;
+    padding: 18px;
+    margin-bottom: 15px;
+}
+
+.special-card h2 {
+    font-size: 17px;
+    font-weight: 800;
+    color: var(--dark-green, #07562c);
+    margin: 0 0 13px;
+}
+
+.special-card label {
+    display: block;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--text-secondary, #365543);
+    margin-bottom: 6px;
+}
+
+/* SEARCH */
+
+#specialSearch {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid var(--border-color, #d9e5dd);
+    border-radius: 8px;
+    background: var(--white, #fff);
+    color: var(--text-primary, #172b20);
+    font-family: inherit;
+    font-size: 13px;
+}
+
+/* COURSE TABLE */
+
+.special-table-wrapper {
+    overflow-x: auto;
+    border: 1px solid var(--border-color, #dce8df);
+    border-radius: 10px;
+    margin-top: 0;
+}
+
+.special-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+.special-table th {
+    padding: 12px;
+    background: linear-gradient(110deg, #008039, #00632d);
+    color: white;
+    font-size: 12px;
+    font-weight: 800;
+}
+
+.special-table td {
+    padding: 12px;
+    border-bottom: 1px solid var(--border-color, #e1e9e3);
+    font-size: 12px;
+    color: var(--text-primary, #172b20);
+}
+
+.special-table tr:last-child td {
+    border-bottom: none;
+}
+
+.special-table tbody tr:hover {
+    background: var(--pale-green, #edf6ef);
+}
+
+.special-student-count {
+    color: #006b35;
+    font-weight: 800;
+}
+
+.special-table button {
+    background: #008037;
+    color: white;
+    border: none;
+    border-radius: 7px;
+    padding: 8px 15px;
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+/* APPLICATION FORM */
+
+.special-form-group {
+    margin-top: 12px;
+}
+
+.special-form-group select,
+.special-form-group textarea {
+    width: 100%;
+    box-sizing: border-box;
+    border: 1px solid var(--border-color, #d9e5dd);
+    border-radius: 7px;
+    background: var(--white, #fff);
+    color: var(--text-primary, #172b20);
+    padding: 9px 11px;
+    font-family: inherit;
+    font-size: 13px;
+}
+
+.special-form-group textarea {
+    min-height: 85px;
+    resize: vertical;
+}
+
+.special-form-group select:focus,
+.special-form-group textarea:focus,
+#specialSearch:focus {
+    outline: 2px solid #008037;
+    outline-offset: 1px;
+}
+
+/* RIGHT COLUMN */
+
+.special-right {
+    padding-top: 50px;
+}
+
+.requested-card {
+    min-height: 145px;
+}
+
+.special-requests-list {
+    min-height: 55px;
+}
+
+.special-empty {
+    text-align: center;
+    font-size: 13px;
+    font-style: italic;
+    color: var(--text-secondary, #607469);
+    padding: 12px 0;
+}
+
+.special-request-count {
+    margin: 12px 0 0;
+    font-size: 12px;
+    color: var(--text-secondary, #607469);
+}
+
+.special-request-count strong {
+    color: #006b35;
+}
+
+.special-request-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 11px 0;
+    border-bottom: 1px solid var(--border-color, #dce8df);
+    font-size: 12px;
+}
+
+.special-request-item input {
+    accent-color: #008037;
+}
+
+.special-request-details {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.special-request-details strong {
+    color: var(--text-primary, #172b20);
+}
+
+.special-request-details span {
+    color: var(--text-secondary, #607469);
+}
+
+.special-request-details small {
+    color: #008037;
+    font-weight: 700;
+}
+
+/* ACTION BUTTONS */
+
+.special-actions {
+    display: flex;
+    gap: 12px;
+    padding-top: 15px;
+    border-top: 1px solid var(--border-color, #dce8df);
+}
+
+.special-actions button {
+    padding: 12px 18px;
+    border-radius: 9px;
+    border: 1px solid var(--border-color, #dce8df);
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.special-withdraw,
+.special-apply {
+    background: var(--white, #fff);
+    color: var(--text-primary, #365543);
+}
+
+.special-submit {
+    background: #008037;
+    color: white;
+    border-color: #008037 !important;
+}
+
+.special-actions button:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+}
+
+.special-actions button:not(:disabled):hover {
+    filter: brightness(0.94);
+}
+
+/* DARK MODE */
+
+.dark-theme .special-page-title,
+.dark-theme .special-card h2 {
+    color: #9bdbad;
+}
+
+.dark-theme .special-request-count strong,
+.dark-theme .special-student-count {
+    color: #9bdbad;
+}
+
+.dark-theme .special-submit,
+.dark-theme .special-table button,
+.dark-theme .special-campus-btn.active {
+    background: #008037;
+    color: white;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 1200px) {
+    .special-class-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .special-right {
+        padding-top: 0;
+    }
+}
+
+@media (max-width: 700px) {
+    .special-class-content {
+        padding: 20px 14px;
+    }
+
+    .special-page-title {
+        font-size: 23px;
+    }
+
+    .special-table {
+        min-width: 570px;
+    }
+
+    .special-actions {
+        flex-wrap: wrap;
+    }
+}

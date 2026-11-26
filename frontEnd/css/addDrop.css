@@ -1,0 +1,531 @@
+/* =========================================
+   ADD / DROP PAGE
+========================================= */
+
+.adddrop-content {
+    padding: 26px 35px 40px;
+}
+
+.page-title {
+    color: var(--dark-green);
+    font-size: 28px;
+    font-weight: 800;
+    margin-bottom: 20px;
+}
+
+.adddrop-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1.3fr) minmax(0, 0fr);
+    gap: 0;
+    align-items: start;
+    overflow: clip;
+
+    transition:
+        grid-template-columns 0.35s ease,
+        gap 0.35s ease;
+}
+
+/* Expand the right column when changes exist */
+
+.adddrop-layout.has-pending-changes {
+    grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+    gap: 24px;
+}
+
+.courses-section,
+.selection-section {
+    min-width: 0;
+}
+
+/* =========================================
+   CAMPUS SELECTION
+========================================= */
+
+.campus-tabs,
+.selection-tabs {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 18px;
+}
+
+.campus-btn,
+.selection-btn {
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    padding: 12px 24px;
+    background: var(--white);
+    color: var(--text-primary);
+    font-weight: 700;
+    font-size: 14px;
+    transition: 0.2s;
+}
+
+.campus-btn.active,
+.selection-btn.active {
+    background: var(--primary-green);
+    color: #fff;
+    border-color: var(--primary-green);
+}
+
+.campus-btn:hover,
+.selection-btn:hover {
+    opacity: 0.85;
+}
+
+/* =========================================
+   SEARCH AND SORT
+========================================= */
+
+.course-controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    margin-bottom: 12px;
+}
+
+.course-controls label {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text-secondary);
+}
+
+.course-controls input,
+.course-controls select {
+    width: 230px;
+    max-width: 60%;
+    height: 41px;
+    padding: 0 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    background: var(--white);
+    color: var(--text-primary);
+    font-family: inherit;
+    font-size: 13px;
+}
+
+.course-controls input:focus,
+.course-controls select:focus {
+    outline: 2px solid var(--primary-green);
+    outline-offset: 1px;
+}
+
+/* =========================================
+   COURSE TABLE
+========================================= */
+
+.course-table-wrapper {
+    overflow-x: auto;
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+}
+
+.course-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+.course-table th {
+    background: linear-gradient(110deg, #00803D, #00602E);
+    color: #fff;
+    padding: 14px 15px;
+    font-size: 13px;
+    font-weight: 800;
+}
+
+.course-table td {
+    padding: 13px 15px;
+    border-bottom: 1px solid var(--border-color);
+    font-size: 13px;
+    vertical-align: top;
+}
+
+.course-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.course-table tbody tr:hover {
+    background: var(--pale-green);
+}
+
+.course-table td:first-child {
+    font-weight: 600;
+}
+
+.section-code {
+    font-weight: 800;
+}
+
+.section-details {
+    margin-top: 5px;
+    color: var(--text-secondary);
+    font-size: 11px;
+    line-height: 1.5;
+}
+
+.action-btn {
+    min-width: 65px;
+    padding: 7px 12px;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 800;
+    border: 1px solid transparent;
+}
+
+.action-add {
+    background: #008037;
+    color: #fff;
+}
+
+.action-drop {
+    background: transparent;
+    color: #D53025;
+    border-color: #D53025;
+}
+
+.action-change {
+    background: #FFF4D5;
+    color: #916000;
+    border-color: #F0C86B;
+}
+
+.action-btn:hover {
+    filter: brightness(0.93);
+}
+
+/* =========================================
+   SPECIAL CLASS BANNER
+========================================= */
+
+.special-class-banner {
+    margin-top: 16px;
+    padding: 14px 16px;
+    min-height: 68px;
+    background: var(--light-green);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.special-class-banner span {
+    font-size: 13px;
+    color: var(--text-secondary);
+}
+
+.special-class-banner button,
+.save-btn {
+    background: var(--white);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    padding: 12px 20px;
+    border-radius: 9px;
+    font-weight: 700;
+}
+
+/* =========================================
+   RIGHT COLUMN
+========================================= */
+
+.selection-tabs {
+    justify-content: flex-start;
+    width: fit-content;
+    background: var(--light-green);
+    padding: 4px;
+    border-radius: 10px;
+}
+
+.selection-btn {
+    border: none;
+    padding: 10px 18px;
+}
+
+.selection-btn:not(.active) {
+    background: transparent;
+}
+
+.chosen-courses {
+    min-height: 85px;
+    padding: 15px 5px;
+    color: var(--text-secondary);
+    font-size: 13px;
+}
+
+.empty-courses {
+    text-align: center;
+    font-style: italic;
+    padding: 25px 0;
+}
+
+.chosen-item {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 10px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.chosen-item strong {
+    color: var(--text-primary);
+}
+
+.chosen-item small {
+    display: block;
+    margin-top: 4px;
+}
+
+.enrollment-count {
+    font-size: 13px;
+    color: var(--text-secondary);
+    margin-bottom: 16px;
+}
+
+.enrollment-count strong {
+    color: var(--dark-green);
+}
+
+/* =========================================
+   CHANGES PANEL
+========================================= */
+
+.changes-panel {
+    background: var(--light-green);
+    border: 1px dashed #B8D6C1;
+    border-radius: 13px;
+    padding: 18px;
+}
+
+.changes-panel h2 {
+    color: var(--dark-green);
+    font-size: 18px;
+    margin-bottom: 15px;
+}
+
+.changes-list {
+    min-height: 50px;
+    color: var(--text-secondary);
+    font-size: 13px;
+    font-style: italic;
+    text-align: center;
+    padding: 10px 0;
+}
+
+.change-item {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--border-color);
+    font-style: normal;
+    text-align: left;
+}
+
+.reason-group {
+    margin-top: 12px;
+}
+
+.reason-group label {
+    display: block;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--text-secondary);
+    margin-bottom: 7px;
+}
+
+.reason-group select,
+.reason-group textarea {
+    width: 100%;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    background: var(--white);
+    color: var(--text-primary);
+    padding: 8px;
+    font-family: inherit;
+    font-size: 13px;
+}
+
+.reason-group textarea {
+    resize: vertical;
+}
+
+/* =========================================
+   SAVE / SUBMIT
+========================================= */
+
+.submission-area {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    margin-top: 20px;
+    padding-top: 18px;
+    border-top: 1px solid var(--border-color);
+}
+
+.policy-checkbox {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--text-secondary);
+}
+
+.policy-checkbox input {
+    width: 18px;
+    height: 18px;
+    accent-color: var(--primary-green);
+}
+
+.submission-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.submit-btn {
+    background: #008037;
+    border: none;
+    color: #fff;
+    padding: 12px 22px;
+    border-radius: 9px;
+    font-weight: 700;
+}
+
+.submit-btn:hover,
+.save-btn:hover {
+    opacity: 0.85;
+}
+
+/* DARK MODE ADJUSTMENTS */
+
+.dark-theme .page-title,
+.dark-theme .changes-panel h2,
+.dark-theme .enrollment-count strong {
+    color: #9BDBAE;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 1200px) {
+    .adddrop-layout {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 700px) {
+    html {
+        zoom: 100%;
+    }
+
+    .adddrop-content {
+        padding: 20px 14px;
+    }
+
+    .page-title {
+        font-size: 24px;
+    }
+
+    .course-controls,
+    .submission-area {
+        flex-wrap: wrap;
+    }
+
+    .course-controls input,
+    .course-controls select {
+        max-width: 100%;
+        width: 100%;
+    }
+
+    .course-table {
+        min-width: 550px;
+    }
+
+    .special-class-banner {
+        flex-wrap: wrap;
+    }
+
+    .submission-buttons {
+        width: 100%;
+        justify-content: flex-end;
+    }
+}
+
+/* =========================================
+   DYNAMIC SELECTION PANEL
+========================================= */
+
+.adddrop-layout>.selection-section {
+    min-width: 0;
+    max-height: 0;
+    overflow: hidden;
+
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(100%);
+    pointer-events: none;
+
+    transition:
+        transform 0.35s ease,
+        opacity 0.25s ease,
+        visibility 0.35s,
+        max-height 0s linear 0.35s;
+}
+
+/* Visible selection panel */
+
+.adddrop-layout.has-pending-changes>.selection-section {
+    max-height: none;
+    overflow: visible;
+
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(0);
+    pointer-events: auto;
+
+    transition:
+        transform 0.35s ease,
+        opacity 0.25s ease,
+        visibility 0s,
+        max-height 0s;
+}
+
+/* Deselect button */
+
+.adddrop-content .action-deselect {
+    background: var(--white);
+    color: var(--text-secondary);
+    border-color: var(--border-color);
+}
+
+.adddrop-content .action-deselect:hover {
+    color: #D53025;
+    border-color: #D53025;
+}
+
+/* Responsive layout */
+
+@media (max-width: 1200px) {
+
+    .adddrop-layout,
+    .adddrop-layout.has-pending-changes {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .adddrop-layout.has-pending-changes {
+        gap: 24px;
+    }
+}
+
+/* Accessibility: reduced motion */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .adddrop-layout,
+    .adddrop-layout>.selection-section {
+        transition: none;
+    }
+}

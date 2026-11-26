@@ -1,0 +1,297 @@
+/* =========================================
+   COURSE WITHDRAWAL PAGE
+========================================= */
+
+.withdrawal-content {
+    padding: 26px 35px 40px;
+}
+
+.withdrawal-page-title {
+    margin: 0 0 20px;
+    font-size: 27px;
+    font-weight: 800;
+    color: #07562c;
+}
+
+.withdrawal-card {
+    background: #fff;
+    border: 1px solid #dce8df;
+    border-radius: 14px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.withdrawal-card h2 {
+    color: #07562c;
+    font-size: 18px;
+    font-weight: 800;
+    margin: 0 0 15px;
+}
+
+/* WITHDRAWAL PERIOD NOTICE */
+
+.withdrawal-notice {
+    background: #fff4d6;
+    color: #925b00;
+    border: 1px solid #f3ce70;
+    border-radius: 9px;
+    padding: 11px 14px;
+    margin-bottom: 15px;
+    font-size: 13px;
+}
+
+/* ENROLLED COURSES TABLE */
+
+.withdrawal-table-wrapper {
+    overflow-x: auto;
+    border: 1px solid #dce8df;
+    border-radius: 10px;
+}
+
+.withdrawal-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+.withdrawal-table th {
+    background: linear-gradient(110deg, #008039, #00632d);
+    color: white;
+    padding: 13px 14px;
+    font-size: 12px;
+    font-weight: 800;
+}
+
+.withdrawal-table td {
+    padding: 13px 14px;
+    border-bottom: 1px solid #e1e9e3;
+    color: #172b20;
+    font-size: 13px;
+}
+
+.withdrawal-table tr:last-child td {
+    border-bottom: none;
+}
+
+.withdrawal-table tbody tr:hover {
+    background: #f2f8f3;
+}
+
+/* WITHDRAW BUTTONS */
+
+.withdrawal-course-btn {
+    background: white;
+    color: #c62828;
+    border: 1px solid #e65c5c;
+    border-radius: 8px;
+    padding: 8px 17px;
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.withdrawal-course-btn:hover {
+    background: #fff0f0;
+}
+
+.withdrawal-course-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* SELECTED COURSES */
+
+.withdrawal-selected-courses {
+    min-height: 55px;
+    margin-bottom: 14px;
+}
+
+.withdrawal-empty {
+    text-align: center;
+    padding: 18px 0;
+    color: #607469;
+    font-size: 13px;
+    font-style: italic;
+}
+
+.withdrawal-selected-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 12px 14px;
+    margin-bottom: 8px;
+    background: #f2f8f3;
+    border: 1px solid #dce8df;
+    border-radius: 9px;
+}
+
+.withdrawal-selected-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.withdrawal-selected-info strong {
+    font-size: 13px;
+    color: #07562c;
+}
+
+.withdrawal-selected-info span {
+    font-size: 12px;
+    color: #607469;
+}
+
+.withdrawal-remove-btn {
+    background: white;
+    color: #c62828;
+    border: 1px solid #e65c5c;
+    border-radius: 7px;
+    padding: 7px 12px;
+    font-family: inherit;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+/* WITHDRAWAL FORM */
+
+.withdrawal-form-group {
+    margin: 12px 0;
+}
+
+.withdrawal-form-group label {
+    display: block;
+    margin-bottom: 6px;
+    font-size: 13px;
+    font-weight: 700;
+    color: #365543;
+}
+
+.withdrawal-form-group select,
+.withdrawal-form-group textarea {
+    width: 100%;
+    box-sizing: border-box;
+    border: 1px solid #d9e5dd;
+    border-radius: 7px;
+    padding: 9px 11px;
+    font-family: inherit;
+    font-size: 13px;
+    background: white;
+    color: #172b20;
+}
+
+.withdrawal-form-group textarea {
+    resize: vertical;
+}
+
+.withdrawal-form-group select:focus,
+.withdrawal-form-group textarea:focus {
+    outline: 2px solid #008037;
+    outline-offset: 1px;
+}
+
+.withdrawal-agreement {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    font-size: 13px;
+    font-weight: 700;
+    color: #365543;
+    cursor: pointer;
+    margin: 12px 0;
+}
+
+.withdrawal-agreement input {
+    width: 17px;
+    height: 17px;
+    accent-color: #008037;
+}
+
+/* SUBMIT BUTTON */
+
+.withdrawal-actions {
+    padding-top: 15px;
+    border-top: 1px solid #e1e9e3;
+}
+
+.withdrawal-submit {
+    background: #008037;
+    color: white;
+    border: none;
+    border-radius: 9px;
+    padding: 12px 24px;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.withdrawal-submit:hover:not(:disabled) {
+    background: #006b30;
+}
+
+.withdrawal-submit:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+}
+
+/* DARK MODE */
+
+.dark-theme .withdrawal-card {
+    background: #1d2b23;
+    border-color: #3b5142;
+}
+
+.dark-theme .withdrawal-page-title,
+.dark-theme .withdrawal-card h2,
+.dark-theme .withdrawal-selected-info strong {
+    color: #9bdbad;
+}
+
+.dark-theme .withdrawal-table td,
+.dark-theme .withdrawal-form-group label,
+.dark-theme .withdrawal-agreement {
+    color: #e2eee5;
+}
+
+.dark-theme .withdrawal-table tbody tr:hover,
+.dark-theme .withdrawal-selected-item {
+    background: #263b2d;
+}
+
+.dark-theme .withdrawal-form-group select,
+.dark-theme .withdrawal-form-group textarea {
+    background: #263b2d;
+    color: #fff;
+    border-color: #4b6653;
+}
+
+.dark-theme .withdrawal-selected-info span,
+.dark-theme .withdrawal-empty {
+    color: #b7c8bd;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 700px) {
+    .withdrawal-content {
+        padding: 20px 14px;
+    }
+
+    .withdrawal-page-title {
+        font-size: 23px;
+    }
+
+    .withdrawal-card {
+        padding: 14px;
+    }
+
+    .withdrawal-table {
+        min-width: 560px;
+    }
+
+    .withdrawal-selected-item {
+        flex-wrap: wrap;
+    }
+}

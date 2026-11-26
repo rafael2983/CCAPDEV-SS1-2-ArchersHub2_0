@@ -1,0 +1,237 @@
+/* =========================================
+   CURRICULUM PROGRESSION PAGE
+========================================= */
+
+.curriculum-content {
+    padding: 26px 35px 40px;
+}
+
+.curriculum-page-title {
+    margin: 0 0 20px;
+    font-size: 27px;
+    font-weight: 800;
+    color: #07562c;
+}
+
+/* CARDS */
+
+.curriculum-card {
+    background: #fff;
+    border: 1px solid #dce8df;
+    border-radius: 14px;
+    padding: 21px;
+    margin-bottom: 20px;
+}
+
+.curriculum-card h2 {
+    margin: 0 0 16px;
+    color: #07562c;
+    font-size: 18px;
+    font-weight: 800;
+}
+
+/* PROGRESS */
+
+.curriculum-units-text {
+    margin: 0 0 19px;
+    color: #172b20;
+    font-size: 14px;
+}
+
+.curriculum-units-text strong {
+    font-weight: 500;
+}
+
+.curriculum-progress-track {
+    width: 100%;
+    height: 11px;
+    background: #e5e5e5;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.curriculum-progress-fill {
+    height: 100%;
+    width: 0;
+    background: linear-gradient(90deg,
+            #008037,
+            #20a052);
+    border-radius: 20px;
+    transition: width 0.4s ease;
+}
+
+/* FILTERS */
+
+.curriculum-filters {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    flex-wrap: wrap;
+    width: fit-content;
+    max-width: 100%;
+    padding: 4px;
+    margin-bottom: 16px;
+    background: #f2f6f3;
+    border-radius: 10px;
+}
+
+.curriculum-filter {
+    border: none;
+    border-radius: 8px;
+    background: transparent;
+    color: #607469;
+    padding: 10px 16px;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.curriculum-filter:hover:not(.active) {
+    background: #e3eee6;
+}
+
+.curriculum-filter.active {
+    background: #008037;
+    color: white;
+}
+
+/* TABLE */
+
+.curriculum-table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+    border: 1px solid #dce8df;
+    border-radius: 11px;
+}
+
+.curriculum-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+.curriculum-table th {
+    padding: 13px 14px;
+    background: linear-gradient(110deg,
+            #008039,
+            #00632d);
+    color: white;
+    font-size: 12px;
+    font-weight: 800;
+    white-space: nowrap;
+}
+
+.curriculum-table td {
+    padding: 13px 14px;
+    border-bottom: 1px solid #e1e9e3;
+    color: #172b20;
+    font-size: 13px;
+}
+
+.curriculum-table tr:last-child td {
+    border-bottom: none;
+}
+
+.curriculum-table tbody tr:hover {
+    background: #f2f8f3;
+}
+
+.curriculum-table th:nth-child(2) {
+    min-width: 230px;
+}
+
+.curriculum-table th:nth-child(8) {
+    min-width: 145px;
+}
+
+/* STATUS */
+
+.curriculum-status {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+.curriculum-status.taken {
+    color: #172b20;
+}
+
+.curriculum-status.can-take-now {
+    color: #172b20;
+}
+
+.curriculum-status.needs-prerequisite {
+    color: #172b20;
+}
+
+.curriculum-empty {
+    text-align: center;
+    padding: 22px !important;
+    color: #607469 !important;
+    font-style: italic;
+}
+
+/* DARK MODE */
+
+.dark-theme .curriculum-card {
+    background: #1d2b23;
+    border-color: #3b5142;
+}
+
+.dark-theme .curriculum-page-title,
+.dark-theme .curriculum-card h2 {
+    color: #9bdbad;
+}
+
+.dark-theme .curriculum-units-text,
+.dark-theme .curriculum-table td,
+.dark-theme .curriculum-status {
+    color: #e2eee5;
+}
+
+.dark-theme .curriculum-filters {
+    background: #263b2d;
+}
+
+.dark-theme .curriculum-filter {
+    color: #b7c8bd;
+}
+
+.dark-theme .curriculum-filter.active {
+    background: #008037;
+    color: white;
+}
+
+.dark-theme .curriculum-table tbody tr:hover {
+    background: #263b2d;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 900px) {
+    .curriculum-table {
+        min-width: 950px;
+    }
+}
+
+@media (max-width: 700px) {
+    .curriculum-content {
+        padding: 20px 14px;
+    }
+
+    .curriculum-page-title {
+        font-size: 23px;
+    }
+
+    .curriculum-card {
+        padding: 15px;
+    }
+
+    .curriculum-filter {
+        padding: 9px 12px;
+        font-size: 12px;
+    }
+}

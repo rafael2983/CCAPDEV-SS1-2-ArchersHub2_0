@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ArchersHub | Add / Drop</title>
+
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/addDrop.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="app-container">
+
+        <!-- TOPBAR -->
+        <header class="topbar">
+            <div class="topbar-logo">
+                <div class="university-logo">
+                    <span>DLSU</span>
+                </div>
+            </div>
+
+            <div class="topbar-actions">
+                <button class="role-switcher" id="roleSwitcher">
+                    <span id="currentRole">STUDENT</span>
+                    <span class="switch-icon">&#8635;</span>
+                </button>
+
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">&#9728;</button>
+
+                <div class="student-id" id="studentID">ID12345678</div>
+            </div>
+        </header>
+
+        <div class="app-layout">
+
+            <!-- SIDEBAR -->
+            <aside class="sidebar">
+                <nav class="sidebar-navigation" id="sidebarNavigation"></nav>
+
+                <div class="sidebar-bottom">
+                    <button class="logout-button" id="logoutButton">
+                        Log out
+                    </button>
+                </div>
+            </aside>
+
+            <!-- MAIN CONTENT -->
+            <main class="dashboard-main">
+                <div class="dashboard-content adddrop-content">
+
+                    <h1 class="page-title">Add / Drop</h1>
+
+                    <div class="adddrop-layout">
+
+                        <!-- LEFT COLUMN -->
+                        <section class="courses-section">
+
+                            <!-- CAMPUS TABS -->
+                            <div class="campus-tabs">
+                                <button class="campus-btn active" data-campus="Laguna">Laguna</button>
+                                <button class="campus-btn" data-campus="Manila">Manila</button>
+                            </div>
+
+                            <!-- SEARCH -->
+                            <div class="course-controls">
+                                <label for="courseSearch">Search courses</label>
+                                <input type="search" id="courseSearch" placeholder="Search by course code">
+                            </div>
+
+                            <!-- SORT -->
+                            <div class="course-controls">
+                                <label for="courseSort">Sort courses</label>
+
+                                <select id="courseSort">
+                                    <option value="code-asc">Course code (A-Z)</option>
+                                    <option value="code-desc">Course code (Z-A)</option>
+                                    <option value="name-asc">Course name (A-Z)</option>
+                                </select>
+                            </div>
+
+                            <!-- COURSE TABLE -->
+                            <div class="course-table-wrapper">
+                                <table class="course-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Course code</th>
+                                            <th>Course name</th>
+                                            <th>Section</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody id="courseTableBody"></tbody>
+                                </table>
+                            </div>
+
+                            <!-- SPECIAL CLASS -->
+                            <div class="special-class-banner">
+                                <span>Can't find the course you need?</span>
+                                <button id="specialClassButton">
+                                    Apply Special Class
+                                </button>
+                            </div>
+
+                        </section>
+
+                        <!-- RIGHT COLUMN -->
+                        <section class="selection-section">
+
+                            <!-- CHOSEN COURSES / SCHEDULE -->
+                            <div class="selection-tabs">
+                                <button class="selection-btn active" data-tab="courses">
+                                    Chosen courses
+                                </button>
+
+                                <button class="selection-btn" data-tab="schedule">
+                                    Schedule
+                                </button>
+                            </div>
+
+                            <div id="chosenCourses" class="chosen-courses">
+                            </div>
+
+                            <p class="enrollment-count">
+                                Courses enrolled:
+                                <strong id="enrollmentCount">0</strong>
+                            </p>
+
+                            <!-- CHANGES -->
+                            <div class="changes-panel">
+                                <h2>Changes</h2>
+
+                                <div id="changesList" class="changes-list">
+                                    No changes yet. Press Add, Drop or Change on a course.
+                                </div>
+
+                                <div class="reason-group">
+                                    <label for="changeReason">Reason</label>
+                                    <select id="changeReason">
+                                        <option value="">Select a reason</option>
+                                        <option value="Schedule conflict">Schedule conflict</option>
+                                        <option value="Change of section">Change of section</option>
+                                        <option value="Change of course">Change of course</option>
+                                        <option value="Personal reason">Personal reason</option>
+                                        <option value="Other">Other</option>
+                                    </select>
+                                </div>
+
+                                <div class="reason-group">
+                                    <label for="otherReason">Other reason</label>
+                                    <textarea id="otherReason" rows="2" placeholder="Optional details"></textarea>
+                                </div>
+                            </div>
+
+                            <!-- ACTIONS -->
+                            <div class="submission-area">
+                                <label class="policy-checkbox">
+                                    <input type="checkbox" id="policyAgreement">
+                                    <span>I agree to the school policy</span>
+                                </label>
+
+                                <div class="submission-buttons">
+                                    <button class="save-btn" id="saveButton">
+                                        Save
+                                    </button>
+
+                                    <button class="submit-btn" id="submitButton">
+                                        Submit
+                                    </button>
+                                </div>
+                            </div>
+
+                        </section>
+
+                    </div>
+                </div>
+
+                <footer class="dashboard-footer">
+                    <span>2026 ArchersHub 2.0</span>
+                    <div>
+                        <a href="#">Privacy Policy</a> |
+                        <a href="#">Conditions</a>
+                    </div>
+                </footer>
+            </main>
+        </div>
+    </div>
+
+    <script type="module" src="js/addDropMain.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ArchersHub | Register</title>
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/register.css">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+
+<body class="registration-page">
+
+    <main class="login-container">
+
+        <!-- LEFT: School Image Carousel -->
+        <section class="school-panel">
+
+            <div class="school-image" id="schoolImage">
+
+                <img src="images/school-picture1.png" alt="De La Salle University campus" class="school-photo"
+                    id="schoolPhoto">
+
+                <div class="image-overlay"></div>
+
+                <div class="school-caption">
+                    <span class="caption-tag">DE LA SALLE UNIVERSITY</span>
+                    <h1>Welcome to<br>ArchersHub.</h1>
+                    <p>Your university journey, all in one place.</p>
+                </div>
+
+                <button class="next-photo" id="nextPhoto" aria-label="Show next school photograph">
+                    <span>&#8594;</span>
+                </button>
+
+                <div class="photo-indicators" id="photoIndicators">
+                    <span class="active"></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+
+        </section>
+
+
+        <!-- RIGHT: Login Section -->
+        <section class="login-panel">
+
+            <div class="login-card">
+
+                <!-- School Logo -->
+                <header class="school-header">
+                    <div class="logo-placeholder">
+                        <span>DLSU</span>
+                    </div>
+
+                    <div class="school-name">
+                        <h2>ARCHERSHUB</h2>
+                        <p>DE LA SALLE UNIVERSITY</p>
+                    </div>
+                </header>
+
+
+                <!-- Welcome Message -->
+                <div class="welcome-section">
+                    <h1>Create your account</h1>
+                    <p>Register using your DLSU institutional email. All fields except middle name are required.</p>
+                </div>
+
+
+                <form id="registerForm" method="post">
+                    <div class="register-row">
+                        <div class="form-group"><label for="firstName">First name *</label><input id="firstName" autocomplete="given-name" maxlength="100" required></div>
+                        <div class="form-group"><label for="lastName">Last name *</label><input id="lastName" autocomplete="family-name" maxlength="100" required></div>
+                    </div>
+                    <div class="form-group"><label for="middleName">Middle name (optional)</label><input id="middleName" autocomplete="additional-name" maxlength="100"></div>
+                    <div class="form-group"><label for="schoolId">Student ID *</label><input id="schoolId" inputmode="numeric" autocomplete="username" pattern="[0-9]{8}" maxlength="8" placeholder="8-digit student ID" required></div>
+                    <div class="form-group"><label for="email">DLSU email *</label><input id="email" type="email" autocomplete="email" maxlength="255" placeholder="name@dlsu.edu.ph" required><small>Only @dlsu.edu.ph email addresses are accepted.</small></div>
+                    <div class="form-group"><label for="program">Academic program *</label><select id="program" required disabled><option value="">Loading programs...</option></select></div>
+                    <div class="register-row">
+                        <div class="form-group"><label for="password">Password *</label><input id="password" type="password" autocomplete="new-password" minlength="8" maxlength="72" required></div>
+                        <div class="form-group"><label for="confirmPassword">Confirm password *</label><input id="confirmPassword" type="password" autocomplete="new-password" minlength="8" maxlength="72" required></div>
+                    </div>
+                    <label class="show-password"><input type="checkbox" id="showPassword"> Show passwords</label>
+                    <p id="registerMessage" role="status" aria-live="polite" hidden></p>
+                    <button type="submit" class="login-button" id="registerButton" disabled>Create Student Account <span>&#8594;</span></button>
+                </form>
+                <p class="auth-switch">Already have an account? <a href="index.html">Log in</a></p>
+
+                <!-- Footer -->
+                <footer class="login-footer">
+                    <p>© 2026 ArchersHub | De La Salle University</p>
+                    <p>For authorized university users only.</p>
+                </footer>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- Frontend-only JavaScript -->
+    <script type="module" src="js/registerMain.js"></script>
+
+</body>
+
+</html>

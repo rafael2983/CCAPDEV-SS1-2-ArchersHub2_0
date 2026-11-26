@@ -1,0 +1,243 @@
+/* =========================================
+   PROGRAM EXCHANGE PAGE
+========================================= */
+
+.exchange-content {
+    padding: 26px 35px 40px;
+}
+
+.exchange-page-title {
+    margin: 0 0 20px;
+    font-size: 27px;
+    font-weight: 800;
+    color: #07562c;
+}
+
+.exchange-card {
+    background: #fff;
+    border: 1px solid #dce8df;
+    border-radius: 14px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.exchange-card h2 {
+    color: #07562c;
+    font-size: 18px;
+    font-weight: 800;
+    margin: 0 0 15px;
+}
+
+/* APPLICATION NOTICE */
+
+.exchange-notice {
+    background: #fff4d6;
+    color: #925b00;
+    border: 1px solid #f3ce70;
+    border-radius: 9px;
+    padding: 11px 14px;
+    margin-bottom: 15px;
+    font-size: 13px;
+}
+
+/* FORM */
+
+.exchange-form-group {
+    margin-bottom: 13px;
+}
+
+.exchange-form-group label {
+    display: block;
+    font-size: 13px;
+    font-weight: 700;
+    color: #365543;
+    margin-bottom: 6px;
+}
+
+.exchange-form-group input,
+.exchange-form-group select,
+.exchange-form-group textarea {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #d9e5dd;
+    border-radius: 8px;
+    background: white;
+    color: #172b20;
+    font: inherit;
+    font-size: 13px;
+}
+
+.exchange-form-group input[readonly] {
+    background: #f9fbf9;
+}
+
+.exchange-form-group textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+
+.exchange-form-group select:focus,
+.exchange-form-group textarea:focus {
+    outline: 2px solid #008037;
+    outline-offset: 1px;
+}
+
+/* SUBMIT BUTTON */
+
+.exchange-actions {
+    border-top: 1px solid #e1e9e3;
+    padding-top: 17px;
+}
+
+.exchange-submit {
+    background: #007b35;
+    color: white;
+    border: none;
+    border-radius: 9px;
+    padding: 12px 24px;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 5px 12px rgba(0, 107, 53, 0.12);
+}
+
+.exchange-submit:hover {
+    background: #00632d;
+}
+
+/* APPLICATIONS TABLE */
+
+.exchange-table-wrapper {
+    overflow-x: auto;
+    border: 1px solid #dce8df;
+    border-radius: 10px;
+}
+
+.exchange-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+.exchange-table th {
+    background: linear-gradient(110deg, #008039, #00632d);
+    color: white;
+    padding: 13px 14px;
+    font-size: 12px;
+    font-weight: 800;
+}
+
+.exchange-table td {
+    padding: 13px 14px;
+    border-bottom: 1px solid #e1e9e3;
+    color: #172b20;
+    font-size: 13px;
+}
+
+.exchange-table tr:last-child td {
+    border-bottom: none;
+}
+
+.exchange-table tbody tr:hover {
+    background: #f2f8f3;
+}
+
+.exchange-empty {
+    text-align: center;
+    font-style: italic;
+    color: #607469 !important;
+    padding: 18px !important;
+}
+
+/* APPLICATION STATUS */
+
+.exchange-status {
+    display: inline-block;
+    border-radius: 20px;
+    padding: 5px 11px;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.exchange-status.pending {
+    background: #fff4d6;
+    color: #925b00;
+}
+
+.exchange-status.cancelled {
+    background: #f1f3f2;
+    color: #607469;
+}
+
+/* CANCEL BUTTON */
+
+.exchange-cancel-btn {
+    background: white;
+    color: #c62828;
+    border: 1px solid #e65c5c;
+    border-radius: 7px;
+    padding: 8px 15px;
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.exchange-cancel-btn:hover {
+    background: #fff0f0;
+}
+
+/* DARK MODE */
+
+.dark-theme .exchange-card {
+    background: #1d2b23;
+    border-color: #3b5142;
+}
+
+.dark-theme .exchange-page-title,
+.dark-theme .exchange-card h2 {
+    color: #9bdbad;
+}
+
+.dark-theme .exchange-form-group label,
+.dark-theme .exchange-table td {
+    color: #e2eee5;
+}
+
+.dark-theme .exchange-form-group input,
+.dark-theme .exchange-form-group select,
+.dark-theme .exchange-form-group textarea {
+    background: #263b2d;
+    color: #fff;
+    border-color: #4b6653;
+}
+
+.dark-theme .exchange-table tbody tr:hover {
+    background: #263b2d;
+}
+
+.dark-theme .exchange-empty {
+    color: #b7c8bd !important;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 700px) {
+    .exchange-content {
+        padding: 20px 14px;
+    }
+
+    .exchange-page-title {
+        font-size: 23px;
+    }
+
+    .exchange-card {
+        padding: 14px;
+    }
+
+    .exchange-table {
+        min-width: 560px;
+    }
+}

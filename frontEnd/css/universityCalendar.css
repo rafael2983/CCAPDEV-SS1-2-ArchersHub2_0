@@ -1,0 +1,259 @@
+/* =========================================
+   UNIVERSITY CALENDAR
+========================================= */
+
+.university-calendar-content {
+    padding: 26px 35px 40px;
+}
+
+.university-calendar-title {
+    margin: 0 0 20px;
+    color: #07562c;
+    font-size: 27px;
+    font-weight: 800;
+}
+
+/* MAIN CARD */
+
+.university-calendar-card {
+    background: #fff;
+    border: 1px solid #dce8df;
+    border-radius: 14px;
+    padding: 21px;
+}
+
+/* VIEW TOGGLE */
+
+.university-calendar-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px;
+    margin-bottom: 17px;
+    background: #f2f6f3;
+    border-radius: 10px;
+}
+
+.university-calendar-toggle-btn {
+    padding: 10px 19px;
+    border: none;
+    border-radius: 8px;
+    background: transparent;
+    color: #607469;
+    font: inherit;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+}
+
+.university-calendar-toggle-btn.active {
+    background: #008037;
+    color: white;
+}
+
+.university-calendar-toggle-btn:hover:not(.active) {
+    background: #e5eee8;
+}
+
+/* TABLE */
+
+.university-calendar-table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+    border: 1px solid #dce8df;
+    border-radius: 11px;
+}
+
+.university-calendar-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+.university-calendar-table th {
+    padding: 13px 15px;
+    background: linear-gradient(110deg,
+            #008039,
+            #00632d);
+    color: #fff;
+    font-size: 12px;
+    font-weight: 800;
+}
+
+.university-calendar-table td {
+    padding: 15px;
+    border-bottom: 1px solid #e1e9e3;
+    color: #172b20;
+    font-size: 13px;
+    vertical-align: middle;
+}
+
+.university-calendar-table tr:last-child td {
+    border-bottom: none;
+}
+
+.university-calendar-table tbody tr:hover {
+    background: #f2f8f3;
+}
+
+.university-calendar-table th:nth-child(1),
+.university-calendar-table th:nth-child(2) {
+    width: 25%;
+}
+
+.university-calendar-table th:nth-child(3) {
+    width: 20%;
+}
+
+.university-calendar-table th:nth-child(4) {
+    width: 30%;
+}
+
+/* IMPORTANT BADGE */
+
+.university-calendar-important {
+    display: inline-block;
+    padding: 5px 11px;
+    background: #fff2d6;
+    color: #9a6200;
+    border: 1px solid #f2d58a;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 800;
+}
+
+.university-calendar-normal {
+    color: #607469;
+    font-size: 12px;
+}
+
+/* LIST VIEW */
+
+.university-calendar-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.university-calendar-event {
+    padding: 16px 18px;
+    border: 1px solid #dce8df;
+    border-radius: 10px;
+    background: #fafcfb;
+}
+
+.university-calendar-event.important {
+    border-left: 4px solid #e5aa32;
+}
+
+.university-calendar-event h3 {
+    margin: 0 0 8px;
+    color: #07562c;
+    font-size: 15px;
+    font-weight: 800;
+}
+
+.university-calendar-event-date {
+    margin: 0;
+    color: #607469;
+    font-size: 12px;
+}
+
+.university-calendar-event-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 8px;
+}
+
+/* EMPTY STATES */
+
+.university-calendar-empty {
+    padding: 24px !important;
+    text-align: center;
+    color: #607469 !important;
+    font-size: 13px;
+    font-style: italic;
+}
+
+#universityCalendarListView[hidden],
+#universityCalendarTabularView[hidden] {
+    display: none;
+}
+
+/* DARK MODE */
+
+.dark-theme .university-calendar-card {
+    background: #1d2b23;
+    border-color: #3b5142;
+}
+
+.dark-theme .university-calendar-title,
+.dark-theme .university-calendar-event h3 {
+    color: #9bdbad;
+}
+
+.dark-theme .university-calendar-toggle {
+    background: #263b2d;
+}
+
+.dark-theme .university-calendar-toggle-btn:not(.active) {
+    color: #d5e6da;
+}
+
+.dark-theme .university-calendar-table td {
+    color: #e2eee5;
+    border-color: #3b5142;
+}
+
+.dark-theme .university-calendar-table tbody tr:hover {
+    background: #263b2d;
+}
+
+.dark-theme .university-calendar-event {
+    background: #263b2d;
+    border-color: #3b5142;
+}
+
+.dark-theme .university-calendar-event-date {
+    color: #c2d5c8;
+}
+
+.dark-theme .university-calendar-normal {
+    color: #c2d5c8;
+}
+
+.dark-theme .university-calendar-important {
+    background: #59441b;
+    color: #ffe2a0;
+    border-color: #8c6c2b;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 900px) {
+    .university-calendar-table {
+        min-width: 650px;
+    }
+}
+
+@media (max-width: 700px) {
+    .university-calendar-content {
+        padding: 20px 14px;
+    }
+
+    .university-calendar-title {
+        font-size: 23px;
+    }
+
+    .university-calendar-card {
+        padding: 14px;
+    }
+
+    .university-calendar-event-header {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+}

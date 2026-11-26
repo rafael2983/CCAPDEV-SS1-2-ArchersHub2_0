@@ -1,0 +1,513 @@
+/* =========================================
+   MAKE ANNOUNCEMENTS PAGE
+========================================= */
+
+.announcements-page {
+    padding: 26px 28px;
+}
+
+.announcements-heading {
+    margin-bottom: 30px;
+}
+
+.announcements-heading p {
+    margin: 0 0 4px;
+    color: #607568;
+    font-size: 14px;
+}
+
+.announcements-heading .page-title {
+    margin: 0;
+    color: #07562c;
+    font-size: 32px;
+    font-weight: 800;
+}
+
+
+/* =========================================
+   MAIN GRID
+========================================= */
+
+.announcements-layout {
+    display: grid;
+    grid-template-columns: 1.15fr 1fr;
+    gap: 24px;
+    align-items: stretch;
+}
+
+.announcements-left {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+    min-width: 0;
+}
+
+
+/* =========================================
+   CARDS
+========================================= */
+
+.announcement-card {
+    padding: 24px;
+    background: white;
+    border: 1px solid #cfe2d4;
+    border-radius: 16px;
+    min-width: 0;
+}
+
+.announcement-card h2 {
+    margin: 0 0 20px;
+    color: #07562c;
+    font-size: 21px;
+    font-weight: 800;
+}
+
+.announcement-card-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.announcement-card-heading h2 {
+    margin-bottom: 18px;
+}
+
+
+/* =========================================
+   TITLE
+========================================= */
+
+#announcementTitle {
+    width: 100%;
+    padding: 13px;
+    border: 1px solid #cbd5ce;
+    border-radius: 7px;
+    background: white;
+    font: inherit;
+    font-size: 15px;
+}
+
+.announcement-important {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 22px;
+    color: #254b34;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.announcement-important input {
+    width: 17px;
+    height: 17px;
+    accent-color: #007b35;
+}
+
+
+/* =========================================
+   FILE UPLOAD
+========================================= */
+
+.announcement-add-file {
+    padding: 7px 11px;
+    border: 1px solid #cfe2d4;
+    border-radius: 7px;
+    background: #f3f8f4;
+    color: #07562c;
+    font: inherit;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.announcement-add-file:hover {
+    background: #e3f0e7;
+}
+
+.announcement-file-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    min-height: 65px;
+    padding: 16px;
+    border: 1px dashed #cbd5ce;
+    border-radius: 8px;
+    background: #fafafa;
+    color: #666;
+    text-align: center;
+}
+
+.announcement-file-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 10px;
+    border: 1px solid #dce8df;
+    border-radius: 7px;
+    background: white;
+    color: #253b2b;
+    font-size: 13px;
+    text-align: left;
+}
+
+.announcement-file-item span {
+    overflow-wrap: anywhere;
+}
+
+.announcement-remove-file {
+    border: none;
+    background: none;
+    color: #c62828;
+    font: inherit;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+
+/* =========================================
+   DATES
+========================================= */
+
+.announcement-date-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+.announcement-field label {
+    display: block;
+    margin-bottom: 7px;
+    color: #607568;
+    font-size: 14px;
+    font-weight: 800;
+    letter-spacing: 0.4px;
+}
+
+.announcement-field input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #cbd5ce;
+    border-radius: 7px;
+    background: white;
+    font: inherit;
+    font-size: 14px;
+}
+
+
+/* =========================================
+   CONTENTS
+========================================= */
+
+.announcement-content-card {
+    display: flex;
+    flex-direction: column;
+    min-height: 575px;
+}
+
+#announcementContents {
+    flex: 1;
+    width: 100%;
+    min-height: 450px;
+    padding: 16px;
+    border: 1px solid #cbd5ce;
+    border-radius: 8px;
+    background: white;
+    font: inherit;
+    font-size: 15px;
+    line-height: 1.6;
+    resize: vertical;
+}
+
+
+/* =========================================
+   ACTION BUTTONS
+========================================= */
+
+.announcement-actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+}
+
+.announcement-actions button {
+    padding: 14px;
+    border-radius: 9px;
+    font: inherit;
+    font-size: 16px;
+    font-weight: 800;
+    cursor: pointer;
+}
+
+.announcement-save-button {
+    border: 1px solid #cbd5df;
+    background: #f2f4f7;
+    color: #354255;
+}
+
+.announcement-upload-button {
+    border: 1px solid #005b2a;
+    background: #005b2a;
+    color: white;
+}
+
+.announcement-upload-button:hover {
+    background: #007b35;
+}
+
+.announcement-message {
+    margin: 0;
+    color: #007b35;
+    font-size: 13px;
+}
+
+.announcement-message:empty {
+    display: none;
+}
+
+.announcement-message.error {
+    color: #c62828;
+}
+
+
+/* =========================================
+   FOCUS STATES
+========================================= */
+
+.announcements-page input:focus,
+.announcements-page textarea:focus {
+    outline: 2px solid #008037;
+    outline-offset: 1px;
+}
+
+
+/* =========================================
+   DARK MODE
+========================================= */
+
+.dark-theme .announcement-card {
+    background: #1d2b23;
+    border-color: #3b5142;
+}
+
+.dark-theme .announcements-heading .page-title,
+.dark-theme .announcement-card h2 {
+    color: #9bdbad;
+}
+
+.dark-theme .announcements-heading p,
+.dark-theme .announcement-field label,
+.dark-theme .announcement-important {
+    color: #c5d8ca;
+}
+
+.dark-theme .announcements-page input:not([type="checkbox"]),
+.dark-theme .announcements-page textarea {
+    background: #263b2d;
+    border-color: #47614d;
+    color: #e2eee5;
+}
+
+.dark-theme .announcement-file-list,
+.dark-theme .announcement-file-item {
+    background: #263b2d;
+    border-color: #47614d;
+    color: #e2eee5;
+}
+
+
+/* =========================================
+   RESPONSIVE DESIGN
+========================================= */
+
+@media (max-width: 1000px) {
+
+    .announcements-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .announcement-content-card {
+        min-height: 350px;
+    }
+
+    #announcementContents {
+        min-height: 300px;
+    }
+}
+
+@media (max-width: 600px) {
+
+    .announcements-page {
+        padding: 16px;
+    }
+
+    .announcements-heading .page-title {
+        font-size: 26px;
+    }
+
+    .announcement-card {
+        padding: 17px;
+    }
+
+    .announcement-date-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+/* =========================================
+   ANNOUNCEMENT MANAGEMENT
+========================================= */
+
+.announcement-management {
+    margin-top: 32px;
+}
+
+.announcement-management-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.announcement-management-heading h2 {
+    margin: 0;
+    font-size: 20px;
+}
+
+#announcementManagementList {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.management-announcement-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    padding: 18px;
+    border: 1px solid rgba(128, 128, 128, 0.25);
+    border-radius: 12px;
+}
+
+.management-announcement-details {
+    min-width: 0;
+    overflow-wrap: anywhere;
+}
+
+.management-announcement-details h3 {
+    margin: 0 0 6px;
+    font-size: 16px;
+}
+
+.management-announcement-status {
+    margin: 0 0 6px;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.management-announcement-details small {
+    opacity: 0.7;
+}
+
+.management-announcement-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.management-announcement-actions button {
+    padding: 8px 12px;
+    border: 1px solid rgba(128, 128, 128, 0.35);
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 13px;
+}
+
+.management-edit-button {
+    background: #198754;
+    color: white;
+}
+
+.management-toggle-button {
+    background: transparent;
+    color: inherit;
+}
+
+.management-delete-button {
+    background: #dc3545;
+    color: white;
+}
+
+.management-announcement-actions button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+#managementMessage {
+    margin-bottom: 12px;
+}
+
+#managementMessage.error {
+    color: #dc3545;
+}
+
+@media (max-width: 768px) {
+    .management-announcement-item {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .management-announcement-actions {
+        width: 100%;
+    }
+}
+
+/* =========================================
+   REQUIRED FIELD INDICATORS
+========================================= */
+
+.announcement-required {
+    color: #d32f2f;
+    font-weight: 800;
+    margin-left: 3px;
+}
+
+.announcements-heading .announcement-required-note {
+    margin-top: 10px;
+    font-size: 13px;
+    color: #607568;
+    font-weight: 500;
+}
+
+.announcement-required-note .announcement-required {
+    margin-left: 0;
+    margin-right: 4px;
+}
+
+/* Invalid fields after user interaction */
+
+.announcements-page input:user-invalid,
+.announcements-page textarea:user-invalid {
+    border-color: #d32f2f;
+    outline-color: #d32f2f;
+}
+
+/* Dark mode */
+
+.dark-theme .announcement-required {
+    color: #ff7373;
+}
+
+.dark-theme .announcements-heading .announcement-required-note {
+    color: #c5d8ca;
+}
+
+.dark-theme .announcements-page input:user-invalid,
+.dark-theme .announcements-page textarea:user-invalid {
+    border-color: #ff7373;
+    outline-color: #ff7373;
+}

@@ -1,0 +1,370 @@
+/* =========================================
+   ADMIN - ACCOUNT MANAGEMENT
+========================================= */
+
+.account-management-page {
+    padding: 24px 28px;
+}
+
+.account-management-page .page-title {
+    margin: 0 0 20px;
+    color: #07562c;
+    font-size: 30px;
+    font-weight: 800;
+}
+
+/* MAIN LAYOUT */
+
+.account-management-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    align-items: stretch;
+}
+
+.account-panel {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    min-height: 650px;
+    background: white;
+    border: 1px solid #cfe2d4;
+    border-radius: 16px;
+    overflow: hidden;
+}
+
+.account-panel-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    padding: 20px;
+}
+
+.account-panel-header h2 {
+    margin: 0;
+    color: #07562c;
+    font-size: 20px;
+}
+
+.account-panel-header p {
+    margin: 7px 0 0;
+    color: #5d7164;
+    font-size: 13px;
+}
+
+.account-count {
+    flex-shrink: 0;
+    padding: 7px 11px;
+    border: 1px solid #cfe2d4;
+    border-radius: 30px;
+    background: #f4f8f5;
+    color: #07562c;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+/* ACCOUNT LIST */
+
+.account-list {
+    flex: 1;
+    padding: 14px;
+    border-top: 1px solid #dce8df;
+}
+
+.account-item {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    gap: 13px;
+    margin-bottom: 10px;
+    padding: 13px;
+    background: white;
+    border: 1px solid #cfe2d4;
+    border-radius: 12px;
+    text-align: left;
+    cursor: pointer;
+    font: inherit;
+}
+
+.account-item:hover,
+.account-item.selected {
+    background: #f0f7f2;
+    border-color: #77b48a;
+}
+
+.account-avatar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    flex-shrink: 0;
+    border: 1px solid #cfe2d4;
+    border-radius: 50%;
+    background: #f4f8f5;
+    color: #07562c;
+    font-size: 13px;
+    font-weight: 800;
+}
+
+.account-item-info {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    gap: 5px;
+    min-width: 0;
+}
+
+.account-item-info strong {
+    color: #07562c;
+    font-size: 15px;
+    overflow-wrap: anywhere;
+}
+
+.account-item-info small {
+    color: #607568;
+    font-size: 12px;
+}
+
+.account-badges {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 5px;
+}
+
+.account-type-badge,
+.account-status-badge {
+    padding: 5px 9px;
+    border-radius: 20px;
+    font-size: 11px;
+    white-space: nowrap;
+}
+
+.account-type-badge {
+    background: #f4f8f5;
+    border: 1px solid #cfe2d4;
+    color: #607568;
+}
+
+.account-status-badge.active {
+    background: #e8f7ed;
+    border: 1px solid #b7dfc2;
+    color: #087335;
+}
+
+.account-status-badge.inactive {
+    background: #fff0f0;
+    border: 1px solid #e8c4c4;
+    color: #b52c2c;
+}
+
+/* BOTTOM BUTTONS */
+
+.account-panel-footer {
+    display: flex;
+    gap: 8px;
+    padding: 13px;
+    border-top: 1px solid #dce8df;
+}
+
+.account-secondary-button {
+    flex: 1;
+    padding: 12px;
+    background: #f4f8f5;
+    border: 1px solid #cfe2d4;
+    border-radius: 9px;
+    color: #607568;
+    font: inherit;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.account-secondary-button:hover {
+    background: #e5f1e9;
+}
+
+/* FORM */
+
+.account-form-heading-actions {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.account-required-note {
+    color: #607568;
+    font-size: 12px;
+}
+
+.account-required-note span,
+.account-field>label span {
+    color: #c62828;
+}
+
+.account-new-button {
+    padding: 0;
+    border: none;
+    background: none;
+    color: #007a35;
+    font: inherit;
+    font-size: 13px;
+    font-weight: 800;
+    cursor: pointer;
+}
+
+#accountManagementForm {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+}
+
+.account-form-body {
+    flex: 1;
+    padding: 4px 20px 20px;
+}
+
+.account-field {
+    margin-bottom: 18px;
+}
+
+.account-field label {
+    display: block;
+    margin-bottom: 8px;
+    color: #172b20;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.account-field input,
+.account-field select {
+    width: 100%;
+    min-height: 43px;
+    padding: 10px 12px;
+    border: 1px solid #cfe2d4;
+    border-radius: 9px;
+    background: white;
+    color: #172b20;
+    font: inherit;
+    font-size: 13px;
+}
+
+.account-field input:focus,
+.account-field select:focus {
+    outline: 2px solid #008037;
+    outline-offset: 1px;
+}
+
+.account-name-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px;
+}
+
+.account-name-grid>div {
+    min-width: 0;
+}
+
+.account-select-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 13px;
+}
+
+.account-form-message {
+    color: #007a35;
+    font-size: 13px;
+}
+
+.account-form-message:empty {
+    display: none;
+}
+
+.account-form-message.error {
+    color: #c62828;
+}
+
+.account-form-footer {
+    display: flex;
+    justify-content: flex-end;
+    padding: 13px;
+    border-top: 1px solid #dce8df;
+}
+
+.account-primary-button {
+    min-width: 145px;
+    padding: 13px 20px;
+    border: none;
+    border-radius: 9px;
+    background: #007b35;
+    color: white;
+    font: inherit;
+    font-size: 14px;
+    font-weight: 800;
+    cursor: pointer;
+}
+
+.account-primary-button:hover {
+    background: #005b2a;
+}
+
+/* DARK MODE */
+
+.dark-theme .account-panel,
+.dark-theme .account-item {
+    background: #1d2b23;
+    border-color: #3b5142;
+}
+
+.dark-theme .account-management-page .page-title,
+.dark-theme .account-panel-header h2,
+.dark-theme .account-item-info strong {
+    color: #9bdbad;
+}
+
+.dark-theme .account-panel-header p,
+.dark-theme .account-item-info small,
+.dark-theme .account-field label {
+    color: #c5d8ca;
+}
+
+.dark-theme .account-field input,
+.dark-theme .account-field select {
+    background: #263b2d;
+    border-color: #47614d;
+    color: #e2eee5;
+}
+
+.dark-theme .account-item:hover,
+.dark-theme .account-item.selected {
+    background: #304d38;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 1000px) {
+    .account-management-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .account-panel {
+        min-height: 450px;
+    }
+}
+
+@media (max-width: 600px) {
+    .account-management-page {
+        padding: 16px;
+    }
+
+    .account-name-grid,
+    .account-select-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .account-panel-header {
+        flex-wrap: wrap;
+    }
+}

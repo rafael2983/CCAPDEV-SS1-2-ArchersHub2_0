@@ -1,0 +1,364 @@
+/* =========================================
+   ENLISTMENT PAGE
+========================================= */
+
+.enlistment-content {
+    padding: 22px 35px 40px;
+}
+
+.enlistment-title {
+    margin: 0 0 17px;
+    color: #07562c;
+    font-size: 27px;
+    font-weight: 800;
+}
+
+/* CAMPUS BUTTONS */
+
+.enlistment-campus-toggle {
+    display: flex;
+    gap: 9px;
+    margin-bottom: 16px;
+}
+
+.enlistment-campus-btn {
+    min-width: 85px;
+    padding: 10px 17px;
+    border: 1px solid #dce8df;
+    border-radius: 9px;
+    background: #f5f8f6;
+    color: #172b20;
+    font: inherit;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.enlistment-campus-btn.active {
+    background: #008037;
+    color: #fff;
+    border-color: #008037;
+}
+
+/* SEARCH AND SORT */
+
+.enlistment-filters {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 14px;
+}
+
+.enlistment-filter-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+}
+
+.enlistment-filter-row label {
+    color: #365543;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.enlistment-filter-row input,
+.enlistment-filter-row select {
+    box-sizing: border-box;
+    width: 190px;
+    padding: 9px 12px;
+    border: 1px solid #d9e5dd;
+    border-radius: 8px;
+    background: white;
+    color: #172b20;
+    font: inherit;
+    font-size: 13px;
+}
+
+/* COURSE TABLE */
+
+.enlistment-table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+    border: 1px solid #dce8df;
+    border-radius: 11px;
+}
+
+.enlistment-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+.enlistment-table th {
+    padding: 12px 13px;
+    background: linear-gradient(110deg,
+            #008039,
+            #00632d);
+    color: white;
+    font-size: 12px;
+    font-weight: 800;
+}
+
+.enlistment-table td {
+    padding: 11px 13px;
+    border-bottom: 1px solid #dce8df;
+    color: #172b20;
+    font-size: 12px;
+    vertical-align: top;
+}
+
+.enlistment-table tr:last-child td {
+    border-bottom: none;
+}
+
+.enlistment-table th:nth-child(1) {
+    width: 18%;
+}
+
+.enlistment-table th:nth-child(2) {
+    width: 35%;
+}
+
+.enlistment-table th:nth-child(3) {
+    width: 34%;
+}
+
+.enlistment-table th:nth-child(4) {
+    width: 13%;
+}
+
+.enlistment-section-code {
+    display: block;
+    font-weight: 800;
+}
+
+.enlistment-section-detail {
+    display: block;
+    margin-top: 3px;
+    color: #607469;
+    font-size: 11px;
+}
+
+.enlistment-add-btn,
+.enlistment-remove-btn {
+    padding: 7px 15px;
+    border: none;
+    border-radius: 7px;
+    background: #008037;
+    color: white;
+    font: inherit;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.enlistment-add-btn:disabled {
+    background: #a2b8a8;
+    cursor: not-allowed;
+}
+
+.enlistment-remove-btn {
+    background: #fff;
+    border: 1px solid #dc4444;
+    color: #c62828;
+}
+
+/* LOWER TABS */
+
+.enlistment-bottom-toggle {
+    display: flex;
+    gap: 5px;
+    margin: 4px 0 18px;
+}
+
+.enlistment-view-btn {
+    padding: 9px 16px;
+    border: none;
+    border-radius: 8px;
+    background: transparent;
+    color: #607469;
+    font: inherit;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.enlistment-view-btn.active {
+    background: #008037;
+    color: white;
+}
+
+/* CHOSEN COURSES */
+
+.enlistment-chosen-list {
+    min-height: 55px;
+}
+
+.enlistment-empty {
+    padding: 23px;
+    color: #607469;
+    text-align: center;
+    font-size: 13px;
+    font-style: italic;
+}
+
+.enlistment-chosen-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    padding: 12px;
+    border-bottom: 1px solid #dce8df;
+}
+
+.enlistment-chosen-item strong {
+    display: block;
+    color: #07562c;
+    font-size: 13px;
+}
+
+.enlistment-chosen-item span {
+    display: block;
+    margin-top: 4px;
+    color: #607469;
+    font-size: 12px;
+}
+
+#enlistmentScheduleView[hidden],
+#enlistmentChosenView[hidden] {
+    display: none;
+}
+
+/* COUNT AND ACTIONS */
+
+.enlistment-course-count {
+    margin: 12px 0;
+    color: #607469;
+    font-size: 13px;
+}
+
+.enlistment-course-count strong {
+    color: #07562c;
+}
+
+.enlistment-actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 15px;
+    padding-top: 15px;
+    border-top: 1px solid #dce8df;
+}
+
+.enlistment-policy {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    color: #365543;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.enlistment-policy input {
+    width: 17px;
+    height: 17px;
+    accent-color: #008037;
+}
+
+.enlistment-action-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.enlistment-save-btn,
+.enlistment-submit-btn {
+    padding: 11px 24px;
+    border: 1px solid #dce8df;
+    border-radius: 9px;
+    background: #f5f8f6;
+    color: #365543;
+    font: inherit;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.enlistment-submit-btn {
+    background: #008037;
+    color: #fff;
+    border-color: #008037;
+}
+
+.enlistment-submit-btn:disabled {
+    background: #8bb597;
+    border-color: #8bb597;
+    cursor: not-allowed;
+}
+
+.enlistment-message {
+    margin-top: 12px;
+    font-size: 13px;
+    color: #07562c;
+}
+
+.enlistment-message:empty {
+    display: none;
+}
+
+/* DARK MODE */
+
+.dark-theme .enlistment-title,
+.dark-theme .enlistment-chosen-item strong {
+    color: #9bdbad;
+}
+
+.dark-theme .enlistment-filter-row label,
+.dark-theme .enlistment-policy,
+.dark-theme .enlistment-table td {
+    color: #e2eee5;
+}
+
+.dark-theme .enlistment-filter-row input,
+.dark-theme .enlistment-filter-row select {
+    background: #263b2d;
+    color: white;
+    border-color: #4b6653;
+}
+
+.dark-theme .enlistment-campus-btn:not(.active) {
+    background: #263b2d;
+    color: white;
+    border-color: #4b6653;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 900px) {
+    .enlistment-table {
+        min-width: 750px;
+    }
+}
+
+@media (max-width: 700px) {
+    .enlistment-content {
+        padding: 20px 14px;
+    }
+
+    .enlistment-title {
+        font-size: 23px;
+    }
+
+    .enlistment-filter-row {
+        align-items: stretch;
+        flex-direction: column;
+        gap: 6px;
+    }
+
+    .enlistment-filter-row input,
+    .enlistment-filter-row select {
+        width: 100%;
+    }
+}

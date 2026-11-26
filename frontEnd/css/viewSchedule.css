@@ -1,0 +1,260 @@
+/* =========================================
+   VIEW SCHEDULE
+========================================= */
+
+.schedule-content {
+    padding: 26px 35px 40px;
+}
+
+.schedule-page-title {
+    margin: 0 0 20px;
+    font-size: 27px;
+    font-weight: 800;
+    color: #07562c;
+}
+
+.schedule-card {
+    background: #fff;
+    border: 1px solid #dce8df;
+    border-radius: 14px;
+    padding: 21px;
+}
+
+/* TOP TOOLBAR */
+
+.schedule-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-bottom: 17px;
+}
+
+.schedule-term-group {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.schedule-term-group label {
+    font-size: 13px;
+    font-weight: 700;
+    color: #365543;
+}
+
+.schedule-term-group select {
+    min-width: 190px;
+    padding: 9px 12px;
+    border: 1px solid #d9e5dd;
+    border-radius: 7px;
+    background: #fff;
+    color: #172b20;
+    font-family: inherit;
+    font-size: 13px;
+}
+
+/* WEEKLY / LIST TOGGLE */
+
+.schedule-view-toggle {
+    display: flex;
+    gap: 4px;
+    padding: 4px;
+    background: #f2f6f3;
+    border-radius: 10px;
+}
+
+.schedule-toggle {
+    padding: 10px 18px;
+    border: none;
+    border-radius: 8px;
+    background: transparent;
+    color: #607469;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.schedule-toggle.active {
+    background: #008037;
+    color: white;
+}
+
+/* TABLES */
+
+.schedule-table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+    border: 1px solid #dce8df;
+    border-radius: 11px;
+}
+
+.schedule-table-wrapper[hidden] {
+    display: none;
+}
+
+.schedule-weekly-table,
+.schedule-list-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+.schedule-weekly-table {
+    table-layout: fixed;
+}
+
+.schedule-weekly-table th,
+.schedule-list-table th {
+    background: linear-gradient(110deg,
+            #008039,
+            #00632d);
+    color: white;
+    padding: 12px;
+    font-size: 12px;
+    font-weight: 800;
+    text-align: center;
+}
+
+.schedule-weekly-table td,
+.schedule-list-table td {
+    border-bottom: 1px solid #e1e9e3;
+    border-right: 1px solid #e1e9e3;
+    padding: 10px;
+    color: #172b20;
+    font-size: 12px;
+}
+
+.schedule-weekly-table tr:last-child td,
+.schedule-list-table tr:last-child td {
+    border-bottom: none;
+}
+
+.schedule-weekly-table td:last-child,
+.schedule-list-table td:last-child {
+    border-right: none;
+}
+
+.schedule-time-cell {
+    text-align: center;
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+.schedule-day-cell {
+    height: 42px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+/* CLASS BLOCKS */
+
+.schedule-class-block {
+    padding: 9px 6px;
+    background: #e0f3e6;
+    border-left: 3px solid #008037;
+    border-radius: 6px;
+    text-align: left;
+    overflow-wrap: anywhere;
+}
+
+.schedule-class-block strong {
+    display: block;
+    color: #07562c;
+    font-size: 12px;
+    margin-bottom: 4px;
+}
+
+.schedule-class-block span {
+    display: block;
+    color: #365543;
+    font-size: 11px;
+    line-height: 1.5;
+}
+
+.schedule-list-table td {
+    text-align: left;
+    padding: 13px;
+}
+
+.schedule-empty {
+    text-align: center !important;
+    color: #607469 !important;
+    font-style: italic;
+    padding: 20px !important;
+}
+
+/* DARK MODE */
+
+.dark-theme .schedule-card {
+    background: #1d2b23;
+    border-color: #3b5142;
+}
+
+.dark-theme .schedule-page-title {
+    color: #9bdbad;
+}
+
+.dark-theme .schedule-term-group label,
+.dark-theme .schedule-weekly-table td,
+.dark-theme .schedule-list-table td {
+    color: #e2eee5;
+}
+
+.dark-theme .schedule-term-group select {
+    background: #263b2d;
+    color: white;
+    border-color: #4b6653;
+}
+
+.dark-theme .schedule-view-toggle {
+    background: #263b2d;
+}
+
+.dark-theme .schedule-toggle.active {
+    background: #008037;
+    color: white;
+}
+
+.dark-theme .schedule-class-block {
+    background: #294633;
+}
+
+.dark-theme .schedule-class-block strong {
+    color: #9bdbad;
+}
+
+.dark-theme .schedule-class-block span {
+    color: #d5e6da;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 900px) {
+    .schedule-weekly-table {
+        min-width: 850px;
+    }
+
+    .schedule-list-table {
+        min-width: 700px;
+    }
+}
+
+@media (max-width: 700px) {
+    .schedule-content {
+        padding: 20px 14px;
+    }
+
+    .schedule-page-title {
+        font-size: 23px;
+    }
+
+    .schedule-card {
+        padding: 14px;
+    }
+
+    .schedule-toolbar {
+        align-items: flex-start;
+    }
+}

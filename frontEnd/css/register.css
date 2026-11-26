@@ -1,0 +1,16 @@
+/* Registration-only styles and shared authentication link */
+.auth-switch { text-align:center; margin-top:22px; font-size:13px; color:var(--text-muted); }
+.auth-switch a { color:var(--dlsu-green); font-weight:700; }
+.registration-page .login-card { max-width:520px; }
+.registration-page .welcome-section { margin:22px 0; }
+.registration-page .form-group { margin-bottom:14px; min-width:0; }
+.registration-page .form-group input, .registration-page select { height:44px; }
+.register-row { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+.registration-page select { width:100%; border:1px solid var(--border); border-radius:7px; background:#FAFCFA; padding:0 10px; font:inherit; font-size:13px; color:var(--text-dark); }
+.registration-page small { display:block; margin-top:5px; font-size:11px; color:var(--text-muted); }
+.show-password { display:flex; align-items:center; gap:8px; font-size:13px; margin:0 0 16px; }
+#registerMessage { font-size:13px; margin-bottom:14px; color:#b42318; overflow-wrap:anywhere; }
+#registerMessage.success { color:var(--dlsu-green); }
+.registration-page .login-button:disabled { opacity:.55; cursor:not-allowed; transform:none; box-shadow:none; }
+.registration-page .login-footer { margin-top:24px; }
+@media(max-width:420px) { .register-row { grid-template-columns:1fr; gap:0; } }

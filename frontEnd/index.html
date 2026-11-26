@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ArchersHub | Login</title>
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/register.css">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <main class="login-container">
+
+        <!-- LEFT: School Image Carousel -->
+        <section class="school-panel">
+
+            <div class="school-image" id="schoolImage">
+
+                <img src="images/school-picture1.png" alt="De La Salle University campus" class="school-photo"
+                    id="schoolPhoto">
+
+                <div class="image-overlay"></div>
+
+                <div class="school-caption">
+                    <span class="caption-tag">DE LA SALLE UNIVERSITY</span>
+                    <h1>Welcome to<br>ArchersHub.</h1>
+                    <p>Your university journey, all in one place.</p>
+                </div>
+
+                <button class="next-photo" id="nextPhoto" aria-label="Show next school photograph">
+                    <span>&#8594;</span>
+                </button>
+
+                <div class="photo-indicators" id="photoIndicators">
+                    <span class="active"></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+
+        </section>
+
+
+        <!-- RIGHT: Login Section -->
+        <section class="login-panel">
+
+            <div class="login-card">
+
+                <!-- School Logo -->
+                <header class="school-header">
+                    <div class="logo-placeholder">
+                        <span>DLSU</span>
+                    </div>
+
+                    <div class="school-name">
+                        <h2>ARCHERSHUB</h2>
+                        <p>DE LA SALLE UNIVERSITY</p>
+                    </div>
+                </header>
+
+
+                <!-- Welcome Message -->
+                <div class="welcome-section">
+                    <h1>Welcome back!</h1>
+                    <p>Sign in to access your university portal.</p>
+                </div>
+
+
+                <!-- Login Form -->
+                <form id="loginForm">
+
+                    <div class="form-group">
+                        <label for="studentID">Enter your School ID</label>
+                        <input type="text" id="studentID" name="studentID" placeholder="Enter your Student ID"
+                            autocomplete="username" required>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="password-label">
+                            <label for="password">Password</label>
+                            <a href="#" id="forgotPassword">Forgot password?</a>
+                        </div>
+
+                        <input type="password" id="password" name="password" placeholder="Enter your password"
+                            autocomplete="current-password" required>
+                    </div>
+
+
+                    <!-- Cloudflare Placeholder -->
+                    <div class="cloudflare-container">
+                        <div class="cloudflare-checkbox">
+                            <span class="checkbox-placeholder"></span>
+                            <span>Verify you are human</span>
+                        </div>
+
+                        <div class="cloudflare-brand">
+                            <span class="cloud-icon">&#9729;</span>
+                            <span>Cloudflare</span>
+                        </div>
+                    </div>
+
+
+                    <p id="loginMessage" role="alert" style="display: none; margin-bottom: 12px; font-size: 13px;">
+                    </p>
+                    <!-- Login Button -->
+                    <button type="submit" class="login-button">
+                        Login
+                        <span>&#8594;</span>
+                    </button>
+
+                    <!-- DEBUG Butto REMOVE LATER -->
+                    <button type="button" onclick="window.location.href='home.html'">
+                        DEBUG: Open Dashboard
+                    </button>
+
+                </form>
+
+
+                <!-- Divider -->
+                <div class="divider">
+                    <span>OR</span>
+                </div>
+
+
+                <!-- Google Login -->
+                <button class="google-button" id="googleLogin" type="button">
+                    <span class="google-icon">G</span>
+                    Continue with Google
+                </button>
+
+                <p class="auth-switch">
+                    Don't have an account?
+                    <a href="register.html">Register here</a>
+                </p>
+
+
+                <!-- Footer -->
+                <footer class="login-footer">
+                    <p>© 2026 ArchersHub | De La Salle University</p>
+                    <p>For authorized university users only.</p>
+                </footer>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- Frontend-only JavaScript -->
+    <script type="module" src="js/main.js"></script>
+
+</body>
+
+</html>

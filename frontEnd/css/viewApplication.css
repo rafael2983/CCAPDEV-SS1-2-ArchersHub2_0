@@ -1,0 +1,345 @@
+/* =========================================
+   FACULTY - VIEW APPLICATION
+========================================= */
+
+.view-application-page {
+    padding: 28px 35px 45px;
+}
+
+.application-heading {
+    margin-bottom: 28px;
+}
+
+.application-heading p {
+    margin: 0 0 5px;
+    color: #607368;
+    font-size: 14px;
+}
+
+.application-heading h1 {
+    margin: 0;
+    color: #07562c;
+    font-size: 29px;
+    font-weight: 800;
+}
+
+/* LAYOUT */
+
+.application-layout {
+    display: grid;
+    grid-template-columns: 1.6fr 0.9fr 2.15fr;
+    grid-template-areas:
+        "courses sections selected"
+        "courses sections students"
+        "actions actions students";
+    gap: 22px;
+    align-items: start;
+}
+
+.application-card {
+    min-width: 0;
+    padding: 23px;
+    background: #fff;
+    border: 1px solid #d4e4d9;
+    border-radius: 15px;
+    box-shadow: 0 7px 22px rgba(0, 50, 20, 0.035);
+}
+
+.application-card h2 {
+    margin: 0 0 17px;
+    color: #07562c;
+    font-size: 19px;
+    line-height: 1.3;
+}
+
+.application-courses {
+    grid-area: courses;
+}
+
+.application-sections {
+    grid-area: sections;
+}
+
+.application-selected {
+    grid-area: selected;
+}
+
+.application-actions {
+    grid-area: actions;
+}
+
+.application-students {
+    grid-area: students;
+}
+
+/* COURSE AND SECTION LISTS */
+
+.application-list {
+    overflow: hidden;
+    border: 1px solid #d4e4d9;
+    border-radius: 12px;
+}
+
+.application-list-header {
+    padding: 14px 16px;
+    background: linear-gradient(110deg, #008039, #00642c);
+    color: white;
+    font-size: 13px;
+    font-weight: 800;
+}
+
+.application-list-item {
+    display: block;
+    width: 100%;
+    padding: 15px 16px;
+    border: none;
+    border-bottom: 1px solid #dce7df;
+    background: #fff;
+    color: #1a2d20;
+    text-align: left;
+    font: inherit;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.application-list-item:last-child {
+    border-bottom: none;
+}
+
+.application-list-item:hover {
+    background: #f1f7f2;
+}
+
+.application-list-item.active {
+    background: #e6eee8;
+    font-weight: 800;
+}
+
+/* SELECTED COURSE */
+
+.application-selected h3 {
+    margin: 0 0 7px;
+    color: #666;
+    font-size: 17px;
+}
+
+#applicationSelectedCourse {
+    margin: 0;
+    color: #07562c;
+    font-size: 22px;
+    font-weight: 800;
+    overflow-wrap: anywhere;
+}
+
+/* FORM */
+
+#applicationUpdateForm {
+    display: grid;
+    grid-template-columns: 1fr 1fr auto;
+    align-items: end;
+    gap: 12px;
+}
+
+.application-form-field {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    min-width: 0;
+}
+
+.application-form-field label {
+    color: #355541;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.application-form-field input,
+.application-form-field select {
+    width: 100%;
+    min-height: 40px;
+    padding: 8px 10px;
+    border: 1px solid #cfdcd3;
+    border-radius: 7px;
+    background: white;
+    color: #172b20;
+    font: inherit;
+    font-size: 13px;
+}
+
+.application-form-field input:focus,
+.application-form-field select:focus {
+    outline: 2px solid #008037;
+    outline-offset: 1px;
+}
+
+.application-submit {
+    min-height: 40px;
+    padding: 9px 15px;
+    border: none;
+    border-radius: 8px;
+    background: #005a2e;
+    color: white;
+    font: inherit;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.application-submit:hover {
+    background: #007338;
+}
+
+.application-feedback {
+    margin: 10px 0 0;
+    color: #006c36;
+    font-size: 12px;
+}
+
+.application-feedback:empty {
+    display: none;
+}
+
+.application-feedback.error {
+    color: #c62828;
+}
+
+/* STUDENT TABLE */
+
+.application-table-wrapper {
+    overflow-x: auto;
+    border: 1px solid #d4e4d9;
+    border-radius: 11px;
+}
+
+.application-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+.application-table th {
+    padding: 13px 12px;
+    background: linear-gradient(110deg, #008039, #00642c);
+    color: white;
+    font-size: 12px;
+    white-space: nowrap;
+}
+
+.application-table td {
+    padding: 15px 12px;
+    border-bottom: 1px solid #dce7df;
+    font-size: 13px;
+    vertical-align: top;
+}
+
+.application-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.application-table tbody tr:hover {
+    background: #f4f9f5;
+}
+
+.application-status {
+    font-weight: 800;
+}
+
+.application-status.enlisted {
+    color: #009b48;
+}
+
+.application-status.pending {
+    color: #d67b00;
+}
+
+.application-status.none {
+    color: #d62828;
+}
+
+/* DARK MODE */
+
+.dark-theme .application-card {
+    background: #1d2b23;
+    border-color: #3b5142;
+}
+
+.dark-theme .application-heading h1,
+.dark-theme .application-card h2,
+.dark-theme #applicationSelectedCourse {
+    color: #9bdbad;
+}
+
+.dark-theme .application-heading p,
+.dark-theme .application-selected h3,
+.dark-theme .application-form-field label {
+    color: #c5d8ca;
+}
+
+.dark-theme .application-list-item {
+    background: #263b2d;
+    color: #e2eee5;
+    border-color: #47614d;
+}
+
+.dark-theme .application-list-item.active {
+    background: #365b40;
+}
+
+.dark-theme .application-form-field input,
+.dark-theme .application-form-field select {
+    background: #263b2d;
+    color: #e2eee5;
+    border-color: #47614d;
+}
+
+.dark-theme .application-table td {
+    color: #e2eee5;
+    border-color: #3b5142;
+}
+
+.dark-theme .application-table tbody tr:hover {
+    background: #263b2d;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 1150px) {
+    .application-layout {
+        grid-template-columns: 1fr 1fr;
+        grid-template-areas:
+            "courses sections"
+            "selected selected"
+            "students students"
+            "actions actions";
+    }
+}
+
+@media (max-width: 650px) {
+    .view-application-page {
+        padding: 18px 14px;
+    }
+
+    .application-layout {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+            "courses"
+            "sections"
+            "selected"
+            "students"
+            "actions";
+        gap: 14px;
+    }
+
+    .application-card {
+        padding: 16px;
+    }
+
+    #applicationUpdateForm {
+        grid-template-columns: 1fr;
+    }
+
+    .application-table {
+        min-width: 540px;
+    }
+}
