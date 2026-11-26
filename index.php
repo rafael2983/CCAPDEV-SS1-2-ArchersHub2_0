@@ -1,3 +1,3 @@
 <?php
-header("Location: frontend/index.html", true, 302);
+header("Location: frontEnd/index.html", true, 302);
 exit;
