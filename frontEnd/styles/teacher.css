@@ -99,3 +99,37 @@
         grid-template-columns: 1fr;
     }
 }
+
+/* Grade suggestion list */
+.grade-suggest {
+    position: fixed;
+    z-index: 1000;
+    margin: 0;
+    padding: 4px 0;
+    list-style: none;
+    max-height: 240px;
+    overflow-y: auto;
+    background: var(--surface);
+    color: var(--text);
+    border: 1px solid var(--input-border);
+    border-radius: 6px;
+    box-shadow: var(--shadow);
+}
+
+.grade-suggest li {
+    display: flex;
+    justify-content: space-between;
+    gap: 14px;
+    padding: 6px 12px;
+    cursor: pointer;
+}
+
+.grade-suggest li span {
+    color: var(--text-muted);
+    font-size: 13px;
+}
+
+.grade-suggest li.active,
+.grade-suggest li:hover {
+    background: var(--surface-alt);
+}

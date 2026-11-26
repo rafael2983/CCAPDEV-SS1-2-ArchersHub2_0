@@ -70,8 +70,48 @@ class GradeEncodingController
             flash('error', 'Nothing to save.');
             redirect('grade-encoding', $back);
         }
+                // Every typed grade must be a valid grade (a blank means "not graded yet").
+        // Upper/lower case does not matter: "inc" is saved as "INC".
+        $lookup = [];
+        foreach (GradeEncoding::scale() as $g) {
+            $lookup[strtolower($g['grade_value'])] = $g['grade_value'];
+        }
 
-        GradeEncoding::save($sectionId, (int) $_SESSION['user']['user_id'], $grades);
+        $clean = [];
+        $bad   = [];
+        foreach ($grades as $enrollmentId => $value) {
+            if (!is_scalar($value)) {
+                $bad[] = '?';
+                continue;
+            }
+            $value = trim((string) $value);
+            if ($value === '') {
+                $clean[$enrollmentId] = '';
+                continue;
+            }
+            // A typed number such as 3, 4 or 2.50 becomes 3.0, 4.0 or 2.5.
+            // Only whole and half numbers are converted, so 3.45 is never rounded quietly.
+            $number = str_replace(',', '.', $value);
+            if (is_numeric($number) && fmod((float) $number * 2, 1) == 0) {
+                $value = number_format((float) $number, 1, '.', '');
+            }
+
+            $key = strtolower($value);
+            if (!isset($lookup[$key])) {
+                $bad[] = $value;
+                continue;
+            }
+            $clean[$enrollmentId] = $lookup[$key];
+        }
+
+        // If any grade is invalid, save nothing and say which ones.
+        if ($bad) {
+            flash('error', 'Nothing was saved. Not valid grades: ' . implode(', ', array_unique($bad))
+                . '. Pick a grade from the suggestions.');
+            redirect('grade-encoding', $back);
+        }
+
+        GradeEncoding::save($sectionId, (int) $_SESSION['user']['user_id'], $clean);
         flash('success', 'Grades saved for ' . $section['course_code'] . ' ' . $section['section_code'] . '.');
         redirect('grade-encoding', $back);
     }

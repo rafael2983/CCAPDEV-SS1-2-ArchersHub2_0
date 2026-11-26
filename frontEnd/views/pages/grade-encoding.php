@@ -83,7 +83,7 @@
                             <th>Grade</th>
                         </tr>
                     </thead>
-                    <tbody id="grade-students-body">
+                    <tbody id="grade-students-body" data-grades="<?= e(json_encode($scale)) ?>">
                         <?php if (!$section): ?>
                             <tr><td colspan="3">Select a course and section first.</td></tr>
                         <?php elseif (!$students): ?>
@@ -94,28 +94,25 @@
                                 <td><?= e((string) $student['user_id']) ?></td>
                                 <td><?= e($student['last_name'] . ', ' . $student['first_name']) ?></td>
                                 <td>
-                                    <select class="grade-input" name="grades[<?= (int) $student['enrollment_id'] ?>]"
-                                            <?= $canSave ? '' : 'disabled' ?>>
-                                        <option value="">No grade</option>
-                                        <?php foreach ($scale as $grade): ?>
-                                            <option value="<?= e($grade['grade_value']) ?>"
-                                                <?= ($student['grade_value'] ?? '') === $grade['grade_value'] ? 'selected' : '' ?>>
-                                                <?= e($grade['grade_value'] . ' — ' . $grade['description']) ?>
-                                            </option>
-                                        <?php endforeach; ?>
-                                    </select>
+                                    <input type="text" class="grade-input"
+                                           name="grades[<?= (int) $student['enrollment_id'] ?>]"
+                                           value="<?= e($student['grade_value'] ?? '') ?>"
+                                           placeholder="Grade" maxlength="5" autocomplete="off"
+                                           aria-label="Grade for <?= e($student['last_name'] . ', ' . $student['first_name']) ?>"
+                                           <?= $canSave ? '' : 'disabled' ?>>
                                 </td>
                             </tr>
                         <?php endforeach; ?>
                     </tbody>
                 </table>
             </div>
-
+            <p class="period-note">Leave a grade blank for "not yet graded". Pick a grade from the suggestions.</p>
             <div class="grade-actions">
                 <button type="submit" id="save-grades-btn" <?= $canSave ? '' : 'disabled' ?>>Save</button>
             </div>
         </form>
     </section>
 </div>
+<script src="<?= e(asset('frontEnd/scripts/grade-suggest.js')) ?>" defer></script>
 
 <?php require __DIR__ . '/../partials/app_footer.php'; ?>
